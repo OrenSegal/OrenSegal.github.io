@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { ArrowDown, Sparkles, Brain, Code, ChevronRight } from 'lucide-react'
 
 const typingTexts = [
-  'Urban Analytics',
-  'Predictive Models',
-  'Smart Recommendations',
-  'Data Visualization',
+  'that think ahead',
+  'that learn & adapt',
+  'that solve real problems',
+  'that surprise & delight',
 ]
 
 export default function Hero() {
@@ -68,20 +68,20 @@ export default function Hero() {
 
         {/* Main heading */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in">
-          Building Intelligent
+          I build systems
           <span className="block mt-2 h-[1.2em]">
             <span className="bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               {displayedText}
             </span>
             <span className="animate-pulse text-primary-400">|</span>
           </span>
-          <span className="block mt-2">Systems</span>
         </h1>
 
         {/* Subtitle */}
         <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up">
-          Hi, I'm <span className="text-white font-semibold">Oren Segal</span> —
-          I create data-driven solutions that make cities smarter and experiences more personalized.
+          <span className="text-white font-semibold">Oren Segal</span> — AI engineer obsessed with
+          making data actually useful. From predicting NYC neighborhood shifts to optimizing your
+          next binge-watch, I turn complex ML into experiences people love.
         </p>
 
         {/* Stats */}

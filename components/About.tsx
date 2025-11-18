@@ -52,10 +52,10 @@ export default function About() {
             <span className="text-primary-300 text-sm font-medium">About Me</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            The Mind Behind the Code
+            Not Your Typical Data Scientist
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Turning complex data into actionable intelligence
+            I don't just build models — I build things people actually want to use
           </p>
         </div>
 
@@ -67,20 +67,20 @@ export default function About() {
             </h3>
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                I'm an AI & Data Science professional passionate about building systems that make
-                real-world impact. My work focuses on <span className="text-primary-400 font-medium">urban analytics</span>,
-                <span className="text-primary-400 font-medium"> personalization engines</span>, and
-                <span className="text-primary-400 font-medium"> intelligent recommendation systems</span>.
+                Most ML projects die in notebooks. Mine don't. I'm obsessed with the last mile —
+                taking sophisticated algorithms and making them feel <span className="text-primary-400 font-medium">effortless</span> to use.
+                Whether it's predicting which NYC block will gentrify next or figuring out
+                why you keep rewatching The Office.
               </p>
               <p>
-                I believe in the power of data to transform how we experience cities, consume content,
-                and make decisions. Every project I build combines rigorous machine learning with
-                intuitive user experiences.
+                I gravitate toward problems where <span className="text-primary-400 font-medium">data meets human behavior</span>:
+                urban dynamics, content consumption patterns, fitness adaptation.
+                The messy, real-world stuff that doesn't fit neatly into a Kaggle competition.
               </p>
               <p>
-                Currently exploring the intersection of <span className="text-white font-medium">real-time sentiment analysis</span> and
-                <span className="text-white font-medium"> predictive analytics</span> to help people and
-                organizations make better decisions.
+                My superpower? Building complete systems end-to-end with a <span className="text-white font-medium">$0 infrastructure cost</span>.
+                No excuses, no "this would work if we had more budget." If an idea is good,
+                I'll find a way to ship it.
               </p>
             </div>
 
@@ -103,42 +103,42 @@ export default function About() {
 
           {/* Approach */}
           <div className="bg-gradient-to-br from-primary-500/10 to-purple-500/10 backdrop-blur-sm border border-primary-500/20 rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-white mb-6">My Approach</h3>
+            <h3 className="text-xl font-bold text-white mb-6">How I Think</h3>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🎯</span>
+                  <span className="text-xl">🔥</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Problem-First</h4>
-                  <p className="text-gray-400 text-sm">Start with real user problems, not cool technology</p>
+                  <h4 className="text-white font-semibold mb-1">Complexity is a Bug</h4>
+                  <p className="text-gray-400 text-sm">If users need a manual, I've failed. Period.</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🔬</span>
+                  <span className="text-xl">🧪</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Data-Driven</h4>
-                  <p className="text-gray-400 text-sm">Let the data guide decisions, not assumptions</p>
+                  <h4 className="text-white font-semibold mb-1">Question Everything</h4>
+                  <p className="text-gray-400 text-sm">Best practices are starting points, not finish lines</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🎨</span>
+                  <span className="text-xl">⚡</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">User-Centric</h4>
-                  <p className="text-gray-400 text-sm">Complex ML should feel simple to users</p>
+                  <h4 className="text-white font-semibold mb-1">Speed Creates Clarity</h4>
+                  <p className="text-gray-400 text-sm">Ship something ugly fast, then make it beautiful</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🚀</span>
+                  <span className="text-xl">🎲</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Ship Fast</h4>
-                  <p className="text-gray-400 text-sm">Iterate quickly, learn from real usage</p>
+                  <h4 className="text-white font-semibold mb-1">Embrace Constraints</h4>
+                  <p className="text-gray-400 text-sm">$0 budget forces creative solutions that scale</p>
                 </div>
               </div>
             </div>

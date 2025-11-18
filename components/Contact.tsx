@@ -13,10 +13,11 @@ export default function Contact() {
             <span className="text-primary-300 text-sm font-medium">Get in Touch</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Let's Build Something
+            Got a Problem Worth Solving?
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Interested in collaboration or have a project in mind? I'd love to hear from you.
+            I'm always hunting for interesting challenges — the weirder the data, the better.
+            Let's talk.
           </p>
         </div>
 
@@ -66,18 +67,19 @@ export default function Contact() {
         {/* CTA */}
         <div className="text-center p-8 bg-gradient-to-br from-primary-500/10 to-purple-500/10 backdrop-blur-sm border border-primary-500/20 rounded-2xl">
           <h3 className="text-2xl font-bold text-white mb-4">
-            Ready to start a project?
+            Ideas welcome. Vague ideas too.
           </h3>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Whether you're looking to build something new or improve existing systems,
-            I'm here to help bring your vision to life with AI and data science.
+            Sometimes the best projects start with "I have this data but don't know what to do with it"
+            or "I keep doing this manually and it's driving me crazy."
+            Those are my favorite conversations.
           </p>
           <a
             href="mailto:contact@example.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-primary-500/50"
           >
             <Mail className="w-5 h-5" />
-            Send me an email
+            Let's figure it out
           </a>
         </div>
       </div>
