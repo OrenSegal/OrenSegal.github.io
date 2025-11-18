@@ -4,13 +4,19 @@ Agentic health management system using LangGraph
 """
 
 from langgraph.graph import StateGraph, END
-from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
 from typing import TypedDict, List, Annotated, Optional
 import operator
 import json
 from datetime import datetime, timedelta
 import asyncio
+import os
+import sys
+
+# Add parent directory to path for imports
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from services.llm_provider import get_llm, get_provider_info
 
 class HealthHubState(TypedDict):
     """Shared state across agent workflow"""
@@ -27,13 +33,15 @@ class HealthHubState(TypedDict):
 class HealthHubAgent:
     """Main health management agent with agentic workflows"""
 
-    def __init__(self, api_key: str):
-        self.llm = ChatAnthropic(
-            model="claude-3-5-sonnet-20241022",
-            api_key=api_key,
-            temperature=0.3
-        )
+    def __init__(self, api_key: str = None):
+        # Use flexible LLM provider (supports Ollama, Groq, Anthropic, Google)
+        # Set LLM_PROVIDER env var to choose: ollama, groq, anthropic, google
+        self.llm = get_llm(temperature=0.3)
+        self.provider_info = get_provider_info()
         self.graph = self._build_graph()
+
+        print(f"HealthHub initialized with {self.provider_info['provider']} ({self.provider_info.get('model', 'default')})")
+        print(f"Cost: {self.provider_info['cost']}")
 
     def _build_graph(self) -> StateGraph:
         """Construct the agentic workflow graph"""
