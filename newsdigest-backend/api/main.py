@@ -29,8 +29,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
-news_agent = NewsDigestAgent(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+# Initialize agent - uses LLM_PROVIDER env var: ollama (free), groq (free), anthropic (paid)
+try:
+    news_agent = NewsDigestAgent()
+except Exception as e:
+    print(f"Warning: Could not initialize news agent: {e}")
+    news_agent = None
 
 
 # Pydantic Models

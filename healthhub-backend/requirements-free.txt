@@ -1,0 +1,37 @@
+# HealthHub Free Deployment - $0/month
+# Uses Ollama (local) or Groq (free cloud) instead of Anthropic
+
+# Core Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# AI/LLM - Multi-provider support
+langchain==0.1.0
+langgraph==0.0.20
+
+# FREE LLM Providers
+langchain-community==0.0.20  # For Ollama
+langchain-groq==0.0.3        # For Groq (free tier)
+# langchain-google-genai==1.0.0  # Optional: Google AI Studio (free tier)
+
+# Paid providers (optional, comment out for free)
+# langchain-anthropic==0.1.1
+# anthropic==0.8.1
+
+# Database - SQLite (free, local)
+# No psycopg2 needed for SQLite
+
+# Async
+httpx==0.25.2
+aiohttp==3.9.1
+
+# Date/Time
+python-dateutil==2.8.2
+
+# Environment
+python-dotenv==1.0.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1

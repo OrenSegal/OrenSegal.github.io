@@ -33,8 +33,13 @@ app.add_middleware(
 )
 
 # Initialize health agent
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
-health_agent = HealthHubAgent(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+# Uses LLM_PROVIDER env var: ollama (free local), groq (free cloud), anthropic (paid)
+# Defaults to Ollama if no provider specified
+try:
+    health_agent = HealthHubAgent()
+except Exception as e:
+    print(f"Warning: Could not initialize health agent: {e}")
+    health_agent = None
 
 
 # Pydantic Models

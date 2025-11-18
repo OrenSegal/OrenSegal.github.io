@@ -29,8 +29,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
-homekeeper_agent = HomeKeeperAgent(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+# Initialize agent - uses LLM_PROVIDER env var: ollama (free), groq (free), anthropic (paid)
+try:
+    homekeeper_agent = HomeKeeperAgent()
+except Exception as e:
+    print(f"Warning: Could not initialize homekeeper agent: {e}")
+    homekeeper_agent = None
 
 
 # Pydantic Models
