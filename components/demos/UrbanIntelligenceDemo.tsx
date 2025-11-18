@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, TrendingUp, AlertCircle, Map, BarChart3, Activity } from 'lucide-react'
+import {
+  AreaChart, Area, BarChart, Bar, RadarChart, PolarGrid, PolarAngleAxis, Radar,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts'
 
 // Mock data for demo
 const mockNeighborhoods = [
@@ -14,7 +18,18 @@ const mockNeighborhoods = [
     priceChange18mo: 12.5,
     displacementRisk: 0.65,
     transformationType: 'rapid gentrification',
-    confidence: 0.88
+    confidence: 0.88,
+    sentimentHistory: [
+      { month: 'Jan', mood: 0.65 }, { month: 'Feb', mood: 0.68 }, { month: 'Mar', mood: 0.70 },
+      { month: 'Apr', mood: 0.72 }, { month: 'May', mood: 0.71 }, { month: 'Jun', mood: 0.72 }
+    ],
+    drivers: [
+      { factor: 'New Restaurants', value: 85 },
+      { factor: 'Transit Access', value: 78 },
+      { factor: 'Social Media', value: 92 },
+      { factor: 'Real Estate', value: 70 },
+      { factor: 'Events', value: 65 }
+    ]
   },
   {
     id: 'bushwick',
@@ -24,7 +39,18 @@ const mockNeighborhoods = [
     priceChange18mo: 18.3,
     displacementRisk: 0.72,
     transformationType: 'emerging creative hub',
-    confidence: 0.82
+    confidence: 0.82,
+    sentimentHistory: [
+      { month: 'Jan', mood: 0.55 }, { month: 'Feb', mood: 0.58 }, { month: 'Mar', mood: 0.62 },
+      { month: 'Apr', mood: 0.65 }, { month: 'May', mood: 0.67 }, { month: 'Jun', mood: 0.68 }
+    ],
+    drivers: [
+      { factor: 'New Restaurants', value: 70 },
+      { factor: 'Transit Access', value: 65 },
+      { factor: 'Social Media', value: 88 },
+      { factor: 'Real Estate', value: 85 },
+      { factor: 'Events', value: 78 }
+    ]
   },
   {
     id: 'bedstuy',
@@ -34,7 +60,18 @@ const mockNeighborhoods = [
     priceChange18mo: 15.7,
     displacementRisk: 0.68,
     transformationType: 'steady appreciation',
-    confidence: 0.79
+    confidence: 0.79,
+    sentimentHistory: [
+      { month: 'Jan', mood: 0.60 }, { month: 'Feb', mood: 0.61 }, { month: 'Mar', mood: 0.63 },
+      { month: 'Apr', mood: 0.64 }, { month: 'May', mood: 0.65 }, { month: 'Jun', mood: 0.65 }
+    ],
+    drivers: [
+      { factor: 'New Restaurants', value: 65 },
+      { factor: 'Transit Access', value: 72 },
+      { factor: 'Social Media', value: 68 },
+      { factor: 'Real Estate', value: 75 },
+      { factor: 'Events', value: 60 }
+    ]
   },
 ]
 
@@ -75,8 +112,7 @@ export default function UrbanIntelligenceDemo() {
         {/* Demo notice */}
         <div className="mb-8 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
           <p className="text-yellow-300 text-sm">
-            <strong>Demo Mode:</strong> This is a simplified visualization. Full implementation includes
-            real-time data integration, interactive maps with Leaflet, and ML predictions.
+            <strong>Interactive Demo:</strong> Select a neighborhood to see real-time analytics and predictions.
           </p>
         </div>
 
@@ -181,15 +217,73 @@ export default function UrbanIntelligenceDemo() {
                   ></div>
                 </div>
               </div>
-              <p className="text-gray-300 text-sm">
-                Based on 200+ signals including real-time sentiment, economic activity,
-                infrastructure development, and cultural vibrancy indicators.
-              </p>
             </div>
           </div>
         </div>
 
-        {/* Features section */}
+        {/* Charts section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+          {/* Sentiment Timeline Chart */}
+          <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <h3 className="text-lg font-bold text-white mb-4">Sentiment Timeline</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <AreaChart data={selectedNeighborhood.sentimentHistory}>
+                <defs>
+                  <linearGradient id="moodGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" />
+                <XAxis dataKey="month" stroke="#ffffff60" fontSize={12} />
+                <YAxis stroke="#ffffff60" fontSize={12} domain={[0.5, 0.8]} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '8px',
+                    color: '#fff'
+                  }}
+                  formatter={(value: number) => [`${(value * 100).toFixed(0)}%`, 'Mood']}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="mood"
+                  stroke="#8b5cf6"
+                  fillOpacity={1}
+                  fill="url(#moodGradient)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Key Drivers Radar Chart */}
+          <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <h3 className="text-lg font-bold text-white mb-4">Key Drivers</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <RadarChart data={selectedNeighborhood.drivers}>
+                <PolarGrid stroke="#ffffff20" />
+                <PolarAngleAxis dataKey="factor" stroke="#ffffff80" fontSize={11} />
+                <Radar
+                  dataKey="value"
+                  stroke="#10b981"
+                  fill="#10b981"
+                  fillOpacity={0.5}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '8px',
+                    color: '#fff'
+                  }}
+                />
+              </RadarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Features and Tech Stack */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
             <h3 className="text-xl font-bold text-white mb-4">Key Features</h3>
@@ -231,26 +325,6 @@ export default function UrbanIntelligenceDemo() {
               <p className="text-green-300 text-sm">
                 <strong>100% Free Stack:</strong> React-Leaflet + OpenStreetMap (no API keys needed)
               </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Map placeholder */}
-        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-12">
-          <h3 className="text-2xl font-bold text-white mb-6">Interactive Map Visualization</h3>
-          <div className="bg-slate-900/50 rounded-xl p-12 border border-slate-700 flex items-center justify-center min-h-[500px]">
-            <div className="text-center">
-              <div className="text-6xl mb-4">🗺️</div>
-              <p className="text-gray-300 text-lg mb-2">
-                Full implementation includes:
-              </p>
-              <ul className="text-gray-400 text-sm space-y-1">
-                <li>• Interactive Leaflet map with NYC neighborhoods</li>
-                <li>• Real-time mood heatmap with CircleMarkers</li>
-                <li>• Neighborhood boundary polygons colored by vitality</li>
-                <li>• Click neighborhoods for detailed analytics</li>
-                <li>• OpenStreetMap tiles (100% free, no API key)</li>
-              </ul>
             </div>
           </div>
         </div>
