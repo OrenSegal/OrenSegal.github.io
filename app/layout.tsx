@@ -7,13 +7,14 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Oren Segal | AI & Data Science Portfolio',
-  description: 'Portfolio showcasing innovative AI and data science projects by Oren Segal, including Urban Intelligence, MetroFlex, and more.',
-  keywords: ['AI', 'Machine Learning', 'Data Science', 'Portfolio', 'NYC', 'Urban Analytics'],
+  title: 'Oren Segal | AI Platform Engineer',
+  description: 'Portfolio of shipped AI agent, LLM infrastructure, and data engineering projects by Oren Segal.',
+  keywords: ['AI', 'Machine Learning', 'Data Engineering', 'Portfolio', 'Claude Code', 'LLM'],
   authors: [{ name: 'Oren Segal' }],
+  metadataBase: new URL('https://orensegal.github.io'),
   openGraph: {
-    title: 'Oren Segal | AI & Data Science Portfolio',
-    description: 'Innovative AI and data science projects',
+    title: 'Oren Segal | AI Platform Engineer',
+    description: 'Shipped AI agent, LLM infrastructure, and data engineering projects',
     type: 'website',
   },
 }

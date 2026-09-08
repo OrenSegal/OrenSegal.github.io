@@ -62,7 +62,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-slate-700">
           <Link
-            href={project.demoUrl || `/projects/${project.id}`}
+            href={`/projects/${project.id}`}
             className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium transition-colors group/link"
           >
             <span>View Project</span>
@@ -72,7 +72,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
           {project.demoUrl && (
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <ExternalLink className="w-3 h-3" />
-              <span>Live Demo</span>
+              <span>GitHub</span>
             </div>
           )}
         </div>

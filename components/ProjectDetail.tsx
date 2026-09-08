@@ -56,15 +56,17 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
         </div>
 
-        {/* Demo button (if available) */}
-        {project.demoUrl && project.id !== 'urban-intelligence' && project.id !== 'metroflex' && (
+        {/* Repo link (if available) */}
+        {project.demoUrl && (
           <div className="mb-12">
             <a
               href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-primary-500/50"
             >
               <ExternalLink className="w-5 h-5" />
-              View Live Demo
+              View on GitHub
             </a>
           </div>
         )}
@@ -124,22 +126,6 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </span>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Architecture visualization placeholder */}
-        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6">System Architecture</h2>
-          <div className="bg-slate-900/50 rounded-xl p-12 border border-slate-700 flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <div className="text-6xl mb-4">{project.icon}</div>
-              <p className="text-gray-400">
-                Detailed architecture diagram and technical implementation details
-              </p>
-              <p className="text-sm text-gray-500 mt-2">
-                Check the technical specs in the repository for full details
-              </p>
             </div>
           </div>
         </div>
