@@ -2,74 +2,65 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Code2, Home, Briefcase, Mail } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Projects', href: '/#projects', icon: Briefcase },
-    { name: 'Contact', href: '/#contact', icon: Mail },
+    { name: 'Home', href: '/' },
+    { name: 'Projects', href: '/#projects' },
+    { name: 'Contact', href: '/#contact' },
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <Code2 className="w-8 h-8 text-primary-500 group-hover:text-primary-400 transition-colors" />
-            <span className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-bezel bg-panel">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center border border-bezel font-mono text-xs font-semibold text-ink">
+              OS
+            </span>
+            <span className="font-display text-sm font-semibold uppercase tracking-[0.15em] text-ink">
               Oren Segal
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-primary-400 transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
-              )
-            })}
+          <div className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="font-display text-sm font-medium text-ink-dim transition-colors hover:text-ink"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            className="text-ink-dim transition-colors hover:text-ink md:hidden"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-slate-800 border-t border-slate-700">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-slate-700 transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
-              )
-            })}
+        <div className="border-t border-bezel bg-panel-face md:hidden">
+          <div className="space-y-1 px-4 py-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block py-2 font-display text-sm font-medium text-ink-dim transition-colors hover:text-ink"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         </div>
       )}

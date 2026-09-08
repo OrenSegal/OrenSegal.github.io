@@ -9,36 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+        panel: {
+          DEFAULT: '#0a0b0c',
+          face: '#131417',
+          raised: '#1b1d21',
         },
+        bezel: '#2b2e33',
+        ink: {
+          DEFAULT: '#f2f1ea',
+          dim: '#95989c',
+          faint: '#5b5e63',
+        },
+        signal: {
+          DEFAULT: '#7cfa9a',
+          dim: '#3f7a52',
+        },
+        caution: '#f5a623',
+      },
+      fontFamily: {
+        display: ['var(--font-display)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.5s ease-out',
+        'settle': 'settle 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'flag-drop': 'flagDrop 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        settle: {
+          '0%': { transform: 'rotate(var(--needle-rest, -120deg))' },
+          '100%': { transform: 'rotate(var(--needle-value, -120deg))' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideDown: {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        flagDrop: {
+          '0%': { opacity: '0', transform: 'translateY(-6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
     },
