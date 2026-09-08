@@ -2,47 +2,38 @@
 
 import Link from 'next/link'
 import { Home, ArrowLeft } from 'lucide-react'
+import { StatusFlag } from '@/components/Instruments'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        {/* 404 number */}
-        <div className="mb-8">
-          <span className="text-8xl sm:text-9xl font-bold bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            404
-          </span>
+    <div className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center text-center">
+        <StatusFlag label="Off Course" tone="caution" />
+
+        <div className="mt-8 border border-bezel bg-panel-face px-8 py-6">
+          <span className="font-mono text-6xl font-medium tabular text-ink sm:text-7xl">404</span>
         </div>
 
-        {/* Message */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-          Page Not Found
-        </h1>
-        <p className="text-xl text-gray-400 mb-8 max-w-md mx-auto">
+        <h1 className="mt-8 font-display text-2xl font-semibold text-ink sm:text-3xl">Page Not Found</h1>
+        <p className="mx-auto mt-3 max-w-md text-ink-dim">
           The page you're looking for doesn't exist or has been moved.
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/"
-            className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-xl font-semibold transition-all hover:scale-105 shadow-lg shadow-primary-500/50 flex items-center gap-2"
+            className="inline-flex items-center gap-2 border border-ink-dim px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-ink"
           >
-            <Home className="w-5 h-5" />
+            <Home className="h-4 w-4" />
             Go Home
           </Link>
           <button
             onClick={() => window.history.back()}
-            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-semibold transition-all hover:scale-105 border border-white/10 flex items-center gap-2"
+            className="inline-flex items-center gap-2 border border-bezel px-6 py-3 text-sm font-medium text-ink-dim transition-colors hover:text-ink"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="h-4 w-4" />
             Go Back
           </button>
-        </div>
-
-        {/* Fun decoration */}
-        <div className="mt-12 text-6xl animate-bounce">
-          🔍
         </div>
       </div>
     </div>

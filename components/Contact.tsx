@@ -1,84 +1,59 @@
-'use client'
+import { Mail, Github, Linkedin } from 'lucide-react'
 
-import { Mail, Github, Linkedin, Send } from 'lucide-react'
+const channels = [
+  { label: 'Email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
+  { label: 'GitHub', value: 'View my code', href: 'https://github.com/OrenSegal', icon: Github, external: true },
+  { label: 'LinkedIn', value: 'Connect professionally', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin, external: true },
+]
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-4">
-            <Send className="w-4 h-4 text-primary-400" />
-            <span className="text-primary-300 text-sm font-medium">Get in Touch</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Got a Problem Worth Solving?
+    <section id="contact" className="border-t border-bezel bg-panel-face px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-12">
+          <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+            Radio Panel — Got a problem worth solving?
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            I'm always hunting for interesting challenges — the weirder the data, the better.
-            Let's talk.
+          <p className="mt-3 max-w-2xl text-ink-dim">
+            I'm always hunting for interesting challenges — the weirder the data, the better. Let's talk.
           </p>
         </div>
 
-        {/* Contact cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {/* Email */}
-          <a
-            href="mailto:orenssegal@gmail.com"
-            className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
-          >
-            <div className="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-500/20 transition-colors">
-              <Mail className="w-6 h-6 text-primary-400" />
-            </div>
-            <h3 className="text-white font-semibold mb-2">Email</h3>
-            <p className="text-gray-400 text-sm">orenssegal@gmail.com</p>
-          </a>
-
-          {/* GitHub */}
-          <a
-            href="https://github.com/OrenSegal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
-          >
-            <div className="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-500/20 transition-colors">
-              <Github className="w-6 h-6 text-primary-400" />
-            </div>
-            <h3 className="text-white font-semibold mb-2">GitHub</h3>
-            <p className="text-gray-400 text-sm">View my code</p>
-          </a>
-
-          {/* LinkedIn */}
-          <a
-            href="https://linkedin.com/in/oren-segal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
-          >
-            <div className="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-500/20 transition-colors">
-              <Linkedin className="w-6 h-6 text-primary-400" />
-            </div>
-            <h3 className="text-white font-semibold mb-2">LinkedIn</h3>
-            <p className="text-gray-400 text-sm">Connect professionally</p>
-          </a>
+        <div className="mb-12 divide-y divide-bezel border border-bezel">
+          {channels.map((channel) => {
+            const Icon = channel.icon
+            return (
+              <a
+                key={channel.label}
+                href={channel.href}
+                target={channel.external ? '_blank' : undefined}
+                rel={channel.external ? 'noopener noreferrer' : undefined}
+                className="group flex items-center justify-between px-6 py-4 transition-colors hover:bg-panel"
+              >
+                <div className="flex items-center gap-4">
+                  <Icon className="h-4 w-4 text-ink-dim transition-colors group-hover:text-ink" />
+                  <div>
+                    <div className="font-medium text-ink">{channel.label}</div>
+                    <div className="text-sm text-ink-dim">{channel.value}</div>
+                  </div>
+                </div>
+                <span className="h-2 w-2 rounded-full border border-bezel transition-colors group-hover:border-ink" />
+              </a>
+            )
+          })}
         </div>
 
-        {/* CTA */}
-        <div className="text-center p-8 bg-gradient-to-br from-primary-500/10 to-purple-500/10 backdrop-blur-sm border border-primary-500/20 rounded-2xl">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Ideas welcome. Vague ideas too.
-          </h3>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+        <div className="border border-bezel bg-panel p-8 text-center">
+          <h3 className="mb-3 font-display text-xl font-semibold text-ink">Ideas welcome. Vague ideas too.</h3>
+          <p className="mx-auto mb-6 max-w-2xl text-ink-dim">
             Sometimes the best projects start with "I have this data but don't know what to do with it"
-            or "I keep doing this manually and it's driving me crazy."
-            Those are my favorite conversations.
+            or "I keep doing this manually and it's driving me crazy." Those are my favorite conversations.
           </p>
           <a
             href="mailto:orenssegal@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-primary-500/50"
+            className="inline-flex items-center gap-2 border border-signal-dim px-6 py-3 font-mono text-xs uppercase tracking-[0.1em] text-signal transition-colors hover:bg-signal hover:text-panel"
           >
-            <Mail className="w-5 h-5" />
+            <Mail className="h-4 w-4" />
             Let's figure it out
           </a>
         </div>
