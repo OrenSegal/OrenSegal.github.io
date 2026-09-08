@@ -10,9 +10,10 @@ export default function AllProjects() {
 
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'urban', label: 'Urban Analytics' },
-    { id: 'personal', label: 'Personal Tech' },
-    { id: 'entertainment', label: 'Entertainment' },
+    { id: 'ai-agents', label: 'AI Agents' },
+    { id: 'ai-infra', label: 'AI Infra' },
+    { id: 'data-engineering', label: 'Data Engineering' },
+    { id: 'dev-tools', label: 'Developer Tools' },
   ]
 
   const filteredProjects = filter === 'all'
@@ -32,7 +33,7 @@ export default function AllProjects() {
             All Projects
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            From urban intelligence to personalized experiences
+            AI agents, LLM infrastructure, data engineering, and developer tooling
           </p>
         </div>
 

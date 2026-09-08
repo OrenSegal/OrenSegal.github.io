@@ -52,10 +52,10 @@ export default function About() {
             <span className="text-primary-300 text-sm font-medium">About Me</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Not Your Typical Data Scientist
+            I Build the Infra Agents Run On
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            I don't just build models — I build things people actually want to use
+            Not just prompts — the gateways, guardrails, and CI that make agentic systems trustworthy
           </p>
         </div>
 
@@ -67,20 +67,19 @@ export default function About() {
             </h3>
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                Most ML projects die in notebooks. Mine don't. I'm obsessed with the last mile —
-                taking sophisticated algorithms and making them feel <span className="text-primary-400 font-medium">effortless</span> to use.
-                Whether it's predicting which NYC block will gentrify next or figuring out
-                why you keep rewatching The Office.
+                Most AI demos die the moment they hit a real cost budget or a fabricated citation.
+                I'm obsessed with the last mile — the <span className="text-primary-400 font-medium">infrastructure</span> that
+                turns a clever prompt into a system you can actually trust in production.
               </p>
               <p>
-                I gravitate toward problems where <span className="text-primary-400 font-medium">data meets human behavior</span>:
-                urban dynamics, content consumption patterns, fitness adaptation.
-                The messy, real-world stuff that doesn't fit neatly into a Kaggle competition.
+                I gravitate toward the unglamorous layer underneath agents: <span className="text-primary-400 font-medium">cost enforcement,
+                fact-checking, CI for prompt-driven behavior</span>, and shared tooling that keeps a
+                whole family of skills consistent instead of drifting apart.
               </p>
               <p>
-                My superpower? Building complete systems end-to-end with a <span className="text-white font-medium">$0 infrastructure cost</span>.
-                No excuses, no "this would work if we had more budget." If an idea is good,
-                I'll find a way to ship it.
+                My superpower? Shipping <span className="text-white font-medium">complete, open-source systems</span> end to end —
+                not just a notebook or a prototype. Every project on this site has a public repo,
+                real tests, and green CI.
               </p>
             </div>
 

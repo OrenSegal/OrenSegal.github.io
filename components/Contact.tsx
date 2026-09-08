@@ -25,19 +25,19 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Email */}
           <a
-            href="mailto:contact@example.com"
+            href="mailto:orenssegal@gmail.com"
             className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
           >
             <div className="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-500/20 transition-colors">
               <Mail className="w-6 h-6 text-primary-400" />
             </div>
             <h3 className="text-white font-semibold mb-2">Email</h3>
-            <p className="text-gray-400 text-sm">contact@example.com</p>
+            <p className="text-gray-400 text-sm">orenssegal@gmail.com</p>
           </a>
 
           {/* GitHub */}
           <a
-            href="https://github.com"
+            href="https://github.com/OrenSegal"
             target="_blank"
             rel="noopener noreferrer"
             className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
@@ -51,7 +51,7 @@ export default function Contact() {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/oren-segal"
             target="_blank"
             rel="noopener noreferrer"
             className="group p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl hover:border-primary-500 transition-all hover:-translate-y-1"
@@ -75,7 +75,7 @@ export default function Contact() {
             Those are my favorite conversations.
           </p>
           <a
-            href="mailto:contact@example.com"
+            href="mailto:orenssegal@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-primary-500/50"
           >
             <Mail className="w-5 h-5" />

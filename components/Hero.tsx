@@ -62,7 +62,7 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-8 animate-slide-down">
           <Sparkles className="w-4 h-4 text-primary-400" />
           <span className="text-primary-300 text-sm font-medium">
-            AI & Data Science Portfolio
+            AI Platform Engineer
           </span>
         </div>
 
@@ -79,9 +79,9 @@ export default function Hero() {
 
         {/* Subtitle */}
         <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up">
-          <span className="text-white font-semibold">Oren Segal</span> — AI engineer obsessed with
-          making data actually useful. From predicting NYC neighborhood shifts to optimizing your
-          next binge-watch, I turn complex ML into experiences people love.
+          <span className="text-white font-semibold">Oren Segal</span> — AI platform engineer building
+          the infrastructure agents actually run on: cost-safe LLM gateways, evidence-backed research
+          agents, and CI that catches fabricated claims before a human sees them.
         </p>
 
         {/* Stats */}
@@ -91,12 +91,12 @@ export default function Hero() {
             <div className="text-xs sm:text-sm text-gray-400">Projects</div>
           </div>
           <div className="group flex flex-col items-center p-4 rounded-xl bg-slate-800/30 border border-slate-700/50 hover:border-purple-500/50 transition-all">
-            <div className="text-3xl sm:text-4xl font-bold text-purple-400 mb-1 group-hover:scale-110 transition-transform">200+</div>
-            <div className="text-xs sm:text-sm text-gray-400">ML Features</div>
+            <div className="text-3xl sm:text-4xl font-bold text-purple-400 mb-1 group-hover:scale-110 transition-transform">6</div>
+            <div className="text-xs sm:text-sm text-gray-400">Claude Code Skills</div>
           </div>
           <div className="group flex flex-col items-center p-4 rounded-xl bg-slate-800/30 border border-slate-700/50 hover:border-green-500/50 transition-all">
-            <div className="text-3xl sm:text-4xl font-bold text-green-400 mb-1 group-hover:scale-110 transition-transform">$0</div>
-            <div className="text-xs sm:text-sm text-gray-400">Stack Cost</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-400 mb-1 group-hover:scale-110 transition-transform">100%</div>
+            <div className="text-xs sm:text-sm text-gray-400">Open Source</div>
           </div>
         </div>
 

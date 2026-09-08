@@ -6,9 +6,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { name: 'GitHub', href: 'https://github.com', icon: Github },
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-    { name: 'Email', href: 'mailto:contact@example.com', icon: Mail },
+    { name: 'GitHub', href: 'https://github.com/OrenSegal', icon: Github },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin },
+    { name: 'Email', href: 'mailto:orenssegal@gmail.com', icon: Mail },
   ]
 
   return (
@@ -19,8 +19,9 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Oren Segal</h3>
             <p className="text-gray-400 text-sm">
-              AI & Data Science professional specializing in innovative solutions
-              for urban analytics, personalization, and intelligent systems.
+              AI platform engineer building the infrastructure agents run on:
+              cost-safe LLM gateways, evidence-backed research agents, and
+              CI for prompt-driven systems.
             </p>
           </div>
 
