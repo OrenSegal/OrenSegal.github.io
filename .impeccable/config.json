@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-09-09T00:04:17.535Z",
         "reason": "pre-existing project card gradient colors predating this session's 4-feature scope; unrelated to current edits (flightLog narrative field only), out of scope to redesign"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "10px",
+        "files": [
+          "components/ProjectCard.tsx"
+        ],
+        "createdAt": "2026-09-09T00:28:12.897Z",
+        "reason": "10px is the pre-existing, already-shipped Label-tier size used identically on every chip/plate/tag in this file; DESIGN.md documents the Label tier as 10-11px, this is not a new size introduced by the current edit"
       }
     ]
   }

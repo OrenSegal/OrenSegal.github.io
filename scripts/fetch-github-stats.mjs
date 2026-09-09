@@ -1,19 +1,20 @@
-// Build-time only. Pulls a small, honest GitHub stat for the Hero's "Open
-// Source" gauge: the percentage of the projects actually shown on this site
-// (the same set counted by the adjacent "Projects" readout) that carry a
-// real OSS license on GitHub. Scoped to those repos specifically — not the
-// whole account — so the two instruments can't be read as disagreeing.
-// Unauthenticated REST calls, no secrets.
+// Build-time only. Pulls small, honest GitHub stats for the 8 shown
+// portfolio repos in one pass: the aggregate license percentage for the
+// Hero's "Open Source" gauge, plus a per-repo star count and last-push date
+// for each project card. Unauthenticated REST calls, no secrets.
 //
 // Never fails the build: on any network/API error this leaves the existing,
-// committed lib/github-stats.json (a real, previously-fetched value) as is.
-// There is no invented-number fallback — the committed file is the baseline.
+// committed lib/github-stats.json and lib/project-stats.json (real,
+// previously-fetched values) as is. There is no invented-number fallback —
+// the committed files are the baseline.
 
 import { writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
-const OUT_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'lib', 'github-stats.json')
+const LIB_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'lib')
+const STATS_OUT_PATH = path.join(LIB_DIR, 'github-stats.json')
+const PROJECT_STATS_OUT_PATH = path.join(LIB_DIR, 'project-stats.json')
 const USER = 'OrenSegal'
 
 // Mirrors the repo slugs in lib/projects.ts. Kept as a plain list rather than
@@ -29,35 +30,46 @@ const PROJECT_REPOS = [
   'litmus',
 ]
 
-async function fetchStats() {
-  const results = await Promise.all(
+async function fetchRepoData() {
+  return Promise.all(
     PROJECT_REPOS.map(async (repo) => {
       const res = await fetch(`https://api.github.com/repos/${USER}/${repo}`, {
         headers: { Accept: 'application/vnd.github+json' },
       })
       if (!res.ok) throw new Error(`GitHub API responded ${res.status} for ${repo}`)
       const data = await res.json()
-      return Boolean(data.license && data.license.key && data.license.key !== 'other')
+      return {
+        repo,
+        licensed: Boolean(data.license && data.license.key && data.license.key !== 'other'),
+        stars: data.stargazers_count ?? 0,
+        pushedAt: data.pushed_at ?? null,
+      }
     })
   )
-
-  const licensed = results.filter(Boolean).length
-  const openSourcePercent = Math.round((licensed / PROJECT_REPOS.length) * 100)
-
-  return {
-    openSourcePercent,
-    projectCount: PROJECT_REPOS.length,
-    generatedAt: new Date().toISOString(),
-  }
 }
 
 async function main() {
   try {
-    const stats = await fetchStats()
-    await writeFile(OUT_PATH, JSON.stringify(stats, null, 2) + '\n')
-    console.log(`[fetch-github-stats] wrote ${OUT_PATH}:`, stats)
+    const repos = await fetchRepoData()
+    const generatedAt = new Date().toISOString()
+
+    const licensed = repos.filter((r) => r.licensed).length
+    const stats = {
+      openSourcePercent: Math.round((licensed / PROJECT_REPOS.length) * 100),
+      projectCount: PROJECT_REPOS.length,
+      generatedAt,
+    }
+
+    const projectStats = Object.fromEntries(
+      repos.map((r) => [r.repo, { stars: r.stars, pushedAt: r.pushedAt }])
+    )
+
+    await writeFile(STATS_OUT_PATH, JSON.stringify(stats, null, 2) + '\n')
+    await writeFile(PROJECT_STATS_OUT_PATH, JSON.stringify(projectStats, null, 2) + '\n')
+    console.log(`[fetch-github-stats] wrote ${STATS_OUT_PATH}:`, stats)
+    console.log(`[fetch-github-stats] wrote ${PROJECT_STATS_OUT_PATH}`)
   } catch (err) {
-    console.warn(`[fetch-github-stats] skipping update, keeping committed lib/github-stats.json: ${err.message}`)
+    console.warn(`[fetch-github-stats] skipping update, keeping committed stats files: ${err.message}`)
   }
 }
 

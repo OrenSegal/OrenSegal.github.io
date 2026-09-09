@@ -12,14 +12,22 @@ export default function Hero() {
         <div className="mt-10 grid w-full grid-cols-3 gap-3 sm:gap-4">
           <ReadoutWindow plate="INST-01" label="Projects" value={String(projects.length)} />
           <GaugeDial plate="INST-02" label="Skills" value={6} max={10} bootIndex={0} />
-          <GaugeDial
-            plate="INST-03"
-            label="Open Source"
-            value={githubStats.openSourcePercent}
-            max={100}
-            suffix="%"
-            bootIndex={1}
-          />
+          <a
+            href="https://github.com/OrenSegal?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contents"
+            title={`${githubStats.openSourcePercent}% of the ${githubStats.projectCount} projects shown here carry a real OSS license on GitHub — verify on GitHub`}
+          >
+            <GaugeDial
+              plate="INST-03"
+              label="Open Source"
+              value={githubStats.openSourcePercent}
+              max={100}
+              suffix="%"
+              bootIndex={1}
+            />
+          </a>
           <ReadoutWindow plate="INST-04" label="Role" value="AI Platform Engineer" />
           <ReadoutWindow plate="INST-05" label="Location" value="Remote / NYC" />
           <ReadoutWindow plate="INST-06" label="Focus" value="Agent Infrastructure" />
