@@ -1,209 +1,157 @@
 ---
 name: Oren Segal Portfolio
-description: A night flight-deck instrument panel — trust earned by calm, cross-checking instruments, not a glowing SaaS hero.
+description: Plain, dense, specific — a near-black engineer's page that earns trust with prose and proof, not costume.
 colors:
   panel: "#0a0b0c"
-  panel-face: "#131417"
-  bezel: "#2b2e33"
+  line: "#232527"
   ink: "#f2f1ea"
-  ink-dim: "#95989c"
-  ink-faint: "#5b5e63"
-  signal: "#7cfa9a"
-  signal-dim: "#3f7a52"
-  caution: "#f5a623"
+  ink-dim: "#9a9d9f"
+  ink-faint: "#7a7d7f"
+  accent: "#8fd6a8"
+  accent-dim: "#4b7a5d"
 typography:
   display:
     fontFamily: "Space Grotesk, sans-serif"
-    fontSize: "clamp(1.5rem, 3vw, 2.25rem)"
-    fontWeight: 600
-    lineHeight: 1.2
+    fontSize: "clamp(1.875rem, 4vw, 2.25rem)"
+    fontWeight: 500
+    lineHeight: 1.15
     letterSpacing: "normal"
   body:
     fontFamily: "Space Grotesk, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.625
     letterSpacing: "normal"
   label:
-    fontFamily: "IBM Plex Mono, monospace"
-    fontSize: "0.6875rem"
-    fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "0.15em"
-  readout:
-    fontFamily: "IBM Plex Mono, monospace"
+    fontFamily: "Space Grotesk, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 500
-    lineHeight: 1.3
-    letterSpacing: "normal"
-rounded:
-  none: "0px"
-  dot: "9999px"
+    lineHeight: 1.4
+    letterSpacing: "0.05em"
 spacing:
-  xs: "8px"
-  sm: "12px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-  section-y: "80px"
+  section-y: "96px"
+  divider-y: "32px"
+  nav-h: "64px"
 components:
-  button-verified-action:
-    backgroundColor: "{colors.panel-face}"
-    textColor: "{colors.signal}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "12px 24px"
-  button-verified-action-hover:
-    backgroundColor: "{colors.signal}"
-    textColor: "{colors.panel}"
-  button-ghost:
-    backgroundColor: "transparent"
+  link-inline:
     textColor: "{colors.ink}"
     typography: "{typography.body}"
-    rounded: "{rounded.none}"
-    padding: "12px 24px"
-  filter-toggle-active:
-    backgroundColor: "{colors.signal}"
-    textColor: "{colors.panel}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "8px 16px"
-  filter-toggle-inactive:
-    backgroundColor: "transparent"
+  link-inline-hover:
+    textColor: "{colors.accent}"
+  link-list-item:
     textColor: "{colors.ink-dim}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "8px 16px"
+    typography: "{typography.body}"
+    padding: "16px 0"
+  link-list-item-hover:
+    textColor: "{colors.ink}"
 ---
 
 # Design System: Oren Segal Portfolio
 
 ## Overview
 
-**Creative North Star: "The Night Flight-Deck"**
+There is no governing metaphor. The previous system ("The Night Flight-Deck") staged the page as cockpit instrumentation — gauges, plate-numbered cards, a boot sequence — and that costume is fully retired. The current build earns trust the way a well-run engineer's own writing does: plain, dense, specific prose, with hierarchy carried by size, weight, and measure rather than by decorative skin. Differentiation lives in information architecture (projects grouped by category, with the projects that have a real build narrative getting inline depth), not in a themed visual device layered on top.
 
-The page is instrumentation, not marketing chrome: a matte near-black panel carrying hairline-bezeled gauges, readout windows, and plate-numbered cards that report real values (8 shipped projects, a build-time-fetched percentage of those specific projects carrying a real OSS license on GitHub, a role, a location, a focus) and hold still once they've settled. Trust is built the way a pilot trusts a cockpit — by instruments that agree with each other and don't editorialize — not by a glowing SaaS hero making a claim. This is the explicit anti-reference to the AI-template-generated dark/purple-gradient/glassmorphism look the site previously shipped (see PRODUCT.md Brand Commitments): no violet/cyan gradients, no glass or blur, no bounce easing, no decorative sparkle.
-
-Density is calm and instrument-panel-literal: every card carries a plate label (`INST-01`, `PLATE 03`) before its content, uppercase mono labels sit beneath every gauge and field, and section headers borrow flight-deck vocabulary (Flight Log, Manifest, Radio Panel, Pre-flight Checklist) as the page's own diegetic voice rather than generic SaaS section names. On a visitor's first-ever visit only, the two gauges spin up from rest in a staggered boot sequence before the panel goes still for the rest of the session — the instruments come alive exactly once, the way a real panel does at power-on, not on every page load.
+The palette is near-black with warm off-white ink and a single restrained green accent spent almost entirely on hover and link state — never as a fill, a section color, or a badge. One workhorse sans face (Space Grotesk) carries both display and body text at two weights; there is no separate mono face anywhere in the shipped code. Structure is plain hairline dividers between stacked sections and list rows — there is no bordered-card chrome, no tonal surface stack, no shadows, gradients, or blur. This is a direct, confirmed rejection of the site's prior AI-template look (PRODUCT.md's Brand Commitments name the anti-reference explicitly: violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing, generic "Sparkles" badges) and, separately, of the flight-deck metaphor that replaced it.
 
 **Key Characteristics:**
-- Matte near-black ground with three flat tonal steps (panel / panel-face / recessed readout), never a gradient
-- One restrained signal-green accent reserved for verified/live state, never decorative
-- Aviation-style mono numerals and placard-caps labels on every instrument
-- Square hairline-bordered panels throughout; the only curves are small indicator dots
-- A single easing vocabulary (one cubic-bezier curve, no overshoot) for every state transition; gauges additionally get a one-time, first-visit-only staggered boot spin-up, gated behind `prefers-reduced-motion` and a localStorage "seen" flag
+- Near-black ground (`#0a0b0c`), warm off-white ink (`#f2f1ea`), no gradients, no tonal surface stack — depth comes from hairline dividers only, not layered panels
+- One accent (`#8fd6a8`) restricted to underline/hover/focus/selection state, never a fill or a headline color
+- One type family (Space Grotesk) at two weights (400 body, 500 display/label) — no mono face
+- Plain `border-b` list rows and section seams stand in for cards; nothing is boxed
+- A single entrance motion (`rise`, fade + 10px translate, 700ms) used once, on the Hero, not as a page-wide pattern
 
 ## Colors
 
-The palette is almost entirely neutral (near-black ground, warm-white ink, mid-gray bezel); color is spent on exactly two semantic signals, never on decoration.
+The palette is almost entirely neutral; the one accent hue is spent sparingly, as a signal for interactive/live state rather than as decoration.
 
 ### Primary
-- **Signal Green** (`#7cfa9a`): the "verified/live" signal. Restricted to `StatusFlag`'s ok state (dot + border + text), the active category filter toggle in All Projects, and exactly three verified-action CTAs that each gate a real, checkable claim — Hero's "Cleared for contact", ProjectDetail's "View on GitHub", and Contact's "Let's figure it out." Also carries two accessibility/browser-chrome roles that are not decorative choices: the `::selection` highlight and the `:focus-visible` outline (`app/globals.css`).
-- **Signal Green, Dim** (`#3f7a52`): the resting-state companion to Signal Green — used as the border/background on the same three verified-action CTAs before hover, as `StatusFlag`'s ok-state border, and as the scrollbar thumb's hover color.
-
-### Secondary
-- **Caution Amber** (`#f5a623`): reserved for the caution state of `StatusFlag` and its dot. Currently shipped on exactly one screen (`app/not-found.tsx`'s "Off Course" flag). It is a reserved semantic state on a reusable primitive, not a one-off; it must never be used decoratively or repurposed as a second accent.
+- **Accent Green** (`#8fd6a8`): link hover/focus state (Hero's GitHub link, project "source" links, project title arrows, Contact channel rows), the `::selection` highlight, and the `:focus-visible` outline (`app/globals.css`). It never appears at rest as a fill or as static text color.
+- **Accent Green, Dim** (`#4b7a5d`): the resting-state companion — the underline decoration color on inline links before hover (`decoration-accent-dim`) and the scrollbar-thumb hover color.
 
 ### Neutral
-- **Panel Black** (`#0a0b0c`): the base ground — `body` background, nav background, and the base tier of the three-step surface stack.
-- **Panel Face** (`#131417`): the raised-relative surface for every bordered card, dial, readout housing, and dropdown — the middle tier.
-- **Recessed Readout** (`#0a0b0c` reused, nested inside `panel-face`): `ReadoutWindow`'s inner value field reuses `panel` inside a `panel-face` card, which reads as a recessed dial window rather than a raised chip — the closest thing this system has to a "sunken" surface.
-- **Bezel** (`#2b2e33`): every hairline border, divider, and scrollbar track/thumb-rest — the one border color in the system.
-- **Ink** (`#f2f1ea`): primary text, headings, needle strokes, dot centers.
-- **Ink Dim** (`#95989c`): body copy, secondary labels, inactive nav/filter text.
-- **Ink Faint** (`#5b5e63`): the dashed gauge-face guide stroke and scrollbar-track-adjacent chrome; the dimmest text tier the system defines but rarely reaches for.
+- **Panel Black** (`#0a0b0c`): the sole background — `body`, the nav bar (`bg-panel/95`), and the scroll-to-top button. There is no second, raised surface tone; the build does not use a `panel-face` step (the token was defined once in the old system and is not carried forward — no component references it).
+- **Line** (`#232527`): every hairline border — section seams (`border-t border-line`), list-row dividers (`border-b border-line`), nav border, scrollbar track/thumb-rest. The one border color in the system.
+- **Ink** (`#f2f1ea`): headings, primary link text, active nav text.
+- **Ink Dim** (`#9a9d9f`): body copy, project descriptions, inactive nav text, list-row default text.
+- **Ink Faint** (`#7a7d7f`): the dimmest tier — tech-stack lines, timestamps ("updated Mon Year"), uppercase sub-headers on the project detail page, footer copyright, icon default color.
 
 ### Named Rules
-**The Verified-Signal Rule.** Signal green marks a claim the visitor can independently check — a live status, an active filter state, or a link to real, running proof (a repo, a contact channel). It never appears as a headline color, a section accent, or a hover flourish on content that isn't itself verifiable. If a new CTA doesn't gate a checkable action, it gets the ghost/ink-dim treatment, not signal green.
+**The Accent-as-State Rule.** Accent green marks interaction, not identity: link hover, focus-visible, text selection, and icon hover. It never sits on a heading, a section label, or any element at rest. If a new element isn't being hovered, focused, or selected, it does not get accent green.
 
 ## Typography
 
 **Display Font:** Space Grotesk (with sans-serif fallback)
-**Body Font:** Space Grotesk (with sans-serif fallback) — the same face; `body` carries `font-display` globally, so this is one type family used at two weights/sizes, not a display/body pairing.
-**Label/Mono Font:** IBM Plex Mono (with monospace fallback)
+**Body Font:** Space Grotesk (with sans-serif fallback) — the same face at a lighter weight; there is one `font-sans` family loaded via `next/font`, no second face.
 
-**Character:** A single geometric sans (Space Grotesk) does all prose and heading work, deliberately avoiding a generic system/Inter-as-display face; IBM Plex Mono carries every numeral, plate label, and instrument readout, giving the page its aviation-placard, tabular-numerals texture.
+**Character:** A single geometric sans does every job on the page — headline, body, label, and numeral. The build deliberately carries no mono face; the prior system's IBM Plex Mono (plate IDs, tabular readouts) was retired along with the instruments it labeled.
 
 ### Hierarchy
-- **Section Headline** (600, `text-3xl` → `text-4xl` responsive, tight line-height): section openers — "Flight Log", "Manifest — Signature Works", "Radio Panel". This is the largest text on the page.
-- **Name Placard** (600, `text-2xl` → `text-3xl`, tight): the Hero's `<h1>` — deliberately smaller than the section headlines below it, because in this world the name is a placard caption beneath the instrument panel, not the loudest thing on the page. Do not default this to the page's biggest type.
-- **Title/Card Heading** (600, `text-xl`, tight): project card and detail titles.
-- **Body** (400, `text-sm`–`text-base`, relaxed line-height): descriptive copy, About narrative, project descriptions, and each `flightLog` narrative field (problem/decisions/outcome) inside the optional Post-Flight Debrief card.
-- **Label** (500, `10–11px`, `0.15em`–`0.2em` tracking, uppercase): instrument plate IDs, gauge/readout labels, section eyebrettes on cards ("Entry 01", "Instrument Rating"), tag chips, and the mono sub-headers shared by "Key Features"/"Impact"/"Tech Stack"/"Post-Flight Debrief".
-- **Readout** (500, `text-sm`–`text-lg`, tabular-nums via the project's `.tabular` utility, `font-variant-numeric: tabular-nums`): the value shown inside a `ReadoutWindow` or `GaugeDial`.
+- **Display** (500, `text-3xl` → `text-4xl`, tight `leading-[1.15]`): the Hero `<h1>` — two sentences of prose stating what Oren builds. This is the largest, boldest text on the page; there is no separate, smaller "name placard" — the old system's rule that the name stays smaller than section headers is gone along with the instruments it deferred to.
+- **Section Heading** (500, `text-2xl`): "About", "Work", "Get in touch" — the section openers.
+- **Category Heading** (500, `text-lg`, `text-ink-dim`): the four project-category sub-headers ("AI Agents", "AI Infrastructure", "Data Engineering", "Developer Tools") inside Work.
+- **Title/Card Heading** (500, `text-xl`): each project row's title link.
+- **Body** (400, `text-base`–`text-lg`, relaxed `leading-relaxed`): About's narrative paragraphs, project descriptions, Contact's intro line, flight-log problem/outcome copy.
+- **Label** (500, `text-sm`, `uppercase`, `tracking-wide`): the project-detail sub-headers only ("Problem", "Decisions", "Outcome", "Key features", "Impact", "Tech stack") — the sole uppercase-tracked text in the system, confined to that one page.
+- **Meta** (400, `text-sm`, `text-ink-faint`): tech-stack lines, "updated" timestamps, footer copyright, stack list in About.
 
 ### Named Rules
-**The Placard Restraint Rule.** The visitor's name is set smaller than the section headlines that follow it (`text-2xl`/`text-3xl` vs. `text-3xl`/`text-4xl`). The instruments carry the weight of the first viewport; the name is a caption underneath them, not a hero headline.
-
-**The Tracking Ladder.** Letter-spacing widens with a label's formality: plate IDs and instrument labels sit at `0.2em`/`0.15em`, tag/category chips at `0.1em`, and numeric readouts stay at normal or `tracking-tight`. Wider tracking signals "this is an instrument marking," not body prose.
+**The One Face Rule.** Every piece of text on the page — headline, body, label, numeral — is Space Grotesk at 400 or 500. There is no mono face and no third family; hierarchy comes from size and weight, never from a costume type switch.
 
 ## Layout
 
-Content is capped at `max-w-6xl` (nav, About, Featured/All Projects, Footer) or narrower (`max-w-3xl`/`max-w-4xl` for Hero, Contact, and project detail) and centered with standard `px-4 sm:px-6 lg:px-8` gutters. Sections stack full-bleed with a hairline `border-t border-bezel` between them — there is no card-in-card page frame; the bezel line itself is the section seam. Vertical rhythm is a consistent `py-20` per section.
+Nearly every section shares one container: `max-w-3xl`, centered, with `px-4 sm:px-6` gutters (nav, Hero, About, Work, Contact, Footer). The project-detail page is the one narrower exception at `max-w-2xl`, with prose further capped at `max-w-xl`/`max-w-2xl` inside it. There is no `lg:` gutter step anywhere in the shipped code — don't add one without new evidence.
 
-The Hero's six-pack is a fixed `grid-cols-3` at every breakpoint — it does not reflow to fewer columns on narrow viewports, so cells compress rather than restack below `sm`. The composition is 4 `ReadoutWindow`s (Projects, Role, Location, Focus) and 2 `GaugeDial`s (Skills, Open Source) — not an even split, and not the prior build's 3/3 split. This is shipped behavior, not a documented responsive strategy; treat the non-reflowing grid as a known constraint of the six-pack pattern rather than a system rule to reuse elsewhere, and treat the 4-readout/2-gauge split as specific to this composition's content, not a ratio to enforce on future instrument groupings.
+Sections stack full-bleed and are separated by a hairline `border-t border-line` — there is no card-in-card frame; the line itself is the seam. Section vertical rhythm is a consistent `py-24`; the footer is `py-10`; the nav is a fixed `h-16` bar. Inside Work and Contact, list rows repeat the same divider idiom at a tighter interval — `border-b border-line py-8`, with `first:pt-0 last:border-b-0` so the divider never doubles against the section border above or beneath it. This idiom appears at two independent sites (`Projects.tsx`, `Contact.tsx`) and is the system's one reusable list pattern.
 
-Project grids reflow conventionally: 1 column (mobile) → 2 (`md`, All Projects only) → 3 (`lg`).
+Work's category grouping is a single vertical stack of stacked lists, not a grid or a filterable toggle — projects are grouped by category heading, in a fixed order, with no active/inactive filter UI. Project-detail's Key Features/Impact/Tech Stack pair sits in a `sm:grid-cols-2` two-column layout; everything else on the page is single-column.
 
 ## Elevation & Depth
 
-This system has no shadows, no blur, and no gradients anywhere in the shipped code — depth is conveyed entirely through a flat three-step tonal stack (`panel` → `panel-face` → nested `panel` for recessed readouts) plus 1px bezel borders. `ReadoutWindow` is the one place the stack inverts on purpose: its inner value field is `panel` nested inside a `panel-face` card, reading as a recessed dial window rather than a raised element.
+This system has no shadows, no blur, no gradients, and no tonal surface stack. Depth is conveyed by a single hairline divider color (`line`, `#232527`) against one flat background (`panel`, `#0a0b0c`) — there is no second, lighter background tone anywhere in the shipped code. This is flatter than the retired flight-deck system, which layered a three-step tonal stack (`panel` → `panel-face` → recessed readout); that middle "raised card" tone did not carry forward into this world.
 
 ### Named Rules
-**The Flat Panel Rule.** No `box-shadow`, no gradient fill, no backdrop blur, anywhere. Depth is bezel border + tonal step only. A darker nested surface reads recessed; a lighter one would read raised — this system currently only uses the recessed direction.
+**The One Surface Rule.** There is exactly one background tone on the page. Depth is a 1px `line` divider, never a lighter panel, a shadow, or a blur. If a new component wants to read as "elevated," give it a divider, not a fill.
 
 ## Shapes
 
-Every panel, card, button, chip, and input is a hard rectangle — `rounded` is `0px` project-wide except for a small set of literal indicator dots (`rounded-full`, `h-1.5 w-1.5`–`h-2 w-2`): the needle-center dot, the `StatusFlag` state dot, feature-list bullets, and the Contact channel-row marker. Borders are uniformly 1px solid bezel (`#2b2e33`); there is no border-radius scale to speak of beyond "square" and "dot."
+There are no bordered cards, chips, or buttons to describe a radius strategy for — the build has no `rounded-*` corner language in active use. The only literal curved shapes are small bullet dots (`rounded-full`, `h-1 w-1`, `bg-ink-faint`) preceding each item in the project-detail "Decisions" and "Key features" lists. Borders are uniformly 1px solid `line`; dividers run the width of their container.
 
 ## Components
 
-### Buttons
-- **Shape:** square, 1px border, no radius.
-- **Verified-action (signal):** `border-signal-dim` + `bg-panel-face`, `text-signal`, mono uppercase label (`0.1em`–`0.15em` tracking), `px-6 py-3`. Reserved for the three verified-action CTAs named in the Colors section — do not add a fourth without a new checkable claim behind it.
-- **Ghost (default):** `border-ink-dim` or `border-bezel`, `text-ink` or `text-ink-dim`, no fill; used for "Get in Touch," "Go Home," "Back to Projects."
-- **Hover/Focus:** verified-action buttons invert to filled signal green with panel-black text on hover; ghost buttons darken the border to `ink`/`ink-dim`. All transitions use `transition-colors` with no easing override beyond the browser default — no bounce, no scale.
+There is no button, card, or chip component library in this build. Interactive elements are plain text links and icon-accompanied text links; structure comes from spacing and dividers, not boxed containers.
 
-### Chips
-- **Style:** 1px bezel border, no fill, mono uppercase text at `10px`/`0.1em` tracking, `px-2 py-1`. Used for category tags, tech-stack tags, and the project category badge.
-- **State:** the category filter in All Projects is the one chip-like control with a true selected state — active fills `bg-signal`/`text-panel`; inactive stays `text-ink-dim` on transparent.
+### Links
+- **Inline text link (in-sentence):** `text-ink`, underlined with `decoration-accent-dim underline-offset-4`, brightening to `decoration-accent` on hover — used for the Hero's GitHub-percentage link and each project's "source" link.
+- **Action link (standalone, e.g. "See the work," "Get in touch," "Go home"):** `text-ink`, `text-sm font-medium`, no underline at rest, paired with a Lucide arrow icon (`ArrowRight`/`ArrowUpRight`/`Home`) that nudges `translate-x-1` on hover via `group-hover`.
+- **List link (nav, back-link, footer icon):** `text-ink-dim` default → `text-ink` on hover, `transition-colors`, no underline.
 
-### Cards / Containers
-- **Corner Style:** square (0px radius) throughout.
-- **Background:** `panel-face` on every bordered card (project cards, About's "Instrument Rating" panel, project-detail sub-cards, Contact's channel list).
-- **Shadow Strategy:** none — see Elevation & Depth.
-- **Border:** 1px solid `bezel`; project cards brighten the border to `ink-dim` on hover.
-- **Internal Padding:** `p-6` (mobile) to `p-8` (`sm:` and up) is the standard card padding.
+### List Rows (signature pattern)
+- **Style:** `border-b border-line py-8`, `first:pt-0 last:border-b-0` — used identically for project rows in Work and channel rows in Contact. This is the system's one reusable structural component in place of a card.
+- **Contact channel row:** icon (`text-ink-faint` → `text-accent` on hover) + label (`text-ink` → `text-accent` on hover), both transitioning together as one hover target.
+- **Project row:** title link with trailing arrow, description, optional flight-log excerpt (Problem/Outcome only, in a `border-l border-line pl-4` inset — the one place a border runs vertically rather than horizontally), then a meta line of tech stack + optional source link.
 
 ### Navigation
-- Fixed top bar, `bg-panel`, `border-b border-bezel`, `h-16`. Logo mark is a bordered square monogram ("OS") plus the name in uppercase tracked mono-style Space Grotesk. Links use `font-display text-sm`, `ink-dim` default → `ink` on hover, no underline. Mobile collapses to a bezel-bordered dropdown panel on `panel-face`, no overlay/blur behind it.
+- Fixed top bar, `bg-panel/95`, `border-b border-line`, `h-16`, `max-w-3xl` inner container. Wordmark is plain text ("Oren Segal," `text-sm font-medium`, no monogram mark). Links are `text-sm text-ink-dim` → `text-ink` on hover, no underline. Mobile collapses to an inline stacked menu under the same bar, no overlay or blur behind it.
+- Carries a leftover `backdrop-blur-0` utility class (a no-op paired with the semi-transparent `bg-panel/95`) — this is inert leftover markup, not a blur treatment; do not read it as license to add backdrop blur anywhere, and don't carry it forward if the nav is touched again.
 
-### Instrument Primitives (signature components)
-- **GaugeDial** (`components/Instruments.tsx`): a circular dial with a dashed guide arc (`ink-faint`, `stroke-dasharray`), a single needle, a tabular-nums mono readout beneath the needle, and a mono plate ID above. The needle-settle mechanism is now conditional, driven by `lib/boot.ts`'s `getBootDecision()`: on a visitor's first-ever page load (no `localStorage` "seen" flag, and `prefers-reduced-motion` not set), the needle renders at rest, then the `animate-settle` Tailwind keyframe (`900ms cubic-bezier(0.16,1,0.3,1)`, interpolating CSS custom properties `--needle-rest`/`--needle-value`) rotates it to its true value, staggered per-instrument via a `bootIndex` prop (`bootIndex * 150ms` delay) so the Hero's two gauges spin up in sequence rather than together. On every subsequent visit, or under reduced motion, the needle renders directly at its final value with no transition and no keyframe at all — the panel reads as already-settled, not as replaying a boot animation on every load. This is the first real usage of the `settle` keyframe; it was previously defined in `tailwind.config.ts` but dormant, with only `flag-drop` actually invoked. Any documentation claiming `settle` is unused is stale as of this build.
-- **ReadoutWindow**: the text-value counterpart to GaugeDial — plate ID, a bezel-bordered recessed `panel` field holding the mono value, and a label beneath. Used for non-numeric identity fields (Role, Location, Focus) and the Projects count. Unlike `GaugeDial`, it has no boot-sequence motion — it renders static on every load.
-- **StatusFlag**: a small bordered pill with a colored dot and uppercase mono label, entering with the `flag-drop` animation (translateY + fade, 500ms, same easing as the needle settle). `tone="ok"` is signal green; `tone="caution"` is amber and currently reserved for off-nominal states (404). `flag-drop` is unconditional and always plays on every visit — it is not gated by `getBootDecision()`. This is a deliberate scope boundary, not an inconsistency: the boot sequence governs the two `GaugeDial` needles specifically, not every entrance animation on the page.
-- **Plate Numbering**: every project card and instrument carries a mono plate ID (`INST-01`, `PLATE 03`) as a diegetic identifier, not a decorative eyebrow — it names the instrument, the way a real gauge would.
-- **Live-Data Gauge (Open Source %)**: the Hero's "Open Source" `GaugeDial` reads `lib/github-stats.json`, a build-time artifact written by `scripts/fetch-github-stats.mjs` via an npm `prebuild` hook. The script checks GitHub's public REST API for a real OSS license on exactly the 8 portfolio repos shown by the adjacent "Projects" readout (not the whole account), so the two instruments can't be read as disagreeing, and computes the licensed percentage. On any fetch/API failure the script leaves the previously-committed JSON in place rather than falling back to an invented number — the gauge always shows a real, previously-fetched value, never a placeholder. Do not hardcode this percentage in prose or components; it is a live-derived value by design and will change as repos gain or lose licenses. The gauge is also a real link (`<a class="contents">` wrapping the dial so the grid layout is unaffected) to `github.com/OrenSegal`, with a `title` tooltip spelling out exactly what the percentage measures — the mechanism is one click from the claim, per the Verified-Signal Rule.
-- **Per-Project Recency Readout**: `ProjectCard` shows a real "GITHUB · <MONTH YEAR>" line sourced from `lib/project-stats.json` (last GitHub push date, written by the same `fetch-github-stats.mjs` pass), reusing the same repo-data fetch as the Open Source gauge rather than a second API call. Star counts are fetched into the same file but deliberately not displayed — most of these repos have 0-1 stars, and surfacing that number would read as a negative signal rather than proof; recency is the honest, always-positive-reading fact worth showing. If a repo has no fetched data yet, the card renders with no date suffix rather than a placeholder.
-- **Post-Flight Debrief (optional flight-log card)**: `ProjectDetail` conditionally renders a "Post-Flight Debrief" card — problem / decisions / outcome, three columns on `md:` and up — only when `project.flightLog` exists (`lib/projects.ts`, currently 3 of 8 projects). Its header uses the same mono, uppercase, `0.15em`-tracked label tier as the sibling "Key Features"/"Impact"/"Tech Stack" headers, so it reads as one more instrument reading rather than a bolted-on feature. This is a system rule for narrative depth, not a one-off: any project may opt in by populating `flightLog`; projects without it render no card and no visual gap.
-
-### Static Brand Asset
-- **OG/Twitter Card** (`public/og-image.png`): a static 1200×630 PNG generated by `scripts/generate-og-image.mjs` — a hand-authored SVG using this file's exact token palette (panel/bezel/ink/signal, no gradients, square corners, hairline borders) with the real Space Grotesk/IBM Plex Mono font data embedded, rasterized via `rsvg-convert`. Wired into `app/layout.tsx`'s `openGraph`/`twitter` metadata. It is not regenerated at build time; re-run the script by hand if the palette or wordmark changes, so it doesn't silently drift from this document.
+### 404 Page
+- `404` (`text-lg font-medium text-ink-faint`) sits directly above the `<h1>` ("Page not found"). This reads as an eyebrow-shaped arrangement but is scoped to this one error screen's numeral-then-heading pairing, not a documented kicker/label-above-heading pattern — do not generalize it into a reusable eyebrow component elsewhere in the system.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep signal green ( `#7cfa9a`/`#3f7a52`) restricted to verified/live state: `StatusFlag` ok, the active filter toggle, the three named verified-action CTAs, and the browser-chrome selection/focus-ring roles. Everywhere else, use ink/ink-dim/bezel.
-- **Do** use the single easing curve (`cubic-bezier(0.16, 1, 0.3, 1)`) for every state transition — settle, flag-drop, hover — with no bounce or overshoot.
-- **Do** keep every panel, card, chip, and button square (0px radius); reserve `rounded-full` for small literal indicator dots only.
-- **Do** set the visitor's name/heading smaller than the section headlines that follow it, consistent with the Placard Restraint Rule — the instruments carry the first viewport, not a hero headline.
-- **Do** respect `prefers-reduced-motion`: all animation/transition durations collapse to near-zero, `scroll-behavior` becomes `auto` (`app/globals.css`), and the `GaugeDial` boot sequence is skipped entirely.
-- **Do** gate any future one-time entrance motion the way `GaugeDial`'s boot sequence does — a module-cached, `localStorage`-backed, reduced-motion-aware decision (`lib/boot.ts`) — rather than replaying it on every page load.
-- **Do** back numeric instrument readouts with a real, checkable source (a repo count, a fetched API value) the way the Open Source gauge does; commit a real fallback value rather than an invented placeholder for when the fetch fails.
+- **Do** keep accent green (`#8fd6a8`/`#4b7a5d`) restricted to interaction state — hover, focus-visible, selection, and the resting underline decoration on inline links. Everywhere else, use ink/ink-dim/ink-faint.
+- **Do** keep the page to one background tone (`panel`, `#0a0b0c`) and convey structure with `line` (`#232527`) dividers only.
+- **Do** set body copy in Space Grotesk 400 and headings/labels in 500 — do not introduce a second or third type family, including a mono face, for numerals or labels.
+- **Do** use the `border-b border-line py-8 first:pt-0 last:border-b-0` divider idiom for any new repeating list of items (projects, channels, etc.) rather than inventing a bordered card.
+- **Do** respect `prefers-reduced-motion`: `app/globals.css` collapses all animation/transition durations to near-zero and sets `scroll-behavior: auto` when it's set.
+- **Do** reserve uppercase, tracked labels (`text-sm uppercase tracking-wide text-ink-faint`) for the project-detail sub-headers pattern (Problem/Decisions/Outcome/Key features/Impact/Tech stack); it is not used as a general kicker or eyebrow elsewhere on the site, and new eyebrow-style labels should not be added — the 404 page's numeral-above-heading is a one-off, not a precedent.
 
 ### Don't:
-- **Don't** introduce gradients, glassmorphism/backdrop-blur, or drop shadows — this system has none, by design, as the explicit rejection of the prior AI-template look.
-- **Don't** add a fourth signal-green CTA without a genuinely new checkable claim behind it; the accent's restriction to a small, named set of uses is the point, not an incidental count.
-- **Don't** use caution amber for anything but the reserved caution state on `StatusFlag`; it is not a second decorative accent.
-- **Don't** treat the Hero's fixed `grid-cols-3` six-pack, or its 4-readout/2-gauge split, as a general responsive-grid pattern — both are known constraints of that specific composition, not a system rule to copy onto new grids.
-- **Don't** extend the `GaugeDial` boot sequence to `StatusFlag` or other entrance motion without a reason; `flag-drop` staying unconditional on every visit is an intentional scope boundary, not a gap to close.
+- **Don't** introduce gradients, glassmorphism/backdrop-blur, drop shadows, or a second background tone — this build is a confirmed, explicit rejection of the site's prior AI-template look (violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing — per PRODUCT.md's Brand Commitments) and of the flight-deck system that followed it.
+- **Don't** add a second accent hue or use accent green as a fill, a headline color, or a static (non-hover) text color.
+- **Don't** revive the retired instrumentation system — `GaugeDial`/`ReadoutWindow`/`StatusFlag` (`components/Instruments.tsx`), the boot sequence (`lib/boot.ts`), the `settle`/`flag-drop` keyframes, IBM Plex Mono, or the `panel-face`/`bezel`/`signal`/`caution` tokens are gone from the shipped code; do not reintroduce them or reference them as current.
+- **Don't** box content in bordered cards. The system's structural unit is a hairline divider between stacked rows/sections, not a panel.
+- **Don't** add a category filter/toggle to Work — projects are grouped by fixed category headings in document order, with no active/inactive UI state to maintain.
+- **Don't** treat the leftover `backdrop-blur-0` class on Navigation as a blur treatment to extend, and don't turn the 404 page's numeral-above-heading arrangement into a reusable eyebrow/kicker component — neither is a system rule, both are as-shipped artifacts of their one screen.
