@@ -49,6 +49,33 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           )}
         </div>
 
+        {project.flightLog && (
+          <div className="mb-10 border border-bezel bg-panel-face p-6 sm:p-8">
+            <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.15em] text-ink-dim">Post-Flight Debrief</h2>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div>
+                <h3 className="mb-3 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-dim">Problem</h3>
+                <p className="text-sm leading-relaxed text-ink-dim">{project.flightLog.problem}</p>
+              </div>
+              <div>
+                <h3 className="mb-3 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-dim">Decisions</h3>
+                <ul className="space-y-2">
+                  {project.flightLog.decisions.map((decision, index) => (
+                    <li key={index} className="flex items-start gap-2.5">
+                      <span className="mt-1.5 h-1 w-1 flex-shrink-0 bg-ink-faint" />
+                      <span className="text-sm leading-relaxed text-ink-dim">{decision}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="mb-3 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-dim">Outcome</h3>
+                <p className="text-sm leading-relaxed text-ink-dim">{project.flightLog.outcome}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="border border-bezel bg-panel-face p-6 lg:col-span-2">
             <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-ink-dim">Key Features</h2>

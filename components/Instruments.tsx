@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { getBootDecision } from '@/lib/boot'
 
 interface GaugeDialProps {
   label: string
@@ -8,15 +9,25 @@ interface GaugeDialProps {
   max: number
   suffix?: string
   plate: string
+  bootIndex?: number
 }
 
-export function GaugeDial({ label, value, max, suffix = '', plate }: GaugeDialProps) {
+export function GaugeDial({ label, value, max, suffix = '', plate, bootIndex = 0 }: GaugeDialProps) {
   const [ready, setReady] = useState(false)
+  const [animate, setAnimate] = useState(false)
 
   useEffect(() => {
-    const t = requestAnimationFrame(() => setReady(true))
-    return () => cancelAnimationFrame(t)
-  }, [])
+    if (!getBootDecision()) {
+      setAnimate(false)
+      setReady(true)
+      return
+    }
+    setAnimate(true)
+    const t = setTimeout(() => {
+      requestAnimationFrame(() => setReady(true))
+    }, bootIndex * 150)
+    return () => clearTimeout(t)
+  }, [bootIndex])
 
   const pct = Math.min(value / max, 1)
   const rest = -120
@@ -37,12 +48,11 @@ export function GaugeDial({ label, value, max, suffix = '', plate }: GaugeDialPr
           />
         </svg>
         <div
-          className="absolute inset-0 flex items-center justify-center origin-center"
+          className={`absolute inset-0 flex items-center justify-center origin-center ${ready && animate ? 'animate-settle' : ''}`}
           style={{
             '--needle-rest': `${rest}deg`,
             '--needle-value': `${target}deg`,
-            transform: ready ? `rotate(${target}deg)` : `rotate(${rest}deg)`,
-            transition: ready ? 'transform 900ms cubic-bezier(0.16,1,0.3,1)' : 'none',
+            transform: `rotate(${ready ? target : rest}deg)`,
           } as React.CSSProperties}
         >
           <div className="h-9 w-[2px] -translate-y-4 bg-ink" />
