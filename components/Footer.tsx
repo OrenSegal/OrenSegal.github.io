@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 font-display text-sm font-medium text-ink">Quick Links</h3>
+            <h3 className="mb-4 font-display text-sm font-medium text-ink">Index</h3>
             <ul className="space-y-2">
               <li>
                 <a href="/#projects" className="text-sm text-ink-dim transition-colors hover:text-ink">
@@ -61,10 +61,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-bezel pt-8 text-center">
-          <p className="font-mono text-xs text-ink-dim">© {currentYear} Oren Segal. All rights reserved.</p>
-          <p className="mt-2 font-mono text-[11px] text-ink-dim">
-            Built with Next.js, TypeScript, and Tailwind CSS
-          </p>
+          <p className="font-mono text-xs text-ink-dim">© {currentYear} Oren Segal</p>
         </div>
       </div>
     </footer>
