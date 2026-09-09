@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Project } from '@/lib/projects'
 import { ArrowRight } from 'lucide-react'
+import projectStats from '@/lib/project-stats.json'
 
 interface ProjectCardProps {
   project: Project
@@ -8,7 +9,14 @@ interface ProjectCardProps {
   featured?: boolean
 }
 
+const STATS: Record<string, { stars: number; pushedAt: string | null }> = projectStats
+
 export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+  const pushedAt = STATS[project.id]?.pushedAt
+  const updated = pushedAt
+    ? new Date(pushedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()
+    : null
+
   return (
     <Link
       href={`/projects/${project.id}`}
@@ -51,7 +59,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
         </span>
         {project.demoUrl && (
           <span className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-dim">
-            GitHub
+            GitHub{updated && ` · ${updated}`}
           </span>
         )}
       </div>
