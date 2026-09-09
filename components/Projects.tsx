@@ -41,11 +41,11 @@ function ProjectRow({ project }: { project: Project }) {
       {project.flightLog && (
         <div className="mt-4 max-w-2xl space-y-2 border-l border-line pl-4 text-sm leading-relaxed text-ink-dim">
           <p>
-            <span className="text-ink-faint">Problem — </span>
+            <span className="text-ink-faint">Problem: </span>
             {project.flightLog.problem}
           </p>
           <p>
-            <span className="text-ink-faint">Outcome — </span>
+            <span className="text-ink-faint">Outcome: </span>
             {project.flightLog.outcome}
           </p>
         </div>

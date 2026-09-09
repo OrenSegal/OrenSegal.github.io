@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Oren Segal | AI Platform Engineer',
     description: 'Shipped AI agent, LLM infrastructure, and data engineering projects',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal — AI Platform Engineer' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, AI Platform Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
