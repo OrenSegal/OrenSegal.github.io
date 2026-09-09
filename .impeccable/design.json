@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-08T00:00:00Z",
+  "generatedAt": "2026-09-09T00:20:00Z",
   "title": "Design System: Oren Segal Portfolio",
   "extensions": {
     "colorMeta": {
@@ -16,14 +16,15 @@
     },
     "typographyMeta": {
       "display": { "displayName": "Section Headline", "purpose": "Section openers (Flight Log, Manifest, Radio Panel); largest text on the page." },
-      "body": { "displayName": "Body (Space Grotesk)", "purpose": "Prose and body copy; same family as display, set at body weight/size." },
-      "label": { "displayName": "Instrument Label", "purpose": "Plate IDs, gauge/readout labels, tag chips — mono, uppercase, tracked." },
-      "readout": { "displayName": "Readout Value", "purpose": "Numeric/text value shown inside a GaugeDial or ReadoutWindow, tabular-nums." }
+      "body": { "displayName": "Body (Space Grotesk)", "purpose": "Prose and body copy; same family as display, set at body weight/size. Also used for the optional Post-Flight Debrief narrative fields (problem/decisions/outcome)." },
+      "label": { "displayName": "Instrument Label", "purpose": "Plate IDs, gauge/readout labels, tag chips, and the mono sub-headers shared by Key Features/Impact/Tech Stack/Post-Flight Debrief — mono, uppercase, tracked." },
+      "readout": { "displayName": "Readout Value", "purpose": "Numeric/text value shown inside a GaugeDial or ReadoutWindow, tabular-nums via the .tabular utility (font-variant-numeric: tabular-nums)." }
     },
     "shadows": [],
     "motion": [
-      { "name": "settle-transition", "value": "transform 900ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "GaugeDial needle animates from resting angle to true value on mount, applied inline (not via the config `settle` keyframe, which is defined but unused)." },
-      { "name": "flag-drop", "value": "flagDrop 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards", "purpose": "StatusFlag entrance: fade + translateY(-6px to 0). Same easing curve as settle-transition; the system's one easing vocabulary." }
+      { "name": "settle-keyframe", "value": "settle 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards, interpolating --needle-rest to --needle-value", "purpose": "GaugeDial needle spin-up, applied via the animate-settle class only on a visitor's first-ever page load (see boot-sequence gate below); on later visits or under prefers-reduced-motion, the needle renders directly at its final angle with no transition and no keyframe. First real usage of this keyframe — it was previously defined but dormant." },
+      { "name": "boot-sequence-gate", "value": "lib/boot.ts getBootDecision(): module-scope-cached, localStorage key 'instruments-boot-seen', short-circuits false under prefers-reduced-motion", "purpose": "One-time-only decision, shared by all GaugeDial instances mounting in the same commit, for whether the settle-keyframe boot spin-up plays. Scoped to GaugeDial only; does not affect StatusFlag's flag-drop." },
+      { "name": "flag-drop", "value": "flagDrop 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards", "purpose": "StatusFlag entrance: fade + translateY(-6px to 0). Same easing curve as settle-keyframe. Unconditional and always-on every visit — an intentional scope boundary versus GaugeDial's gated boot sequence, not an inconsistency." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -52,15 +53,15 @@
       "name": "GaugeDial",
       "kind": "custom",
       "refersTo": null,
-      "description": "Circular instrument dial: dashed guide arc, single needle settling to its true value on mount, tabular-nums readout, mono plate ID.",
-      "html": "<div class=\"ds-gauge\"><span class=\"ds-gauge-plate\">INST-01</span><div class=\"ds-gauge-face\"><svg viewBox=\"0 0 100 100\" width=\"96\" height=\"96\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"none\" stroke=\"#2b2e33\" stroke-width=\"1.5\"/><path d=\"M 20 76 A 44 44 0 1 1 80 76\" fill=\"none\" stroke=\"#5b5e63\" stroke-width=\"1\" stroke-dasharray=\"2 3\"/></svg><div class=\"ds-gauge-value\">8</div></div><span class=\"ds-gauge-label\">Projects</span></div>",
+      "description": "Circular instrument dial: dashed guide arc, single needle, tabular-nums readout, mono plate ID. Needle plays a staggered first-visit-only boot spin-up (gated by lib/boot.ts), then renders statically thereafter.",
+      "html": "<div class=\"ds-gauge\"><span class=\"ds-gauge-plate\">INST-02</span><div class=\"ds-gauge-face\"><svg viewBox=\"0 0 100 100\" width=\"96\" height=\"96\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"none\" stroke=\"#2b2e33\" stroke-width=\"1.5\"/><path d=\"M 20 76 A 44 44 0 1 1 80 76\" fill=\"none\" stroke=\"#5b5e63\" stroke-width=\"1\" stroke-dasharray=\"2 3\"/></svg><div class=\"ds-gauge-value\">100%</div></div><span class=\"ds-gauge-label\">Open Source</span></div>",
       "css": ".ds-gauge { display: flex; flex-direction: column; align-items: center; gap: 12px; border: 1px solid #2b2e33; background: #131417; padding: 24px 16px; } .ds-gauge-plate { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #95989c; } .ds-gauge-face { position: relative; width: 96px; height: 96px; } .ds-gauge-value { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 500; color: #f2f1ea; } .ds-gauge-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #95989c; }"
     },
     {
       "name": "ReadoutWindow",
       "kind": "custom",
       "refersTo": null,
-      "description": "Text-value instrument: plate ID, recessed mono value field, label beneath.",
+      "description": "Text-value instrument: plate ID, recessed mono value field, label beneath. Static on every load — no boot-sequence motion, unlike GaugeDial.",
       "html": "<div class=\"ds-readout\"><span class=\"ds-readout-plate\">INST-04</span><div class=\"ds-readout-field\">AI Platform Engineer</div><span class=\"ds-readout-label\">Role</span></div>",
       "css": ".ds-readout { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #2b2e33; background: #131417; padding: 24px 16px; } .ds-readout-plate { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #95989c; } .ds-readout-field { display: flex; align-items: center; justify-content: center; width: 100%; height: 96px; border: 1px solid #2b2e33; background: #0a0b0c; padding: 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #f2f1ea; text-align: center; } .ds-readout-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #95989c; }"
     },
@@ -68,7 +69,7 @@
       "name": "StatusFlag",
       "kind": "custom",
       "refersTo": null,
-      "description": "Small bordered status pill with colored dot; ok (signal green) or caution (amber), entering with flag-drop animation.",
+      "description": "Small bordered status pill with colored dot; ok (signal green) or caution (amber), entering with flag-drop animation. Unconditional/always-on every visit — not gated by the GaugeDial boot sequence.",
       "html": "<div class=\"ds-flag ds-flag-ok\"><span class=\"ds-flag-dot\"></span><span>Cleared — Available for hire</span></div>",
       "css": ".ds-flag { display: inline-flex; align-items: center; gap: 8px; background: #131417; border: 1px solid; padding: 6px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; animation: ds-flag-drop 500ms cubic-bezier(0.16,1,0.3,1) forwards; } .ds-flag-ok { border-color: #3f7a52; color: #7cfa9a; } .ds-flag-caution { border-color: #f5a623; color: #f5a623; } .ds-flag-dot { width: 6px; height: 6px; border-radius: 9999px; background: currentColor; } @keyframes ds-flag-drop { 0% { opacity: 0; transform: translateY(-6px); } 100% { opacity: 1; transform: translateY(0); } }"
     },
@@ -87,17 +88,25 @@
       "description": "Active/inactive filter chip in the All Projects category bar. Active state is one of the few sanctioned uses of solid signal green.",
       "html": "<div class=\"ds-filter-group\"><button class=\"ds-filter ds-filter-active\">All Projects</button><button class=\"ds-filter\">AI Agents</button></div>",
       "css": ".ds-filter-group { display: inline-flex; flex-wrap: wrap; gap: 8px; border: 1px solid #2b2e33; padding: 4px; } .ds-filter { padding: 8px 16px; background: transparent; border: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #95989c; transition: color 0.2s, background-color 0.2s; } .ds-filter:hover { color: #f2f1ea; } .ds-filter-active, .ds-filter-active:hover { background: #7cfa9a; color: #0a0b0c; }"
+    },
+    {
+      "name": "Post-Flight Debrief",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Optional three-column narrative card (problem / decisions / outcome) rendered on ProjectDetail only when project.flightLog exists (3 of 8 projects). Header matches the mono label tier of sibling Key Features/Impact/Tech Stack headers.",
+      "html": "<section class=\"ds-debrief\"><h2 class=\"ds-debrief-title\">Post-Flight Debrief</h2><div class=\"ds-debrief-grid\"><div><h3 class=\"ds-debrief-sub\">Problem</h3><p class=\"ds-debrief-body\">Problem text.</p></div><div><h3 class=\"ds-debrief-sub\">Decisions</h3><ul class=\"ds-debrief-list\"><li>Decision one.</li></ul></div><div><h3 class=\"ds-debrief-sub\">Outcome</h3><p class=\"ds-debrief-body\">Outcome text.</p></div></div></section>",
+      "css": ".ds-debrief { border: 1px solid #2b2e33; background: #131417; padding: 24px 32px; } .ds-debrief-title, .ds-debrief-sub { font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.15em; color: #95989c; } .ds-debrief-title { font-size: 12px; margin-bottom: 24px; } .ds-debrief-sub { font-size: 11px; margin-bottom: 12px; } .ds-debrief-grid { display: grid; gap: 24px; grid-template-columns: 1fr; } @media (min-width: 768px) { .ds-debrief-grid { grid-template-columns: repeat(3, 1fr); } } .ds-debrief-body { font-family: 'Space Grotesk', sans-serif; font-size: 14px; line-height: 1.6; color: #95989c; }"
     }
   ],
   "narrative": {
     "northStar": "The Night Flight-Deck",
-    "overview": "The page is instrumentation, not marketing chrome: a matte near-black panel carrying hairline-bezeled gauges, readout windows, and plate-numbered cards that report real values (8 shipped projects, 100% open source, a role, a location, a focus) and hold still once they've settled. Trust is built the way a pilot trusts a cockpit — by instruments that agree with each other and don't editorialize — not by a glowing SaaS hero making a claim. This is the explicit anti-reference to the AI-template-generated dark/purple-gradient/glassmorphism look the site previously shipped (see PRODUCT.md Brand Commitments): no violet/cyan gradients, no glass or blur, no bounce easing, no decorative sparkle.\n\nDensity is calm and instrument-panel-literal: every card carries a plate label (INST-01, PLATE 03) before its content, uppercase mono labels sit beneath every gauge and field, and section headers borrow flight-deck vocabulary (Flight Log, Manifest, Radio Panel, Pre-flight Checklist) as the page's own diegetic voice rather than generic SaaS section names.",
+    "overview": "The page is instrumentation, not marketing chrome: a matte near-black panel carrying hairline-bezeled gauges, readout windows, and plate-numbered cards that report real values (8 shipped projects, a build-time-fetched percentage of those specific projects carrying a real OSS license on GitHub, a role, a location, a focus) and hold still once they've settled. Trust is built the way a pilot trusts a cockpit — by instruments that agree with each other and don't editorialize — not by a glowing SaaS hero making a claim. This is the explicit anti-reference to the AI-template-generated dark/purple-gradient/glassmorphism look the site previously shipped (see PRODUCT.md Brand Commitments): no violet/cyan gradients, no glass or blur, no bounce easing, no decorative sparkle.\n\nDensity is calm and instrument-panel-literal: every card carries a plate label (INST-01, PLATE 03) before its content, uppercase mono labels sit beneath every gauge and field, and section headers borrow flight-deck vocabulary (Flight Log, Manifest, Radio Panel, Pre-flight Checklist) as the page's own diegetic voice rather than generic SaaS section names. On a visitor's first-ever visit only, the two gauges spin up from rest in a staggered boot sequence before the panel goes still for the rest of the session — the instruments come alive exactly once, the way a real panel does at power-on, not on every page load.",
     "keyCharacteristics": [
       "Matte near-black ground with three flat tonal steps (panel / panel-face / recessed readout), never a gradient",
       "One restrained signal-green accent reserved for verified/live state, never decorative",
       "Aviation-style mono numerals and placard-caps labels on every instrument",
       "Square hairline-bordered panels throughout; the only curves are small indicator dots",
-      "A single settle-in motion vocabulary (one easing curve, no overshoot) for every state change"
+      "A single easing vocabulary (one cubic-bezier curve, no overshoot) for every state transition; gauges additionally get a one-time, first-visit-only staggered boot spin-up, gated behind prefers-reduced-motion and a localStorage \"seen\" flag"
     ],
     "rules": [
       { "name": "The Verified-Signal Rule", "body": "Signal green marks a claim the visitor can independently check — a live status, an active filter state, or a link to real, running proof (a repo, a contact channel). It never appears as a headline color, a section accent, or a hover flourish on content that isn't itself verifiable. If a new CTA doesn't gate a checkable action, it gets the ghost/ink-dim treatment, not signal green.", "section": "colors" },
@@ -110,13 +119,16 @@
       "Do use the single easing curve (cubic-bezier(0.16, 1, 0.3, 1)) for every state transition — settle, flag-drop, hover — with no bounce or overshoot.",
       "Do keep every panel, card, chip, and button square (0px radius); reserve rounded-full for small literal indicator dots only.",
       "Do set the visitor's name/heading smaller than the section headlines that follow it, consistent with the Placard Restraint Rule — the instruments carry the first viewport, not a hero headline.",
-      "Do respect prefers-reduced-motion: all animation/transition durations collapse to near-zero and scroll-behavior becomes auto (app/globals.css)."
+      "Do respect prefers-reduced-motion: all animation/transition durations collapse to near-zero, scroll-behavior becomes auto (app/globals.css), and the GaugeDial boot sequence is skipped entirely.",
+      "Do gate any future one-time entrance motion the way GaugeDial's boot sequence does — a module-cached, localStorage-backed, reduced-motion-aware decision (lib/boot.ts) — rather than replaying it on every page load.",
+      "Do back numeric instrument readouts with a real, checkable source (a repo count, a fetched API value) the way the Open Source gauge does; commit a real fallback value rather than an invented placeholder for when the fetch fails."
     ],
     "donts": [
       "Don't introduce gradients, glassmorphism/backdrop-blur, or drop shadows — this system has none, by design, as the explicit rejection of the prior AI-template look.",
       "Don't add a fourth signal-green CTA without a genuinely new checkable claim behind it; the accent's restriction to a small, named set of uses is the point, not an incidental count.",
       "Don't use caution amber for anything but the reserved caution state on StatusFlag; it is not a second decorative accent.",
-      "Don't treat the Hero's fixed grid-cols-3 six-pack as a general responsive-grid pattern — it is a known non-reflowing constraint of that specific composition, not a system rule to copy onto new grids."
+      "Don't treat the Hero's fixed grid-cols-3 six-pack, or its 4-readout/2-gauge split, as a general responsive-grid pattern — both are known constraints of that specific composition, not a system rule to copy onto new grids.",
+      "Don't extend the GaugeDial boot sequence to StatusFlag or other entrance motion without a reason; flag-drop staying unconditional on every visit is an intentional scope boundary, not a gap to close."
     ]
   }
 }

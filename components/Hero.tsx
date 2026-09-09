@@ -1,5 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { GaugeDial, ReadoutWindow, StatusFlag } from './Instruments'
+import { projects } from '@/lib/projects'
+import githubStats from '@/lib/github-stats.json'
 
 export default function Hero() {
   return (
@@ -8,9 +10,16 @@ export default function Hero() {
         <StatusFlag label="Cleared — Available for hire" />
 
         <div className="mt-10 grid w-full grid-cols-3 gap-3 sm:gap-4">
-          <GaugeDial plate="INST-01" label="Projects" value={8} max={10} />
-          <GaugeDial plate="INST-02" label="Skills" value={6} max={10} />
-          <GaugeDial plate="INST-03" label="Open Source" value={100} max={100} suffix="%" />
+          <ReadoutWindow plate="INST-01" label="Projects" value={String(projects.length)} />
+          <GaugeDial plate="INST-02" label="Skills" value={6} max={10} bootIndex={0} />
+          <GaugeDial
+            plate="INST-03"
+            label="Open Source"
+            value={githubStats.openSourcePercent}
+            max={100}
+            suffix="%"
+            bootIndex={1}
+          />
           <ReadoutWindow plate="INST-04" label="Role" value="AI Platform Engineer" />
           <ReadoutWindow plate="INST-05" label="Location" value="Remote / NYC" />
           <ReadoutWindow plate="INST-06" label="Focus" value="Agent Infrastructure" />

@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "lib/projects.ts"
+        ],
+        "createdAt": "2026-09-09T00:04:17.535Z",
+        "reason": "pre-existing project card gradient colors predating this session's 4-feature scope; unrelated to current edits (flightLog narrative field only), out of scope to redesign"
+      }
+    ]
+  }
+}

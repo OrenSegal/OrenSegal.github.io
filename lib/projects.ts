@@ -13,6 +13,11 @@ export interface Project {
   keyFeatures: string[]
   techStack: string[]
   impact: string
+  flightLog?: {
+    problem: string
+    decisions: string[]
+    outcome: string
+  }
 }
 
 export const projects: Project[] = [
@@ -36,6 +41,15 @@ export const projects: Project[] = [
     ],
     techStack: ['Python', 'Claude Code Skills', 'OpenCode'],
     impact: 'Cuts first-customer research from days of manual digging to one evidence-backed report.',
+    flightLog: {
+      problem: 'LLM-generated market research reads well but is routinely wrong: a model will confidently name a "prospect" or cite a "signal" that isn\'t actually there when you go look. For go-to-market research specifically, a fabricated lead costs real outreach time before anyone notices.',
+      decisions: [
+        'Built verify_sources.py as a hard gate: it re-fetches every cited source and confirms the claimed evidence is actually present on the page before a claim is allowed into the report — no claim ships unchecked.',
+        'Extracted the report rendering into a shared, deterministic component reused across the whole skill family, so formatting bugs and prompt drift get fixed once instead of per-skill.',
+        'Shipped as a standalone Claude Code / OpenCode plugin rather than a hosted service, so it runs against a user\'s own Claude Code session with no separate backend to operate.',
+      ],
+      outcome: 'The verification step became the template for catching AI fabrication elsewhere: its containment-checking approach was later generalized into its own standalone tool, verify-before-ship.',
+    },
   },
   {
     id: 'first-to-first-sale',
@@ -78,6 +92,15 @@ export const projects: Project[] = [
     ],
     techStack: ['Swift'],
     impact: 'Prevents a single misbehaving client or feedback loop from exceeding a hard cost ceiling.',
+    flightLog: {
+      problem: 'A shipping iOS app calling LLM APIs directly has no natural circuit breaker: a retry storm, a redundant vision call, or a provider outage can burn through a monthly budget in hours, and usage dashboards only tell you after the money is gone.',
+      decisions: [
+        'Added semantic and vision response caching so near-duplicate prompts and images don\'t re-trigger a full paid call.',
+        'Built tiered circuit breakers that degrade gracefully — falling back tier by tier — instead of a binary up/down switch when a provider misbehaves.',
+        'Enforced cost budgets as a hard ceiling in the gateway itself, not as a downstream alert on a usage log, so the limit holds even if nobody is watching.',
+      ],
+      outcome: 'Measurably cut LLM inference cost by 40-50% in a real shipping iOS app, while removing runaway-cost risk as an operational concern.',
+    },
   },
   {
     id: 'verify-before-ship',
@@ -98,6 +121,15 @@ export const projects: Project[] = [
     ],
     techStack: ['Python'],
     impact: 'Turns "the model cited a source" into a verified, checkable claim before it ships.',
+    flightLog: {
+      problem: 'Signal Scout\'s source-verification step proved the pattern worked for one skill, but every other project generating AI text with citations needed the same guarantee, and copy-pasting the check into each one meant fixing the same fabrication bugs repeatedly.',
+      decisions: [
+        'Generalized the containment-checking methodology out of signal-scout into a standalone tool, so any LLM-writing pipeline can adopt it as a dependency instead of reimplementing it.',
+        'Made it a pre-publish gate rather than a post-hoc audit: a flagged citation blocks the claim before a human reviewer sees it, not after.',
+        'Kept the check narrow and deterministic — re-fetch the source, confirm the claim is actually contained in it — rather than asking another model to grade the first model\'s honesty.',
+      ],
+      outcome: 'Gives any project that generates cited claims a reusable, pre-publish fact-checking gate instead of a one-off script bolted onto a single skill.',
+    },
   },
   {
     id: 'metropulse-nyc',
