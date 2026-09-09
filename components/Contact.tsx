@@ -1,4 +1,5 @@
 import { Mail, Github, Linkedin } from 'lucide-react'
+import { DepthTag } from '@/components/DepthTag'
 
 const channels = [
   { label: 'Email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
@@ -9,7 +10,8 @@ const channels = [
 export default function Contact() {
   return (
     <section id="contact" className="border-t border-line px-4 py-24 sm:px-6">
-      <div className="mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-3xl border-l border-line pl-5">
+        <DepthTag label="resurfacing" />
         <h2 className="mb-3 text-2xl font-medium text-ink">Get in touch</h2>
         <p className="mb-10 max-w-xl text-lg leading-relaxed text-ink-dim">
           Have a problem worth solving, or just want to talk shop about agent
