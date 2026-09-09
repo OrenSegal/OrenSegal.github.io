@@ -11,16 +11,17 @@ export default function About() {
 
         <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-ink-dim">
           <p>
-            Most AI demos die the moment they hit a real cost budget or a fabricated
-            citation. I care about the layer underneath the prompt — the part that
-            turns a clever call to a model into a system you can actually run in
-            production and trust.
+            Most AI demos fall apart the first time they meet a real cost budget
+            or a citation nobody checked. I work on the part underneath the
+            prompt: the plumbing that turns a clever model call into something
+            you can run in production without babysitting it.
           </p>
           <p>
-            That means cost enforcement instead of usage dashboards, fact-checking
-            gates instead of hoping the model didn&apos;t hallucinate, and CI written for
-            behavior a script alone can&apos;t verify. Every project on this site ships as
-            a complete, open-source system — repo, tests, green CI — not a notebook.
+            In practice that&apos;s enforcing cost limits instead of just logging
+            usage, re-verifying citations instead of hoping the model told the
+            truth, and writing CI for behavior a script alone can&apos;t check.
+            Every project here ships as a full open-source system: repo, tests,
+            green CI, not a notebook someone ran once.
           </p>
         </div>
 

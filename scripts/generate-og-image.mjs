@@ -69,8 +69,8 @@ async function main() {
 <text x="80" y="120" font-family="OGDisplay" font-weight="500" font-size="24" fill="${COLORS.ink}">Oren Segal</text>
 
 <text x="80" y="270" font-family="OGDisplay" font-weight="700" font-size="56" fill="${COLORS.ink}">
-  <tspan x="80" dy="0">I build the infrastructure that</tspan>
-  <tspan x="80" dy="66">keeps AI agents honest under load.</tspan>
+  <tspan x="80" dy="0">I build the parts of AI systems</tspan>
+  <tspan x="80" dy="66">that keep them honest.</tspan>
 </text>
 
 <text x="80" y="410" font-family="OGDisplay" font-weight="500" font-size="26" fill="${COLORS.inkDim}">Cost budgets, fact-checking, and CI for code an LLM wrote.</text>
