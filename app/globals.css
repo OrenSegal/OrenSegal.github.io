@@ -28,7 +28,7 @@ body {
 
 /* Browser surfaces carry the design too */
 ::selection {
-  background: #7cfa9a;
+  background: #8fd6a8;
   color: #0a0b0c;
 }
 
@@ -41,17 +41,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2b2e33;
+  background: #232527;
   border-radius: 0;
   border: 2px solid #0a0b0c;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f7a52;
+  background: #4b7a5d;
 }
 
 :focus-visible {
-  outline: 2px solid #7cfa9a;
+  outline: 2px solid #8fd6a8;
   outline-offset: 2px;
 }
 

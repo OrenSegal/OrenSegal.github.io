@@ -1,18 +1,12 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-display',
-})
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
+  variable: '--font-sans',
 })
 
 export const metadata: Metadata = {
@@ -41,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${spaceGrotesk.variable} ${plexMono.variable}`}>
-      <body className="font-display bg-panel min-h-screen">
+    <html lang="en" className={`dark ${spaceGrotesk.variable}`}>
+      <body className="font-sans bg-panel min-h-screen">
         <Navigation />
         <main className="min-h-screen">
           {children}
