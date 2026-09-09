@@ -26,6 +26,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       animation: {
         'rise': 'rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both',

@@ -1,6 +1,6 @@
 ---
 name: Oren Segal Portfolio
-description: Plain, dense, specific — a near-black engineer's page that earns trust with prose and proof, not costume.
+description: Utility Cutaway — a literal underground utility cross-section. Near-black ground is depth; each section is a vertical spine with a rotated depth label, and each project is a utility line crossing it that opens in place to its build log.
 colors:
   panel: "#0a0b0c"
   line: "#232527"
@@ -28,8 +28,15 @@ typography:
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: "0.05em"
+  meta-mono:
+    fontFamily: "JetBrains Mono, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "normal"
 spacing:
   section-y: "96px"
+  spine-gutter: "20px"
   divider-y: "32px"
   nav-h: "64px"
 components:
@@ -44,114 +51,124 @@ components:
     padding: "16px 0"
   link-list-item-hover:
     textColor: "{colors.ink}"
+  utility-line-toggle:
+    textColor: "{colors.ink-faint}"
+    textColorExpanded: "{colors.accent}"
+    typography: "{typography.meta-mono}"
 ---
 
-# Design System: Oren Segal Portfolio
+# Design System: Oren Segal Portfolio — Utility Cutaway
 
 ## Overview
 
-There is no governing metaphor. The previous system ("The Night Flight-Deck") staged the page as cockpit instrumentation — gauges, plate-numbered cards, a boot sequence — and that costume is fully retired. The current build earns trust the way a well-run engineer's own writing does: plain, dense, specific prose, with hierarchy carried by size, weight, and measure rather than by decorative skin. Differentiation lives in information architecture (projects grouped by category, with the projects that have a real build narrative getting inline depth), not in a themed visual device layered on top.
+This build supersedes the prior "no governing metaphor" plain system (retired this session; do not resurrect its rules) and, before that, the "Night Flight-Deck" instrument-panel direction (rejected outright, never shipped). The current shipped system stages the page as a literal underground utility cross-section: the near-black ground (`#0a0b0c`) is not just a dark background, it is depth. Every major section — Hero, Work, About, Contact — is a vertical cutaway spine (`relative border-l border-line pl-5`), and each spine carries a rotated depth label in its left margin naming how far down that section sits: "surface" (Hero), "shallow utility" (Work), "deepest" (About), "resurfacing" (Contact).
 
-The palette is near-black with warm off-white ink and a single restrained green accent spent almost entirely on hover and link state — never as a fill, a section color, or a badge. One workhorse sans face (Space Grotesk) carries both display and body text at two weights; there is no separate mono face anywhere in the shipped code. Structure is plain hairline dividers between stacked sections and list rows — there is no bordered-card chrome, no tonal surface stack, no shadows, gradients, or blur. This is a direct, confirmed rejection of the site's prior AI-template look (PRODUCT.md's Brand Commitments name the anti-reference explicitly: violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing, generic "Sparkles" badges) and, separately, of the flight-deck metaphor that replaced it.
+Inside Work, each project is a utility line crossing the spine via a horizontal connector tick. Clicking a project's toggle expands it in place with a tactile grid-height reveal — not an accordion library — showing the project's real Problem/Decisions/Outcome build log where one exists, or Key Features/Impact where it doesn't. Accent green marks exactly three things across the whole system: interaction state (hover/focus/selection, inherited from the prior system), the active/expanded utility line (tick, chevron, toggle text), and the filled status dot as a binary data affirmative (has-a-build-log). It never fills a background or colors a heading.
+
+No fabricated metrics anywhere: every number and date on the page (verified repo count, last-verified date, per-project pushed date, open-source percent) is sourced at build time from the live GitHub API via `scripts/fetch-github-stats.mjs`, all-or-nothing — there is no invented fallback value if a fetch fails.
 
 **Key Characteristics:**
-- Near-black ground (`#0a0b0c`), warm off-white ink (`#f2f1ea`), no gradients, no tonal surface stack — depth comes from hairline dividers only, not layered panels
-- One accent (`#8fd6a8`) restricted to underline/hover/focus/selection state, never a fill or a headline color
-- One type family (Space Grotesk) at two weights (400 body, 500 display/label) — no mono face
-- Plain `border-b` list rows and section seams stand in for cards; nothing is boxed
-- A single entrance motion (`rise`, fade + 10px translate, 700ms) used once, on the Hero, not as a page-wide pattern
+- Near-black ground (`#0a0b0c`) read as literal depth, not just a background — four independent sections (Hero, Projects, About, Contact) render as a `border-l border-line pl-5` cutaway spine with a rotated `-90deg` depth label
+- Two type families with strict division of labor: Space Grotesk for every heading and every sentence of prose; JetBrains Mono confined to three machine-sourced-fact sites at 10–12px (depth tags, the Hero verified line, each project's id/date toggle) — never prose, never headings
+- Accent green (`#8fd6a8`) has exactly three jobs: interaction state, the expanded project row's active marking, and the filled `StatusDot` as a static binary data signal — it is not restricted to hover-only the way the prior system had it
+- Each project is a "utility line": a horizontal connector tick (`w-5`, matching the spine's own `pl-5` gutter exactly, so the line visibly touches the spine) that goes accent when its row is expanded
+- Expansion is a tactile `grid-template-rows` reveal (`0fr` → `1fr`, 500ms), not an accordion library — real Problem/Decisions/Outcome or Key Features/Impact copy, never placeholder text
+- One motion curve (`cubic-bezier(0.16, 1, 0.3, 1)`) drives every transform/size transition in the system — Hero's entrance (`rise`, 700ms), the row reveal (500ms), and the chevron rotation (300ms); color transitions use Tailwind's default ease
 
 ## Colors
 
-The palette is almost entirely neutral; the one accent hue is spent sparingly, as a signal for interactive/live state rather than as decoration.
-
 ### Primary
-- **Accent Green** (`#8fd6a8`): link hover/focus state (Hero's GitHub link, project "source" links, project title arrows, Contact channel rows), the `::selection` highlight, and the `:focus-visible` outline (`app/globals.css`). It never appears at rest as a fill or as static text color.
-- **Accent Green, Dim** (`#4b7a5d`): the resting-state companion — the underline decoration color on inline links before hover (`decoration-accent-dim`) and the scrollbar-thumb hover color.
+- **Accent Green** (`#8fd6a8`): three jobs, no more. (1) Interaction state — link hover/focus-visible, the `::selection` highlight, icon hover on Contact channel rows and the project title arrow. (2) The expanded project row's active marking — the connector tick (`bg-accent` vs. resting `bg-line`), the chevron, and the toggle button's own text color all switch to accent together while `expanded` is true. (3) `StatusDot`'s filled state (`fill-accent`) — a static, non-interactive data affirmative meaning "this project has a full build log on file," rendered at rest in both Hero (system status) and every `ProjectRow` toggle.
+- **Accent Green, Dim** (`#4b7a5d`): the resting-state companion — underline color on inline links before hover (`decoration-accent-dim`), scrollbar-thumb hover.
 
 ### Neutral
-- **Panel Black** (`#0a0b0c`): the sole background — `body`, the nav bar (`bg-panel/95`), and the scroll-to-top button. There is no second, raised surface tone; the build does not use a `panel-face` step (the token was defined once in the old system and is not carried forward — no component references it).
-- **Line** (`#232527`): every hairline border — section seams (`border-t border-line`), list-row dividers (`border-b border-line`), nav border, scrollbar track/thumb-rest. The one border color in the system.
-- **Ink** (`#f2f1ea`): headings, primary link text, active nav text.
-- **Ink Dim** (`#9a9d9f`): body copy, project descriptions, inactive nav text, list-row default text.
-- **Ink Faint** (`#7a7d7f`): the dimmest tier — tech-stack lines, timestamps ("updated Mon Year"), uppercase sub-headers on the project detail page, footer copyright, icon default color.
+- **Panel Black** (`#0a0b0c`): the sole rendered background — body, nav bar (`bg-panel/95`).
+- **Line** (`#232527`): every hairline — section seams, spine borders (`border-l`), project-row dividers (`border-b`), the connector tick at rest (`bg-line`), the flight-log inset border (`border-l`).
+- **Ink** (`#f2f1ea`): headings, primary link/title text, active nav text, channel-row labels.
+- **Ink Dim** (`#9a9d9f`): body copy, descriptions, flight-log prose, inactive nav text.
+- **Ink Faint** (`#7a7d7f`): depth-tag labels, the resting toggle text/id/date line, tech-stack lines, bullet dots, footer copyright, resting icon color.
 
 ### Named Rules
-**The Accent-as-State Rule.** Accent green marks interaction, not identity: link hover, focus-visible, text selection, and icon hover. It never sits on a heading, a section label, or any element at rest. If a new element isn't being hovered, focused, or selected, it does not get accent green.
+**The Accent-as-Signal Rule.** Accent green is spent on exactly three things: interaction (hover/focus/selection), the one active utility line's marking (tick, chevron, toggle text while expanded), and the filled status dot as a binary data affirmative. It is never a background fill, never a static heading color, and there is no second accent hue. The distinction from the old "hover-only" rule matters: a resting filled `StatusDot` is accent by design (data, not decoration) — do not "fix" it to ink-faint.
 
 ## Typography
 
-**Display Font:** Space Grotesk (with sans-serif fallback)
-**Body Font:** Space Grotesk (with sans-serif fallback) — the same face at a lighter weight; there is one `font-sans` family loaded via `next/font`, no second face.
+**Display/Body Font:** Space Grotesk, loaded via `next/font` as `--font-sans` (`app/layout.tsx`). Carries every heading and every sentence of prose on the page — Hero's h1, section headings, category headings, project titles, all body copy.
 
-**Character:** A single geometric sans does every job on the page — headline, body, label, and numeral. The build deliberately carries no mono face; the prior system's IBM Plex Mono (plate IDs, tabular readouts) was retired along with the instruments it labeled.
-
-### Hierarchy
-- **Display** (500, `text-3xl` → `text-4xl`, tight `leading-[1.15]`): the Hero `<h1>` — two sentences of prose stating what Oren builds. This is the largest, boldest text on the page; there is no separate, smaller "name placard" — the old system's rule that the name stays smaller than section headers is gone along with the instruments it deferred to.
-- **Section Heading** (500, `text-2xl`): "About", "Work", "Get in touch" — the section openers.
-- **Category Heading** (500, `text-lg`, `text-ink-dim`): the four project-category sub-headers ("AI Agents", "AI Infrastructure", "Data Engineering", "Developer Tools") inside Work.
-- **Title/Card Heading** (500, `text-xl`): each project row's title link.
-- **Body** (400, `text-base`–`text-lg`, relaxed `leading-relaxed`): About's narrative paragraphs, project descriptions, Contact's intro line, flight-log problem/outcome copy.
-- **Label** (500, `text-sm`, `uppercase`, `tracking-wide`): the project-detail sub-headers only ("Problem", "Decisions", "Outcome", "Key features", "Impact", "Tech stack") — the sole uppercase-tracked text in the system, confined to that one page.
-- **Meta** (400, `text-sm`, `text-ink-faint`): tech-stack lines, "updated" timestamps, footer copyright, stack list in About.
+**Mono Font:** JetBrains Mono, loaded via `next/font` as `--font-mono` (`app/layout.tsx`), mapped in `tailwind.config.ts`. This is a scoped reintroduction, not the prior system's general type switch — mono is confined to three machine-sourced-fact sites, always small (10–12px) and never prose or a heading:
+1. `DepthTag` — the rotated depth label (`font-mono text-[10px] uppercase tracking-widest text-ink-faint`; `tracking-widest` = 0.1em, scoped to this one site).
+2. Hero's last-verified line (`font-mono text-xs tabular text-ink-faint`, normal tracking).
+3. Each `ProjectRow`'s id + verified-date toggle (`font-mono text-xs tabular`, normal tracking) — note this one is NOT always ink-faint: it goes `text-accent` when its row is expanded, per the Accent-as-Signal Rule. Mono marks *what kind of content it is* (a machine-sourced fact), color marks *state*; the two are independent.
 
 ### Named Rules
-**The One Face Rule.** Every piece of text on the page — headline, body, label, numeral — is Space Grotesk at 400 or 500. There is no mono face and no third family; hierarchy comes from size and weight, never from a costume type switch.
+**The Scoped Mono Rule.** JetBrains Mono renders exactly three things: the depth-tag label, the Hero verified-count timestamp line, and each project's id/date toggle. All three are small, tabular-leaning, machine-sourced facts. Mono never appears in a heading, in prose, or in a label larger than `text-xs`. Adding mono to a new element requires that element to be a similarly small, machine-sourced fact — not a stylistic accent.
+
+### Hierarchy
+- **Display** (Space Grotesk 500, `text-3xl`→`text-4xl`, `leading-[1.15]`): Hero's `<h1>`.
+- **Section Heading** (500, `text-2xl`): "Work", "About", "Get in touch".
+- **Category Heading** (500, `text-lg`, `text-ink-dim`): the four project-category sub-headers inside Work.
+- **Title/Card Heading** (500, `text-xl`): each project row's title link.
+- **Body** (400, `text-base`–`text-lg`, `leading-relaxed`): About's paragraphs, project descriptions, Contact's intro, flight-log problem/outcome copy.
+- **Label** (500, `text-sm`, `uppercase`, `tracking-wide`): project-detail sub-headers only (`app/projects/[id]/page.tsx`, unchanged this session — "Problem", "Decisions", "Outcome", "Key features", "Impact", "Tech stack").
+- **Meta** (400, `text-sm`, `text-ink-faint`): tech-stack lines, footer copyright, stack list in About.
+- **Meta-Mono** (400, `text-[10px]`–`text-xs`, mono, `tabular` where numeric): depth tags, Hero verified line, project id/date toggle. See Scoped Mono Rule above.
 
 ## Layout
 
-Nearly every section shares one container: `max-w-3xl`, centered, with `px-4 sm:px-6` gutters (nav, Hero, About, Work, Contact, Footer). The project-detail page is the one narrower exception at `max-w-2xl`, with prose further capped at `max-w-xl`/`max-w-2xl` inside it. There is no `lg:` gutter step anywhere in the shipped code — don't add one without new evidence.
+Every section shares one container: `max-w-3xl`, centered, `px-4 sm:px-6` gutters, wrapped again by a `border-l border-line pl-5` spine (the **spine gutter**, 20px, consistent across Hero/Work/About/Contact). The project-detail page (`app/projects/[id]/page.tsx`) is unchanged this session and remains the one narrower exception at `max-w-2xl`.
 
-Sections stack full-bleed and are separated by a hairline `border-t border-line` — there is no card-in-card frame; the line itself is the seam. Section vertical rhythm is a consistent `py-24`; the footer is `py-10`; the nav is a fixed `h-16` bar. Inside Work and Contact, list rows repeat the same divider idiom at a tighter interval — `border-b border-line py-8`, with `first:pt-0 last:border-b-0` so the divider never doubles against the section border above or beneath it. This idiom appears at two independent sites (`Projects.tsx`, `Contact.tsx`) and is the system's one reusable list pattern.
+Sections stack full-bleed, separated by `border-t border-line`, `py-24` rhythm; nav is a fixed `h-16` bar. Inside each section's spine, a `DepthTag` sits absolutely positioned at `top-0`, rotated `-90deg` from its origin, in the spine's left margin — see Components below for why this is not a kicker.
 
-Work's category grouping is a single vertical stack of stacked lists, not a grid or a filterable toggle — projects are grouped by category heading, in a fixed order, with no active/inactive filter UI. Project-detail's Key Features/Impact/Tech Stack pair sits in a `sm:grid-cols-2` two-column layout; everything else on the page is single-column.
+Work's project rows and Contact's channel rows share the same divider idiom (`border-b border-line`, `first:pt-0 last:border-b-0`) but at different intervals: project rows are `py-8` (32px, the section's own rhythm), channel rows are `py-4` (16px, a tighter interval for the shorter contact list). Each project row additionally carries a `relative` position and an absolutely-positioned connector tick (`-left-5 top-[15px] h-px w-5`) that visually bridges the row to the spine — the tick's `w-5` exactly matches the spine's `pl-5` gutter, so a utility line reads as physically touching the spine rather than floating beside it.
+
+Hero's verification band (`mt-8 max-w-xl border-y border-line py-4`, top-and-bottom hairline around the status line and last-verified line) is a single-use arrangement scoped to the Hero — it is not a reusable "banded" component; describe new similar bands by their `border-y` idiom directly rather than inventing a named component for one instance.
 
 ## Elevation & Depth
 
-This system has no shadows, no blur, no gradients, and no tonal surface stack. Depth is conveyed by a single hairline divider color (`line`, `#232527`) against one flat background (`panel`, `#0a0b0c`) — there is no second, lighter background tone anywhere in the shipped code. This is flatter than the retired flight-deck system, which layered a three-step tonal stack (`panel` → `panel-face` → recessed readout); that middle "raised card" tone did not carry forward into this world.
+One flat background tone renders (`panel`, `#0a0b0c`). Depth is conveyed by two devices working together: the hairline `line` divider (unchanged from the prior system) and, new this build, the literal cutaway-spine metaphor itself — vertical `border-l` spines plus rotated depth labels stand in for a z-axis the flat color alone can't express. There are still no shadows, blur, or gradients anywhere in the shipped code.
 
 ### Named Rules
-**The One Surface Rule.** There is exactly one background tone on the page. Depth is a 1px `line` divider, never a lighter panel, a shadow, or a blur. If a new component wants to read as "elevated," give it a divider, not a fill.
+**The One Rendered Surface Rule.** Exactly one background tone is painted on the page (`panel`, `#0a0b0c`). Depth is expressed by hairline dividers and the cutaway-spine device, never by a second background fill, a shadow, or a blur.
 
 ## Shapes
 
-There are no bordered cards, chips, or buttons to describe a radius strategy for — the build has no `rounded-*` corner language in active use. The only literal curved shapes are small bullet dots (`rounded-full`, `h-1 w-1`, `bg-ink-faint`) preceding each item in the project-detail "Decisions" and "Key features" lists. Borders are uniformly 1px solid `line`; dividers run the width of their container.
+No bordered cards, chips, or buttons. The only curved shapes are `rounded-full` bullet dots (`h-1 w-1`, `bg-ink-faint`) preceding flight-log "Decisions"/"Key features" list items, and the two `StatusDot` circles (filled `r=4` accent circle vs. outlined `r=3.25` ink-faint circle, `strokeWidth 1.25`) — both small SVGs, not icon-font glyphs. Borders are uniformly 1px solid `line`, except the connector tick and the active-state tick color, both described above.
 
 ## Components
 
-There is no button, card, or chip component library in this build. Interactive elements are plain text links and icon-accompanied text links; structure comes from spacing and dividers, not boxed containers.
+### DepthTag (`components/DepthTag.tsx`)
+A rotated (`-rotate-90`, `origin-top-left`), absolutely positioned (`-left-[9px] top-0`), uppercase mono `text-[10px]` label in `text-ink-faint`, `aria-hidden="true"`. Reads: "surface" (Hero), "shallow utility" (Projects), "deepest" (About), "resurfacing" (Contact). This is **not** a kicker/eyebrow: it sits outside the text column entirely (rotated into the spine's own margin, not stacked above a heading), carries no heading-pairing semantics, and is hidden from assistive tech. It is the cutaway's native margin annotation — a survey marking on the cross-section, not a label-above-title device. Do not generalize it into a horizontal eyebrow anywhere else in the system.
+
+### StatusDot (`components/StatusDot.tsx`)
+An 8×8 SVG circle, two states: filled accent (`fill-accent`) or outlined ink-faint (`stroke-ink-faint`, `strokeWidth 1.25`, no fill). This is a static data indicator, not an interaction or hover state — in Hero it always renders filled (verified-count line), and in each `ProjectRow` toggle it reflects whether `project.flightLog` exists (filled = full build log on file, outlined = summary only), with an SVG `<title>` carrying the distinction for assistive tech. Do not treat this component's accent fill as license to make other static UI accent — its rule (see Accent-as-Signal) is scoped to exactly this binary-data case.
+
+### Utility Line (project row, `components/ProjectRow.tsx`)
+The system's signature interactive pattern, replacing what would otherwise be a card. Structure: title link with trailing `ArrowUpRight` (accent on hover) → mono id/date toggle button with `StatusDot` and `ChevronDown` (whole toggle turns accent while expanded) → description → a `grid-template-rows` reveal (`0fr`→`1fr`, 500ms, `cubic-bezier(0.16,1,0.3,1)`) containing either flight-log Problem/Decisions/Outcome or Key Features/Impact, in a `border-l border-line pl-4` inset → tech-stack meta line with optional "source" link. The horizontal connector tick (`bg-line` resting, `bg-accent` expanded) is the visual joint between this line and the section spine.
 
 ### Links
-- **Inline text link (in-sentence):** `text-ink`, underlined with `decoration-accent-dim underline-offset-4`, brightening to `decoration-accent` on hover — used for the Hero's GitHub-percentage link and each project's "source" link.
-- **Action link (standalone, e.g. "See the work," "Get in touch," "Go home"):** `text-ink`, `text-sm font-medium`, no underline at rest, paired with a Lucide arrow icon (`ArrowRight`/`ArrowUpRight`/`Home`) that nudges `translate-x-1` on hover via `group-hover`.
-- **List link (nav, back-link, footer icon):** `text-ink-dim` default → `text-ink` on hover, `transition-colors`, no underline.
+- **Inline text link:** `text-ink`, `decoration-accent-dim underline-offset-4` at rest, brightening to `decoration-accent` on hover.
+- **Action link:** `text-ink`, `text-sm font-medium`, no underline, paired with a Lucide arrow icon nudging `translate-x-1` on hover.
+- **List/channel link:** `text-ink-dim`→`text-ink` (nav) or `text-ink`→`text-accent` (Contact channel icon+label together) on hover.
 
-### List Rows (signature pattern)
-- **Style:** `border-b border-line py-8`, `first:pt-0 last:border-b-0` — used identically for project rows in Work and channel rows in Contact. This is the system's one reusable structural component in place of a card.
-- **Contact channel row:** icon (`text-ink-faint` → `text-accent` on hover) + label (`text-ink` → `text-accent` on hover), both transitioning together as one hover target.
-- **Project row:** title link with trailing arrow, description, optional flight-log excerpt (Problem/Outcome only, in a `border-l border-line pl-4` inset — the one place a border runs vertically rather than horizontally), then a meta line of tech stack + optional source link.
-
-### Navigation
-- Fixed top bar, `bg-panel/95`, `border-b border-line`, `h-16`, `max-w-3xl` inner container. Wordmark is plain text ("Oren Segal," `text-sm font-medium`, no monogram mark). Links are `text-sm text-ink-dim` → `text-ink` on hover, no underline. Mobile collapses to an inline stacked menu under the same bar, no overlay or blur behind it.
-- Carries a leftover `backdrop-blur-0` utility class (a no-op paired with the semi-transparent `bg-panel/95`) — this is inert leftover markup, not a blur treatment; do not read it as license to add backdrop blur anywhere, and don't carry it forward if the nav is touched again.
-
-### 404 Page
-- `404` (`text-lg font-medium text-ink-faint`) sits directly above the `<h1>` ("Page not found"). This reads as an eyebrow-shaped arrangement but is scoped to this one error screen's numeral-then-heading pairing, not a documented kicker/label-above-heading pattern — do not generalize it into a reusable eyebrow component elsewhere in the system.
+### Navigation & Footer
+Fixed top bar, `bg-panel/95`, `border-b border-line`, `h-16`, `max-w-3xl` inner container, plain-text wordmark, no monogram. No spine, no depth tag — Navigation and Footer sit outside the cutaway metaphor as the page's fixed frame, not a stratum. `Navigation.tsx` carries no stray utility classes in the current tree.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep accent green (`#8fd6a8`/`#4b7a5d`) restricted to interaction state — hover, focus-visible, selection, and the resting underline decoration on inline links. Everywhere else, use ink/ink-dim/ink-faint.
-- **Do** keep the page to one background tone (`panel`, `#0a0b0c`) and convey structure with `line` (`#232527`) dividers only.
-- **Do** set body copy in Space Grotesk 400 and headings/labels in 500 — do not introduce a second or third type family, including a mono face, for numerals or labels.
-- **Do** use the `border-b border-line py-8 first:pt-0 last:border-b-0` divider idiom for any new repeating list of items (projects, channels, etc.) rather than inventing a bordered card.
-- **Do** respect `prefers-reduced-motion`: `app/globals.css` collapses all animation/transition durations to near-zero and sets `scroll-behavior: auto` when it's set.
-- **Do** reserve uppercase, tracked labels (`text-sm uppercase tracking-wide text-ink-faint`) for the project-detail sub-headers pattern (Problem/Decisions/Outcome/Key features/Impact/Tech stack); it is not used as a general kicker or eyebrow elsewhere on the site, and new eyebrow-style labels should not be added — the 404 page's numeral-above-heading is a one-off, not a precedent.
+- **Do** confine mono (JetBrains Mono) to the three scoped sites — depth tags, Hero's verified line, project id/date toggles — always small and always a machine-sourced fact. Do not use mono for a heading or a sentence of prose.
+- **Do** use `border-l border-line pl-5` plus a `DepthTag` for any new full-width section that should read as part of the cutaway — this is the system's section-level pattern now, not just Hero/Work/About/Contact's private choice.
+- **Do** spend accent green only on the three named jobs (interaction, active utility line, filled status dot). A new static element does not get accent green unless it is a genuine binary data affirmative like `StatusDot`.
+- **Do** keep the connector-tick width (`w-5`) matched to the spine gutter (`pl-5`) if adding new lines crossing a spine — the visual join depends on the two values being equal.
+- **Do** respect `prefers-reduced-motion` (`app/globals.css` collapses all animation/transition durations near-zero).
 
 ### Don't:
-- **Don't** introduce gradients, glassmorphism/backdrop-blur, drop shadows, or a second background tone — this build is a confirmed, explicit rejection of the site's prior AI-template look (violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing — per PRODUCT.md's Brand Commitments) and of the flight-deck system that followed it.
-- **Don't** add a second accent hue or use accent green as a fill, a headline color, or a static (non-hover) text color.
-- **Don't** revive the retired instrumentation system — `GaugeDial`/`ReadoutWindow`/`StatusFlag` (`components/Instruments.tsx`), the boot sequence (`lib/boot.ts`), the `settle`/`flag-drop` keyframes, IBM Plex Mono, or the `panel-face`/`bezel`/`signal`/`caution` tokens are gone from the shipped code; do not reintroduce them or reference them as current.
-- **Don't** box content in bordered cards. The system's structural unit is a hairline divider between stacked rows/sections, not a panel.
-- **Don't** add a category filter/toggle to Work — projects are grouped by fixed category headings in document order, with no active/inactive UI state to maintain.
-- **Don't** treat the leftover `backdrop-blur-0` class on Navigation as a blur treatment to extend, and don't turn the 404 page's numeral-above-heading arrangement into a reusable eyebrow/kicker component — neither is a system rule, both are as-shipped artifacts of their one screen.
+- **Don't** use a `max-height` or opacity-only accordion for a new in-place expansion — the system's technique is a `grid-template-rows` (`0fr`↔`1fr`) reveal, confirmed by `ProjectRow`'s existing implementation.
+- **Don't** treat `StatusDot`'s resting accent fill as a general license for static accent color elsewhere — it is scoped to genuine binary data indicators, not decoration.
+- **Don't** widen mono past the three scoped sites, and don't let it inherit the color rule from prose — the ProjectRow toggle's mono text still switches ink-faint→accent with expansion state; mono marks content type, not state.
+- **Don't** add a second background/surface tone, a shadow, a blur, or a gradient — still a confirmed rejection of the prior AI-template look and of the flight-deck system, neither of which shipped or should be referenced as current.
+- **Don't** box content in bordered cards — the structural unit is still the hairline divider plus, now, the spine/tick device for Work's utility lines specifically.
+- **Don't** add a category filter/toggle to Work — categories remain a fixed-order stack of headings with no active/inactive UI.
+- **Don't** turn `DepthTag` into a horizontal eyebrow/kicker pattern anywhere else — its whole identity is the rotated, margin-set, `aria-hidden` placement described above; a horizontal label above a heading is a different, uncanonized device.
+- **Don't** treat `panel.face` (`#121315`, added to `tailwind.config.ts` this session) as an active token — grep confirms zero usages across `.tsx`/`.css` in the shipped tree. It is leftover/aspirational, not part of the system; the One Rendered Surface Rule stands as written above it.
+- **Don't** treat `lib/projects.ts`'s `image`/`icon` emoji fields or `color: 'from-...-...'` gradient strings as design-system material — neither is rendered by `ProjectRow` or `Projects.tsx`; they are dead legacy data from an earlier data shape, not a glyph-icon or gradient rule for this system.

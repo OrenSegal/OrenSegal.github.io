@@ -1,3 +1,5 @@
+import { DepthTag } from '@/components/DepthTag'
+
 const stack = [
   'Python', 'FastAPI', 'GraphQL', 'PostgreSQL', 'Redis', 'PostGIS',
   'React', 'Next.js', 'TypeScript', 'Docker', 'GitHub Actions', 'Claude Code Skills',
@@ -6,7 +8,8 @@ const stack = [
 export default function About() {
   return (
     <section id="about" className="border-t border-line px-4 py-24 sm:px-6">
-      <div className="mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-3xl border-l border-line pl-5">
+        <DepthTag label="deepest" />
         <h2 className="mb-8 text-2xl font-medium text-ink">About</h2>
 
         <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-ink-dim">

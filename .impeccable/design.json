@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-09-09T00:00:00Z",
-  "title": "Design System: Oren Segal Portfolio",
+  "title": "Design System: Oren Segal Portfolio — Utility Cutaway",
   "extensions": {
     "colorMeta": {
       "panel": { "role": "neutral", "displayName": "Panel Black", "canonical": "#0a0b0c" },
@@ -13,13 +13,16 @@
       "accent-dim": { "role": "primary", "displayName": "Accent Green, Dim", "canonical": "#4b7a5d" }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero h1 only — the two-sentence statement of what Oren builds." },
+      "display": { "displayName": "Display", "purpose": "Hero h1 only." },
       "body": { "displayName": "Body", "purpose": "All prose: About, project descriptions, Contact intro, flight-log copy." },
-      "label": { "displayName": "Label", "purpose": "Project-detail sub-headers (Problem/Decisions/Outcome/Key features/Impact/Tech stack) only." }
+      "label": { "displayName": "Label", "purpose": "Project-detail sub-headers (Problem/Decisions/Outcome/Key features/Impact/Tech stack) only. Unchanged this session." },
+      "meta-mono": { "displayName": "Meta Mono", "purpose": "JetBrains Mono, confined to three machine-sourced-fact sites: DepthTag label (10px, tracking-widest/0.1em, the one site with extra tracking), Hero verified-count line, and ProjectRow id/date toggle (both normal tracking). Never prose or headings; color (ink-faint vs accent) tracks interaction state independently of the mono choice." }
     },
     "shadows": [],
     "motion": [
-      { "name": "rise", "value": "700ms cubic-bezier(0.16, 1, 0.3, 1) both, translateY(10px) -> 0 with opacity 0 -> 1", "purpose": "Hero entrance only, applied once via Tailwind's animate-rise; not a page-wide motion pattern." }
+      { "name": "rise", "value": "700ms cubic-bezier(0.16, 1, 0.3, 1) both, translateY(10px) -> 0 with opacity 0 -> 1", "purpose": "Hero entrance only." },
+      { "name": "utility-line-reveal", "value": "transition-[grid-template-rows] 500ms cubic-bezier(0.16, 1, 0.3, 1), grid-rows-[0fr] -> grid-rows-[1fr]", "purpose": "In-place tactile expansion of a ProjectRow's flight-log/key-features detail. Not an accordion library." },
+      { "name": "chevron-rotate", "value": "transition-transform 300ms cubic-bezier(0.16, 1, 0.3, 1), rotate 0 -> -180deg", "purpose": "ProjectRow toggle chevron, paired with the reveal above. Same curve as rise and the reveal — one easing for all transform/size motion in the system." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -27,6 +30,30 @@
     ]
   },
   "components": [
+    {
+      "name": "Depth Tag",
+      "kind": "custom",
+      "refersTo": "meta-mono",
+      "description": "Rotated -90deg, absolutely positioned, aria-hidden mono label naming a section's depth in the cutaway (surface/shallow utility/deepest/resurfacing). Not a kicker: sits outside the text column in the spine's own margin, no heading-pairing semantics, hidden from assistive tech.",
+      "html": "<span aria-hidden=\"true\" class=\"ds-depth-tag\">shallow utility</span>",
+      "css": ".ds-depth-tag { position: absolute; left: -9px; top: 0; transform-origin: top left; transform: rotate(-90deg); white-space: nowrap; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #7a7d7f; pointer-events: none; }"
+    },
+    {
+      "name": "Status Dot",
+      "kind": "custom",
+      "refersTo": "accent",
+      "description": "8x8 SVG static data indicator, not a hover/active state signal. Filled accent circle = has a full build log on file; outlined ink-faint circle = summary only. Used at rest in Hero (verified-count line) and in each ProjectRow toggle.",
+      "html": "<svg width=\"8\" height=\"8\" viewBox=\"0 0 8 8\"><circle cx=\"4\" cy=\"4\" r=\"4\" fill=\"#8fd6a8\"/></svg>",
+      "css": "/* filled: fill #8fd6a8, r=4. outlined: fill none, stroke #7a7d7f, stroke-width 1.25, r=3.25 */"
+    },
+    {
+      "name": "Utility Line (Project Row)",
+      "kind": "custom",
+      "refersTo": "utility-line-toggle",
+      "description": "Signature interactive pattern replacing a card: title with trailing arrow, mono id/date toggle with StatusDot and chevron (goes accent while expanded), horizontal connector tick joining the row to the section spine (bg-line at rest, bg-accent expanded), and a grid-template-rows reveal of real Problem/Decisions/Outcome or Key Features/Impact copy.",
+      "html": "<div class=\"ds-utility-line\"><span class=\"ds-connector-tick\"></span><h4 class=\"ds-utility-line-title\">Project Title</h4><button class=\"ds-utility-line-toggle\" aria-expanded=\"false\"><svg class=\"ds-status-dot\"></svg>project-id · verified Jan 1, 2026</button></div>",
+      "css": ".ds-utility-line { position: relative; border-bottom: 1px solid #232527; padding: 32px 0; } .ds-connector-tick { position: absolute; left: -20px; top: 15px; height: 1px; width: 20px; background: #232527; transition: background-color 0.3s; } .ds-utility-line.expanded .ds-connector-tick { background: #8fd6a8; } .ds-utility-line-toggle { font-family: var(--font-mono); font-size: 12px; color: #7a7d7f; } .ds-utility-line.expanded .ds-utility-line-toggle { color: #8fd6a8; } .ds-utility-line-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1); } .ds-utility-line.expanded .ds-utility-line-detail { grid-template-rows: 1fr; }"
+    },
     {
       "name": "Inline Text Link",
       "kind": "custom",
@@ -39,7 +66,7 @@
       "name": "Action Link",
       "kind": "custom",
       "refersTo": "link-inline",
-      "description": "Standalone call-to-action link with a trailing arrow icon that nudges on hover — 'See the work', 'Get in touch', 'Go home'.",
+      "description": "Standalone call-to-action link with a trailing arrow icon that nudges on hover — 'See the work'.",
       "html": "<a href=\"#\" class=\"ds-link-action\">See the work <svg class=\"ds-link-action-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
       "css": ".ds-link-action { display: inline-flex; align-items: center; gap: 8px; color: #f2f1ea; font-size: 14px; font-weight: 500; } .ds-link-action-icon { transition: transform 0.15s; } .ds-link-action:hover .ds-link-action-icon { transform: translateX(4px); } .ds-link-action:focus-visible { outline: 2px solid #8fd6a8; outline-offset: 2px; }"
     },
@@ -47,73 +74,68 @@
       "name": "Nav Link",
       "kind": "nav",
       "refersTo": "link-list-item",
-      "description": "Top navigation and footer/back links — dim by default, brightens on hover, no underline.",
+      "description": "Top navigation — dim by default, brightens on hover, no underline.",
       "html": "<a href=\"#\" class=\"ds-nav-link\">Work</a>",
       "css": ".ds-nav-link { color: #9a9d9f; font-size: 14px; transition: color 0.15s; } .ds-nav-link:hover { color: #f2f1ea; } .ds-nav-link:focus-visible { outline: 2px solid #8fd6a8; outline-offset: 2px; }"
-    },
-    {
-      "name": "List Row",
-      "kind": "custom",
-      "refersTo": "link-list-item",
-      "description": "The system's one reusable structural unit in place of a card: a divider-bounded row used identically for project rows and Contact channel rows.",
-      "html": "<div class=\"ds-list-row\"><h4 class=\"ds-list-row-title\">Project Title</h4><p class=\"ds-list-row-desc\">Description text.</p></div>",
-      "css": ".ds-list-row { border-bottom: 1px solid #232527; padding: 32px 0; } .ds-list-row:first-child { padding-top: 0; } .ds-list-row:last-child { border-bottom: none; } .ds-list-row-title { font-size: 20px; font-weight: 500; color: #f2f1ea; } .ds-list-row-desc { margin-top: 8px; color: #9a9d9f; line-height: 1.625; }"
     },
     {
       "name": "Contact Channel Row",
       "kind": "custom",
       "refersTo": "link-list-item",
-      "description": "Icon + label link row in Contact; icon and text transition to accent together as one hover target.",
+      "description": "Icon + label link row in Contact, py-4 (16px) interval; icon and text transition to accent together as one hover target (interaction-state accent, not the utility-line active state).",
       "html": "<a href=\"#\" class=\"ds-channel-row\"><svg class=\"ds-channel-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-10 5L2 7\"/></svg><span class=\"ds-channel-label\">orenssegal@gmail.com</span></a>",
       "css": ".ds-channel-row { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #232527; padding: 16px 0; } .ds-channel-row:first-child { padding-top: 0; } .ds-channel-row:last-child { border-bottom: none; } .ds-channel-icon { color: #7a7d7f; transition: color 0.15s; flex-shrink: 0; } .ds-channel-label { color: #f2f1ea; transition: color 0.15s; } .ds-channel-row:hover .ds-channel-icon, .ds-channel-row:hover .ds-channel-label { color: #8fd6a8; }"
     },
     {
-      "name": "Section Divider",
+      "name": "Section Spine",
       "kind": "custom",
-      "refersTo": "spacing.section-y",
-      "description": "The seam between stacked full-bleed sections — the system's sole depth device, in place of card shadows.",
-      "html": "<section class=\"ds-section\"><div class=\"ds-section-inner\">Content</div></section>",
-      "css": ".ds-section { border-top: 1px solid #232527; padding: 96px 16px; } @media (min-width: 640px) { .ds-section { padding-left: 24px; padding-right: 24px; } } .ds-section-inner { max-width: 768px; margin: 0 auto; }"
+      "refersTo": "spacing.spine-gutter",
+      "description": "The cutaway metaphor's core structural device: every full-width section wraps its content in a left-bordered spine carrying a DepthTag. Replaces the prior system's plain section divider as the section-level pattern.",
+      "html": "<section class=\"ds-section\"><div class=\"ds-spine\"><span class=\"ds-depth-tag\">shallow utility</span>Content</div></section>",
+      "css": ".ds-section { border-top: 1px solid #232527; padding: 96px 16px; } @media (min-width: 640px) { .ds-section { padding-left: 24px; padding-right: 24px; } } .ds-spine { position: relative; max-width: 768px; margin: 0 auto; border-left: 1px solid #232527; padding-left: 20px; }"
     },
     {
       "name": "Detail Sub-header Label",
       "kind": "custom",
-      "refersTo": "typography.label",
-      "description": "Uppercase, tracked sub-header scoped to the project-detail page only (Problem/Decisions/Outcome/Key features/Impact/Tech stack) — not a general kicker.",
+      "refersTo": "label",
+      "description": "Uppercase, tracked sub-header scoped to the project-detail page only (Problem/Decisions/Outcome/Key features/Impact/Tech stack) — not a general kicker. Unchanged this session.",
       "html": "<h3 class=\"ds-detail-label\">Key features</h3>",
       "css": ".ds-detail-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #7a7d7f; }"
     }
   ],
   "narrative": {
-    "northStar": "No governing metaphor — plain, dense, specific prose earning trust the way a good engineer's own writing does",
-    "overview": "There is no governing metaphor. The previous system (\"The Night Flight-Deck\") staged the page as cockpit instrumentation — gauges, plate-numbered cards, a boot sequence — and that costume is fully retired. The current build earns trust the way a well-run engineer's own writing does: plain, dense, specific prose, with hierarchy carried by size, weight, and measure rather than by decorative skin. Differentiation lives in information architecture (projects grouped by category, with the projects that have a real build narrative getting inline depth), not in a themed visual device layered on top. The palette is near-black with warm off-white ink and a single restrained green accent spent almost entirely on hover and link state — never as a fill, a section color, or a badge. One workhorse sans face (Space Grotesk) carries both display and body text at two weights; there is no separate mono face anywhere in the shipped code. Structure is plain hairline dividers between stacked sections and list rows — there is no bordered-card chrome, no tonal surface stack, no shadows, gradients, or blur. This is a direct, confirmed rejection of the site's prior AI-template look (PRODUCT.md's Brand Commitments name the anti-reference explicitly: violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing, generic \"Sparkles\" badges) and, separately, of the flight-deck metaphor that replaced it.",
+    "northStar": "Utility Cutaway — the page is a literal underground utility cross-section; what a visitor sees on the surface sits on real strata of infrastructure work beneath it",
+    "overview": "This build supersedes the prior 'no governing metaphor' plain system and the earlier, never-shipped 'Night Flight-Deck' instrument-panel direction. The current shipped system stages the page as a literal underground utility cross-section: the near-black ground (#0a0b0c) is depth. Every major section — Hero, Work, About, Contact — is a vertical cutaway spine (border-l border-line pl-5), each carrying a rotated depth label naming how far down it sits: 'surface' (Hero), 'shallow utility' (Work), 'deepest' (About), 'resurfacing' (Contact). Inside Work, each project is a utility line crossing the spine via a horizontal connector tick; clicking a project's toggle expands it in place with a tactile grid-height reveal, showing real Problem/Decisions/Outcome or Key Features/Impact copy. Accent green marks exactly three things: interaction state, the active/expanded utility line, and the filled status dot as a binary data affirmative — it never fills a background or colors a heading. No fabricated metrics anywhere: every number and date is sourced at build time from the live GitHub API, all-or-nothing.",
     "keyCharacteristics": [
-      "Near-black ground (#0a0b0c), warm off-white ink (#f2f1ea), no gradients, no tonal surface stack — depth comes from hairline dividers only, not layered panels",
-      "One accent (#8fd6a8) restricted to underline/hover/focus/selection state, never a fill or a headline color",
-      "One type family (Space Grotesk) at two weights (400 body, 500 display/label) — no mono face",
-      "Plain border-b list rows and section seams stand in for cards; nothing is boxed",
-      "A single entrance motion (rise, fade + 10px translate, 700ms) used once, on the Hero, not as a page-wide pattern"
+      "Near-black ground (#0a0b0c) read as literal depth — four sections render as a border-l cutaway spine with a rotated -90deg depth label",
+      "Two type families with strict division of labor: Space Grotesk for every heading/sentence; JetBrains Mono confined to three machine-sourced-fact sites (depth tags, Hero verified line, project id/date toggle) at 10-12px, never prose or headings",
+      "Accent green (#8fd6a8) has exactly three jobs: interaction state, the expanded project row's active marking, and the filled StatusDot as a static binary data signal",
+      "Each project is a utility line: a horizontal connector tick (w-5, matching the spine's pl-5 gutter exactly) that goes accent when its row is expanded",
+      "Expansion is a tactile grid-template-rows reveal (0fr -> 1fr, 500ms), not an accordion library",
+      "One motion curve (cubic-bezier(0.16, 1, 0.3, 1)) drives Hero's entrance, the row reveal, and the chevron rotation"
     ],
     "rules": [
-      { "name": "The Accent-as-State Rule", "body": "Accent green marks interaction, not identity: link hover, focus-visible, text selection, and icon hover. It never sits on a heading, a section label, or any element at rest. If a new element isn't being hovered, focused, or selected, it does not get accent green.", "section": "colors" },
-      { "name": "The One Face Rule", "body": "Every piece of text on the page — headline, body, label, numeral — is Space Grotesk at 400 or 500. There is no mono face and no third family; hierarchy comes from size and weight, never from a costume type switch.", "section": "typography" },
-      { "name": "The One Surface Rule", "body": "There is exactly one background tone on the page. Depth is a 1px line divider, never a lighter panel, a shadow, or a blur. If a new component wants to read as 'elevated,' give it a divider, not a fill.", "section": "elevation" }
+      { "name": "The Accent-as-Signal Rule", "body": "Accent green is spent on exactly three things: interaction (hover/focus/selection), the one active utility line's marking (tick, chevron, toggle text while expanded), and the filled status dot as a binary data affirmative. It is never a background fill, never a static heading color, and there is no second accent hue. A resting filled StatusDot is accent by design (data, not decoration) — do not 'fix' it to ink-faint.", "section": "colors" },
+      { "name": "The Scoped Mono Rule", "body": "JetBrains Mono renders exactly three things: the depth-tag label, the Hero verified-count timestamp line, and each project's id/date toggle. All three are small (10-12px), machine-sourced facts. Mono never appears in a heading, in prose, or at a larger size. The ProjectRow toggle's mono text still switches ink-faint to accent with expansion state — mono marks content type, color marks state; the two are independent.", "section": "typography" },
+      { "name": "The One Rendered Surface Rule", "body": "Exactly one background tone is painted on the page (panel, #0a0b0c). Depth is expressed by hairline dividers and the cutaway-spine device (border-l spines plus rotated depth labels), never by a second background fill, a shadow, or a blur.", "section": "elevation" }
     ],
     "dos": [
-      "Do keep accent green (#8fd6a8/#4b7a5d) restricted to interaction state — hover, focus-visible, selection, and the resting underline decoration on inline links. Everywhere else, use ink/ink-dim/ink-faint.",
-      "Do keep the page to one background tone (panel, #0a0b0c) and convey structure with line (#232527) dividers only.",
-      "Do set body copy in Space Grotesk 400 and headings/labels in 500 — do not introduce a second or third type family, including a mono face, for numerals or labels.",
-      "Do use the border-b border-line py-8 first:pt-0 last:border-b-0 divider idiom for any new repeating list of items (projects, channels, etc.) rather than inventing a bordered card.",
-      "Do respect prefers-reduced-motion: app/globals.css collapses all animation/transition durations to near-zero and sets scroll-behavior: auto when it's set.",
-      "Do reserve uppercase, tracked labels (text-sm uppercase tracking-wide text-ink-faint) for the project-detail sub-headers pattern (Problem/Decisions/Outcome/Key features/Impact/Tech stack); it is not used as a general kicker or eyebrow elsewhere on the site, and new eyebrow-style labels should not be added — the 404 page's numeral-above-heading is a one-off, not a precedent."
+      "Do confine mono (JetBrains Mono) to the three scoped sites — depth tags, Hero's verified line, project id/date toggles — always small and always a machine-sourced fact. Do not use mono for a heading or a sentence of prose.",
+      "Do use border-l border-line pl-5 plus a DepthTag for any new full-width section that should read as part of the cutaway.",
+      "Do spend accent green only on the three named jobs (interaction, active utility line, filled status dot).",
+      "Do keep the connector-tick width (w-5) matched to the spine gutter (pl-5) if adding new lines crossing a spine.",
+      "Do respect prefers-reduced-motion: app/globals.css collapses all animation/transition durations to near-zero."
     ],
     "donts": [
-      "Don't introduce gradients, glassmorphism/backdrop-blur, drop shadows, or a second background tone — this build is a confirmed, explicit rejection of the site's prior AI-template look (violet/cyan gradients, glassmorphism, floating blur orbs, gradient text, bounce easing — per PRODUCT.md's Brand Commitments) and of the flight-deck system that followed it.",
-      "Don't add a second accent hue or use accent green as a fill, a headline color, or a static (non-hover) text color.",
-      "Don't revive the retired instrumentation system — GaugeDial/ReadoutWindow/StatusFlag (components/Instruments.tsx), the boot sequence (lib/boot.ts), the settle/flag-drop keyframes, IBM Plex Mono, or the panel-face/bezel/signal/caution tokens are gone from the shipped code; do not reintroduce them or reference them as current.",
-      "Don't box content in bordered cards. The system's structural unit is a hairline divider between stacked rows/sections, not a panel.",
-      "Don't add a category filter/toggle to Work — projects are grouped by fixed category headings in document order, with no active/inactive UI state to maintain.",
-      "Don't treat the leftover backdrop-blur-0 class on Navigation as a blur treatment to extend, and don't turn the 404 page's numeral-above-heading arrangement into a reusable eyebrow/kicker component — neither is a system rule, both are as-shipped artifacts of their one screen."
+      "Don't use a max-height or opacity-only accordion for a new in-place expansion — the system's technique is a grid-template-rows (0fr <-> 1fr) reveal, confirmed by ProjectRow's existing implementation.",
+      "Don't treat StatusDot's resting accent fill as a general license for static accent color elsewhere — it is scoped to genuine binary data indicators.",
+      "Don't widen mono past the three scoped sites, and don't let it inherit the color rule from prose.",
+      "Don't add a second background/surface tone, a shadow, a blur, or a gradient.",
+      "Don't box content in bordered cards — the structural unit is the hairline divider plus the spine/tick device for Work's utility lines.",
+      "Don't add a category filter/toggle to Work.",
+      "Don't turn DepthTag into a horizontal eyebrow/kicker pattern anywhere else on the site.",
+      "Don't treat panel.face (#121315, added to tailwind.config.ts this session) as an active token — zero usages across .tsx/.css in the shipped tree; it is leftover, not part of the system.",
+      "Don't treat lib/projects.ts's image/icon emoji fields or gradient color strings as design-system material — neither is rendered by ProjectRow or Projects.tsx; they are dead legacy data, not a glyph-icon or gradient rule."
     ]
   }
 }
