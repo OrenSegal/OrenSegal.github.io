@@ -214,11 +214,11 @@ export const projects: Project[] = [
     icon: '🔒',
     keyFeatures: [
       'A PreToolUse hook denies an Edit or Write on a file another session has claimed, and auto-claims unclaimed files',
-      'claim, release, check and status tools for reserving files before a multi-file change',
+      'A claim tool reserves files before a multi-file change; release, check and status free them early and show who holds what',
       'Claims live in local SQLite; a unique index on the file path gives each race exactly one winner',
     ],
     techStack: ['Node.js', 'SQLite', 'MCP'],
-    impact: 'Several agent sessions can work in one repo without silently overwriting each other\'s files.',
+    impact: 'Several agent sessions can work in one repo without one overwriting a file another has claimed through Claude Code\'s edit tools.',
     flightLog: {
       problem: 'Running a Claude Code session per issue or per worktree is normal now, and nothing stops two of them from editing the same file. An advisory lock API only helps if the model remembers to call it.',
       decisions: [
