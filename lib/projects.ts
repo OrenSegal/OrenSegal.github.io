@@ -93,13 +93,13 @@ export const projects: Project[] = [
     techStack: ['Swift'],
     impact: 'Prevents a single misbehaving client or feedback loop from exceeding a hard cost ceiling.',
     flightLog: {
-      problem: 'A shipping iOS app calling LLM APIs directly has no natural circuit breaker: a retry storm, a redundant vision call, or a provider outage can burn through a monthly budget in hours, and usage dashboards only tell you after the money is gone.',
+      problem: 'An iOS app calling LLM APIs directly has no natural circuit breaker: a retry storm, a redundant vision call, or a provider outage can burn through a monthly budget in hours, and usage dashboards only tell you after the money is gone.',
       decisions: [
         'Added semantic and vision response caching so near-duplicate prompts and images don\'t re-trigger a full paid call.',
         'Built tiered circuit breakers that fall back tier by tier when a provider misbehaves, instead of a binary up/down switch.',
         'Enforced cost budgets as a hard ceiling in the gateway itself, not as a downstream alert on a usage log, so the limit holds even if nobody is watching.',
       ],
-      outcome: 'Measurably cut LLM inference cost by 40-50% in a real shipping iOS app, while removing runaway-cost risk as an operational concern.',
+      outcome: 'A hard budget cap stops runaway spend before it happens. The patterns were extracted from the LLM gateway in an iOS app that is in TestFlight beta, and there is no published cost benchmark yet.',
     },
   },
   {
