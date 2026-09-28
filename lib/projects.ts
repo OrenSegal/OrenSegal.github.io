@@ -174,8 +174,8 @@ export const projects: Project[] = [
   {
     id: 'architecture-lint',
     title: 'Architecture Lint',
-    subtitle: 'Config-Driven Module Boundary Linter',
-    description: 'A config-driven module boundary linter with a ratchet baseline, for enforcing architecture rules on a legacy codebase without a big-bang cleanup first.',
+    subtitle: 'Module Boundary Linter with a Ratchet',
+    description: 'A single bash script that checks module boundaries in TypeScript and Swift codebases, with a count-based baseline so you can turn it on before cleaning up existing violations.',
     tags: ['Developer Tools', 'Static Analysis', 'CI/CD'],
     category: 'dev-tools',
     image: '🧱',
@@ -184,18 +184,27 @@ export const projects: Project[] = [
     color: 'from-yellow-500 to-orange-500',
     icon: '🧱',
     keyFeatures: [
-      'Ratchet baseline: only new violations fail CI, existing debt is grandfathered in and shrinks over time',
-      'Module boundaries defined declaratively in config, no code annotations required',
-      'Drop-in CLI, works in any CI pipeline',
+      'Baseline records how many violations each rule has today; CI fails when a count goes up',
+      'Boundary rules live in one list at the top of the script, with no annotations in your code',
+      'Needs only bash, grep and xargs; tested on Linux CI and macOS',
     ],
     techStack: ['Shell', 'CLI'],
     impact: 'Lets a team turn on architecture enforcement today, on a codebase with years of existing debt.',
+    flightLog: {
+      problem: 'Architecture rules are easy to agree on and hard to enforce retroactively: turning on a boundary linter for the first time on a real codebase means it immediately fails on years of pre-existing violations, so teams either skip enforcement entirely or burn a sprint on a big-bang cleanup before CI can go green.',
+      decisions: [
+        'Record a per-rule violation count at adoption time and fail CI only when a count rises. It counts rather than tracks individual violations, so fixing one and adding another in the same change still passes; I chose the simpler version and wrote that trade-off down.',
+        'Kept boundary rules in one list inside the script instead of per-file annotations, so adopting it doesn\'t touch application code.',
+        'Kept it to one bash script with no dependencies to install, and made it fail loudly if it\'s pointed at the wrong folder instead of silently reporting clean.',
+      ],
+      outcome: 'You can turn on boundary checks the same day, on a codebase with existing violations, and CI stops the count from growing while you pay the debt down.',
+    },
   },
   {
     id: 'litmus',
     title: 'Litmus',
     subtitle: 'Red/Green CI for Prompt-Ware',
-    description: 'CI for the behavior a skill’s scripts alone can’t verify: deterministic checks wrapped around self-graded model output.',
+    description: 'Tests for prompt-based skills: deterministic checks wherever possible, and a model judge only where it has been checked against known good and bad examples.',
     tags: ['AI Testing', 'CI/CD', 'Python'],
     category: 'dev-tools',
     image: '🧪',
@@ -205,11 +214,20 @@ export const projects: Project[] = [
     icon: '🧪',
     keyFeatures: [
       'Red/green test framework purpose-built for prompt-driven behavior, not just deterministic code',
-      'Combines deterministic assertions with self-graded model checks',
+      'A judge check stays inconclusive until its rubric has both a passing and a failing example, and the judge agrees with them',
       'Designed to run in CI alongside normal unit tests',
     ],
     techStack: ['Python'],
     impact: 'Prompt-based skills get the same red/green CI discipline as regular code.',
+    flightLog: {
+      problem: 'Standard unit tests assume deterministic output, but a prompt-driven skill\'s behavior can vary run to run: a regular assertion either false-fails on harmless variation or gets loosened until it stops catching real regressions.',
+      decisions: [
+        'Kept deterministic assertions for everything that is actually deterministic (inputs, outputs, file writes) rather than routing every check through a model.',
+        'Used a model judge only for the subjective parts, and refused to trust it until it correctly grades known pass and fail examples. A judge that says PASS to everything agrees with pass-only examples, so both kinds are required.',
+        'Designed it to run as a normal red/green suite inside existing CI, so a broken skill fails the build the same way a broken function does.',
+      ],
+      outcome: 'Prompt-based skills get a red/green suite instead of "looked fine when I tried it once", and a judge can\'t turn a check green unless it has shown it can tell good output from bad.',
+    },
   },
 ]
 
