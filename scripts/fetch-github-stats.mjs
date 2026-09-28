@@ -1,19 +1,15 @@
-// Build-time only. Pulls small, honest GitHub stats for the 8 shown
-// portfolio repos in one pass: the aggregate license percentage for the
-// Hero's "Open Source" gauge, plus a per-repo star count and last-push date
-// for each project card. Unauthenticated REST calls, no secrets.
+// Build-time only. Pulls a per-repo star count and last-push date for each
+// portfolio project card. Unauthenticated REST calls, no secrets.
 //
 // Never fails the build: on any network/API error this leaves the existing,
-// committed lib/github-stats.json and lib/project-stats.json (real,
-// previously-fetched values) as is. There is no invented-number fallback —
-// the committed files are the baseline.
+// committed lib/project-stats.json (real, previously-fetched values) as is.
+// There is no invented-number fallback; the committed file is the baseline.
 
 import { writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const LIB_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'lib')
-const STATS_OUT_PATH = path.join(LIB_DIR, 'github-stats.json')
 const PROJECT_STATS_OUT_PATH = path.join(LIB_DIR, 'project-stats.json')
 const USER = 'OrenSegal'
 
@@ -27,6 +23,7 @@ const PROJECT_REPOS = [
   'metropulse-nyc',
   'signal-skills',
   'architecture-lint',
+  'scoped',
   'litmus',
 ]
 
@@ -40,7 +37,6 @@ async function fetchRepoData() {
       const data = await res.json()
       return {
         repo,
-        licensed: Boolean(data.license && data.license.key && data.license.key !== 'other'),
         stars: data.stargazers_count ?? 0,
         pushedAt: data.pushed_at ?? null,
       }
@@ -51,25 +47,14 @@ async function fetchRepoData() {
 async function main() {
   try {
     const repos = await fetchRepoData()
-    const generatedAt = new Date().toISOString()
-
-    const licensed = repos.filter((r) => r.licensed).length
-    const stats = {
-      openSourcePercent: Math.round((licensed / PROJECT_REPOS.length) * 100),
-      projectCount: PROJECT_REPOS.length,
-      generatedAt,
-    }
-
     const projectStats = Object.fromEntries(
       repos.map((r) => [r.repo, { stars: r.stars, pushedAt: r.pushedAt }])
     )
 
-    await writeFile(STATS_OUT_PATH, JSON.stringify(stats, null, 2) + '\n')
     await writeFile(PROJECT_STATS_OUT_PATH, JSON.stringify(projectStats, null, 2) + '\n')
-    console.log(`[fetch-github-stats] wrote ${STATS_OUT_PATH}:`, stats)
     console.log(`[fetch-github-stats] wrote ${PROJECT_STATS_OUT_PATH}`)
   } catch (err) {
-    console.warn(`[fetch-github-stats] skipping update, keeping committed stats files: ${err.message}`)
+    console.warn(`[fetch-github-stats] skipping update, keeping committed stats file: ${err.message}`)
   }
 }
 
