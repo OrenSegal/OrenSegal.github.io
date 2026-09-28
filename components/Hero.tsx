@@ -1,12 +1,8 @@
 import { ArrowRight } from 'lucide-react'
-import githubStats from '@/lib/github-stats.json'
-import { getSystemStatus, formatVerifiedDate } from '@/lib/status'
 import { StatusDot } from '@/components/StatusDot'
 import { DepthTag } from '@/components/DepthTag'
 
 export default function Hero() {
-  const status = getSystemStatus()
-
   return (
     <section className="flex min-h-screen flex-col justify-center px-4 pt-24 sm:px-6">
       <div className="relative mx-auto w-full max-w-3xl animate-rise border-l border-line pl-5">
@@ -22,18 +18,17 @@ export default function Hero() {
           <div className="flex items-center gap-2.5">
             <StatusDot />
             <span className="text-sm text-ink">
-              {status.verified} of {status.total} repos confirmed live at build time
+              Every project below is a public repo with its tests and CI
             </span>
           </div>
           <p className="mt-2 font-mono text-xs tabular text-ink-faint">
-            last verified {formatVerifiedDate(status.lastVerified)} ·{' '}
             <a
-              href="https://github.com/OrenSegal?tab=repositories"
+              href="https://github.com/OrenSegal/til"
               target="_blank"
               rel="noopener noreferrer"
               className="underline decoration-accent-dim underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"
             >
-              {githubStats.openSourcePercent}% open source, check it yourself
+              notes on testing agent-written code
             </a>
           </p>
         </div>
