@@ -15,20 +15,20 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Oren Segal | AI Platform Engineer',
+  title: 'Oren Segal | AI Engineer',
   description: 'Portfolio of shipped AI agent, LLM infrastructure, and data engineering projects by Oren Segal.',
   keywords: ['AI', 'Machine Learning', 'Data Engineering', 'Portfolio', 'Claude Code', 'LLM'],
   authors: [{ name: 'Oren Segal' }],
   metadataBase: new URL('https://orensegal.github.io'),
   openGraph: {
-    title: 'Oren Segal | AI Platform Engineer',
+    title: 'Oren Segal | AI Engineer',
     description: 'Shipped AI agent, LLM infrastructure, and data engineering projects',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, AI Platform Engineer' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, AI Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oren Segal | AI Platform Engineer',
+    title: 'Oren Segal | AI Engineer',
     description: 'Shipped AI agent, LLM infrastructure, and data engineering projects',
     images: ['/og-image.png'],
   },
