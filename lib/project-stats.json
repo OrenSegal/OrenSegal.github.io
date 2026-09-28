@@ -1,7 +1,7 @@
 {
   "signal-scout": {
     "stars": 1,
-    "pushedAt": "2026-09-08T18:59:05Z"
+    "pushedAt": "2026-09-28T05:11:24Z"
   },
   "first-to-first-sale": {
     "stars": 0,
@@ -9,26 +9,30 @@
   },
   "llm-gateway-kit": {
     "stars": 0,
-    "pushedAt": "2026-09-08T19:03:29Z"
+    "pushedAt": "2026-09-28T05:11:44Z"
   },
   "verify-before-ship": {
     "stars": 0,
-    "pushedAt": "2026-09-08T19:03:49Z"
+    "pushedAt": "2026-09-28T05:11:28Z"
   },
   "metropulse-nyc": {
     "stars": 0,
-    "pushedAt": "2026-07-16T16:12:49Z"
+    "pushedAt": "2026-09-09T21:08:25Z"
   },
   "signal-skills": {
     "stars": 0,
-    "pushedAt": "2026-09-08T19:26:37Z"
+    "pushedAt": "2026-09-28T05:11:32Z"
   },
   "architecture-lint": {
     "stars": 0,
-    "pushedAt": "2026-07-16T15:30:25Z"
+    "pushedAt": "2026-09-28T05:11:21Z"
+  },
+  "scoped": {
+    "stars": 0,
+    "pushedAt": "2026-09-28T05:11:17Z"
   },
   "litmus": {
     "stars": 0,
-    "pushedAt": "2026-07-21T23:35:22Z"
+    "pushedAt": "2026-09-28T05:31:50Z"
   }
 }
