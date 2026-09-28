@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Recruiters, hiring managers, and technical interviewers evaluating Oren Segal for AI/ML engineering roles (primary target: AI Platform Engineer, also AI Solutions Architect). They arrive from a resume/LinkedIn link or a job application, split evenly between a fast top-level skim (positioning + proof in seconds) and a deeper technical review (clicking into project repos and code).
+Recruiters, hiring managers, and technical interviewers evaluating Oren Segal for AI/ML engineering roles (primary target: AI Engineer, including agent evaluation and code review work). They arrive from a resume/LinkedIn link or a job application, split evenly between a fast top-level skim (positioning + proof in seconds) and a deeper technical review (clicking into project repos and code).
 
 ## Product Purpose
 
@@ -32,7 +32,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 ## Brand Commitments
 
 - Name: Oren Segal.
-- Target title/framing: "AI Platform Engineer" (sourced from career-ops `config/profile.yml` `target_roles.primary`), not "AI & Data Science."
+- Target title/framing: "AI Engineer", not "AI & Data Science."
 - Visual identity is explicitly **open for full replacement** — the current dark/purple-gradient/glassmorphism look was AI-template-generated and should be treated as anti-reference only, not preserved.
 
 ## Evidence on Hand

@@ -105,8 +105,8 @@ export const projects: Project[] = [
   {
     id: 'verify-before-ship',
     title: 'Verify Before Ship',
-    subtitle: 'Catches AI-Fabricated Claims Before a Human Sees Them',
-    description: 'A fact-checking gate for anything an LLM writes with citations: re-fetches every cited source and verifies the claim is actually there before it reaches a human reviewer.',
+    subtitle: 'Checks Cited Claims Against Their Sources',
+    description: 'A fact-checking gate for anything an LLM writes with citations: re-fetches every cited page and flags any claim it cannot find there, so a reviewer looks at those before anything is published.',
     tags: ['AI Reliability', 'Fact-Checking', 'Python'],
     category: 'ai-infra',
     image: '🔍',
@@ -115,20 +115,20 @@ export const projects: Project[] = [
     color: 'from-orange-500 to-red-500',
     icon: '🔍',
     keyFeatures: [
-      'Re-fetches every source an LLM cites and checks the claim is actually contained in it',
-      'Flags fabricated or unsupported citations before they reach a human',
-      'Runs as a pre-publish gate, not a post-hoc audit',
+      'Re-fetches every source an LLM cites and checks that the claim\'s key words, numbers and names appear in it',
+      'Flags unsupported citations for a person to confirm or cut',
+      'Runs before publication, not as an audit afterwards',
     ],
     techStack: ['Python'],
-    impact: '"The model cited a source" becomes a verified, checkable claim before it ships, not an assumption.',
+    impact: '"The model cited a source" gets checked against the actual page before it ships, not assumed.',
     flightLog: {
       problem: 'Signal Scout\'s source-verification step proved the pattern worked for one skill, but every other project generating AI text with citations needed the same guarantee, and copy-pasting the check into each one meant fixing the same fabrication bugs repeatedly.',
       decisions: [
         'Generalized the containment-checking methodology out of signal-scout into a standalone tool, so any LLM-writing pipeline can adopt it as a dependency instead of reimplementing it.',
-        'Made it a pre-publish gate rather than a post-hoc audit: a flagged citation blocks the claim before a human reviewer sees it, not after.',
+        'Made it run before publication rather than as an audit afterwards: flagged claims go to a person to confirm or cut before anything ships.',
         'Kept the check narrow and deterministic: re-fetch the source, confirm the claim is actually in it, rather than asking another model to grade the first model\'s honesty.',
       ],
-      outcome: 'Any project that generates cited claims can now pull in a reusable, pre-publish fact-checking gate instead of bolting a one-off script onto a single skill.',
+      outcome: 'Any project that generates cited claims can now pull in a reusable pre-publish citation check instead of bolting a one-off script onto a single skill.',
     },
   },
   {
