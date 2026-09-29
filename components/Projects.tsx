@@ -6,10 +6,10 @@ import { ProjectRow } from '@/components/ProjectRow'
 const STATS: Record<string, { stars: number; pushedAt: string | null }> = projectStats
 
 export const CATEGORIES: { id: Project['category']; label: string }[] = [
-  { id: 'ai-agents', label: 'AI Agents' },
   { id: 'ai-infra', label: 'AI Infrastructure' },
-  { id: 'data-engineering', label: 'Data Engineering' },
   { id: 'dev-tools', label: 'Developer Tools' },
+  { id: 'ai-agents', label: 'AI Agents' },
+  { id: 'data-engineering', label: 'Data Engineering' },
 ]
 
 export default function Projects() {

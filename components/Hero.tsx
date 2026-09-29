@@ -9,9 +9,9 @@ export default function Hero() {
         <DepthTag label="surface" />
 
         <h1 className="max-w-2xl text-3xl font-medium leading-[1.15] text-ink sm:text-4xl">
-          I build the parts of AI systems that keep them honest once real money
-          and real users show up: cost budgets, fact-checking, CI for code an
-          LLM wrote.
+          I&apos;m building Shelfie, an iOS app written mostly by Claude Code
+          agents, and the tests and CI that decide which of their work is
+          safe to merge.
         </h1>
 
         <div className="mt-8 max-w-xl border-y border-line py-4">
