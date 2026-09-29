@@ -1,8 +1,8 @@
 import { DepthTag } from '@/components/DepthTag'
 
 const stack = [
-  'Swift', 'SwiftUI', 'Python', 'TypeScript', 'SQL', 'PostgreSQL', 'Supabase',
-  'FastAPI', 'Next.js', 'Docker', 'GitHub Actions', 'Claude Code Skills',
+  'Swift', 'SwiftUI', 'TypeScript', 'Python', 'SQL', 'PostgreSQL', 'Supabase',
+  'Claude Code', 'Gemini', 'Apple Vision', 'GitHub Actions', 'Playwright', 'Docker',
 ]
 
 export default function About() {
@@ -14,22 +14,29 @@ export default function About() {
 
         <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-ink-dim">
           <p>
-            Most AI demos fall apart the first time they meet a real cost budget
-            or a citation nobody checked. I work on the part underneath the
-            prompt: the plumbing that turns a clever model call into something
-            you can leave running without babysitting it.
+            Shelfie is a vision-based iOS kitchen app, now in TestFlight beta.
+            You walk the camera past your fridge and pantry once, and it builds
+            the inventory that meal plans, grocery lists and expiry reminders
+            run on.
           </p>
           <p>
-            In practice that&apos;s enforcing cost limits instead of just logging
-            usage, re-verifying citations instead of hoping the model told the
-            truth, and writing CI for behavior a script alone can&apos;t check.
-            Every project here ships as a full open-source system: repo, tests,
-            green CI, not a notebook someone ran once.
+            Claude Code agents write most of its code, which turned a lot of my
+            job into review. The harness they work in assumes an agent&apos;s
+            report is unproven until a check backs it up, and a merge waits for
+            me whenever a review asks for a person. Much of the CI targets work
+            that looks finished without being finished, like a test filter that
+            matches nothing and still exits green.
           </p>
           <p>
-            Alongside these I&apos;m building Shelfie, a vision-based iOS kitchen
-            app now in TestFlight beta. The patterns in LLM Gateway Kit came
-            out of its AI backend.
+            The projects here came out of that work: checking citations against
+            their sources, testing prompt-based skills, keeping parallel agent
+            sessions off the same file, and capping what an app spends on model
+            calls.
+          </p>
+          <p>
+            Before this I spent five years as a senior data analyst at Reshet
+            13, an Israeli TV network, building the Python and SQL pipelines and
+            forecasting models the business ran on.
           </p>
         </div>
 
