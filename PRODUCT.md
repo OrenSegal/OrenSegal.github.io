@@ -20,13 +20,13 @@ Every project shown is real, shipped, open-source, with a public repo, tests, an
 
 ## Operating Context
 
-Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (all 8 projects) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
+Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (every project) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
 
 ## Capabilities and Constraints
 
 - Static site only — no server, no database, no forms that submit anywhere real (contact is `mailto:`/external profile links only).
 - Must build cleanly under Next.js static export (a prior real bug: any `onClick`/event handler in a Server Component without `'use client'` silently breaks the entire static export).
-- 8 real projects currently listed, categorized as `ai-agents`, `ai-infra`, `data-engineering`, `dev-tools`.
+- Projects are categorized as `ai-agents`, `ai-infra`, `data-engineering`, `dev-tools`.
 - `react/no-unescaped-entities` ESLint errors are currently silenced via `ignoreDuringBuilds: true` in `next.config.js` — open TODO, not yet fixed.
 
 ## Brand Commitments
