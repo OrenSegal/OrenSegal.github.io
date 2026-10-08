@@ -46,6 +46,7 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `metropulse-nyc` — NYC subway station archetypes, serverless lakehouse
 - `signal-skills` — 6-skill Claude Code family
 - `architecture-lint` — module boundary linter with ratchet baseline
+- `scoped` — file locks for concurrent Claude Code sessions
 - `litmus` — mutation testing for eval suites
 
 No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
