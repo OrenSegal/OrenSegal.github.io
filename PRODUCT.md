@@ -38,14 +38,15 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 ## Evidence on Hand
 
 Real shipped projects, sourced from `lib/projects.ts` (each has a real public GitHub repo as `demoUrl`):
+- `sous` — Claude Code harness and doctor: guard hook, zero-test and weakened-test checks
 - `signal-scout` — evidence-backed GTM research agent
 - `first-to-first-sale` — prospect report → outreach/briefs/pitches
 - `llm-gateway-kit` — Swift LLM gateway, cost enforcement
-- `verify-before-ship` — fact-checking gate for AI citations
+- `cited` — fact-checking gate for AI citations (formerly verify-before-ship)
 - `metropulse-nyc` — NYC subway station archetypes, serverless lakehouse
 - `signal-skills` — 6-skill Claude Code family
 - `architecture-lint` — module boundary linter with ratchet baseline
-- `litmus` — red/green CI for prompt-ware
+- `litmus` — mutation testing for eval suites
 
 No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 
