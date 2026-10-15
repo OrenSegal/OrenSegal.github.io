@@ -22,6 +22,37 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'rootcause',
+    title: 'rootcause',
+    subtitle: 'An Incident Agent Built Without a Framework, and Measured',
+    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written by hand over MCP tools, and every claim about it comes from evals scored against known causes, repeated and reported with intervals and cost.',
+    tags: ['AI Agents', 'Evals', 'MCP', 'RAG', 'OpenTelemetry', 'Python'],
+    category: 'ai-agents',
+    image: '🔎',
+    demoUrl: 'https://github.com/OrenSegal/rootcause',
+    featured: true,
+    color: 'from-sky-500 to-indigo-500',
+    icon: '🔎',
+    keyFeatures: [
+      'A hand-written tool loop with an append-only event log, so a crashed run resumes without repeating a side effect',
+      'Approval gate for production actions, a runtime check that rejects answers citing evidence no tool returned, and a prompt-injection scenario where obeying a planted instruction fails the run',
+      'Sweeps that repeat every scenario per model and effort level, with Wilson intervals, pass^k and cost per solved incident',
+      'Retrieval over past postmortems, from BM25 to embeddings to a fused hybrid, evaluated on its own before it reaches the agent',
+    ],
+    techStack: ['Python', 'Claude API', 'Claude Code', 'MCP', 'OpenTelemetry', 'pytest', 'GitHub Actions'],
+    impact: 'Decisions about model, effort and retrieval rest on measured reliability and cost, not on one good-looking run.',
+    flightLog: {
+      problem: 'A responder under pressure blames the last deploy before the errors. That heuristic is often wrong, and an agent can make the same mistake with more confidence. Most agent demos show one run that worked and say nothing about how often it would.',
+      decisions: [
+        'Wrote the loop instead of using a framework, so retries, approvals and crash recovery are explicit and testable.',
+        'Built every scenario around a decoy that defeats the last-deploy heuristic, and kept the ground truth out of everything the agent can read.',
+        'Kept harness failures out of the pass rate and checked that each run was served by the model it asked for, so the numbers measure the model and not the plumbing.',
+        'Measured retrieval on its own first. Plain BM25 beat both embedding models on incident text, which is full of exact error strings.',
+      ],
+      outcome: 'A comparison of models, effort levels and retrieval that a reviewer can rerun from the repo, with every result file committed and every known limitation written down.',
+    },
+  },
+  {
     id: 'sous',
     title: 'sous',
     subtitle: 'Checks What Coding Agents Actually Do',

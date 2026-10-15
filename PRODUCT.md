@@ -38,6 +38,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 ## Evidence on Hand
 
 Real shipped projects, sourced from `lib/projects.ts` (each has a real public GitHub repo as `demoUrl`):
+- `rootcause` — incident root-cause agent: hand-written loop, repeated cost-aware evals
 - `sous` — Claude Code harness and doctor: guard hook, zero-test and weakened-test checks
 - `signal-scout` — evidence-backed GTM research agent
 - `first-to-first-sale` — prospect report → outreach/briefs/pitches
