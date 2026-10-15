@@ -16,6 +16,7 @@ const USER = 'OrenSegal'
 // Mirrors the repo slugs in lib/projects.ts. Kept as a plain list rather than
 // importing the TS file, since this script runs standalone under plain Node.
 const PROJECT_REPOS = [
+  'rootcause',
   'sous',
   'signal-scout',
   'first-to-first-sale',
