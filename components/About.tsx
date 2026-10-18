@@ -28,8 +28,9 @@ export default function About() {
           </p>
           <p>
             Alongside these I&apos;m building Shelfie, a vision-based iOS kitchen
-            app now in TestFlight beta. The patterns in LLM Gateway Kit came
-            out of its AI backend.
+            app in closed TestFlight beta. Every model call in it goes
+            through one gateway with spending limits, caching and a circuit
+            breaker.
           </p>
         </div>
 
