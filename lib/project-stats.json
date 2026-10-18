@@ -1,7 +1,7 @@
 {
   "rootcause": {
     "stars": 0,
-    "pushedAt": "2026-10-15T13:33:11Z"
+    "pushedAt": "2026-10-18T01:59:31Z"
   },
   "sous": {
     "stars": 0,
@@ -11,25 +11,9 @@
     "stars": 1,
     "pushedAt": "2026-10-07T01:54:19Z"
   },
-  "first-to-first-sale": {
-    "stars": 0,
-    "pushedAt": "2026-10-06T23:11:35Z"
-  },
-  "llm-gateway-kit": {
-    "stars": 0,
-    "pushedAt": "2026-09-28T05:11:44Z"
-  },
   "cited": {
     "stars": 0,
-    "pushedAt": "2026-10-09T20:38:42Z"
-  },
-  "metropulse-nyc": {
-    "stars": 0,
-    "pushedAt": "2026-09-29T17:37:41Z"
-  },
-  "signal-skills": {
-    "stars": 0,
-    "pushedAt": "2026-10-07T00:17:44Z"
+    "pushedAt": "2026-10-16T00:44:08Z"
   },
   "architecture-lint": {
     "stars": 0,
