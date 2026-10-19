@@ -68,17 +68,16 @@ async function main() {
 
 <text x="80" y="120" font-family="OGDisplay" font-weight="500" font-size="24" fill="${COLORS.ink}">Oren Segal</text>
 
-<text x="80" y="270" font-family="OGDisplay" font-weight="700" font-size="56" fill="${COLORS.ink}">
-  <tspan x="80" dy="0">I build the parts of AI systems</tspan>
-  <tspan x="80" dy="66">that keep them honest.</tspan>
+<text x="80" y="250" font-family="OGDisplay" font-weight="700" font-size="56" fill="${COLORS.ink}">
+  <tspan x="80" dy="0">I build AI agents, and the evals</tspan>
+  <tspan x="80" dy="66">that show whether they work.</tspan>
 </text>
 
-<text x="80" y="410" font-family="OGDisplay" font-weight="500" font-size="26" fill="${COLORS.inkDim}">Cost budgets, fact-checking, and CI for code an LLM wrote.</text>
+<text x="80" y="400" font-family="OGDisplay" font-weight="500" font-size="26" fill="${COLORS.inkDim}">rootcause: 525 runs, accuracy flat at 77-84%, cost per solved incident varied 25x</text>
 
 <line x1="80" y1="480" x2="1120" y2="480" stroke="${COLORS.line}" stroke-width="1" />
 
-<text x="80" y="536" font-family="OGDisplay" font-weight="500" font-size="22" fill="${COLORS.accent}">8 shipped projects</text>
-<text x="80" y="568" font-family="OGDisplay" font-weight="400" font-size="20" fill="${COLORS.inkFaint}">orensegal.github.io</text>
+<text x="80" y="540" font-family="OGDisplay" font-weight="500" font-size="22" fill="${COLORS.inkFaint}">Applied AI Engineer · orensegal.github.io</text>
 </svg>
 `
 
