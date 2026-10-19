@@ -21,7 +21,7 @@ export function ProjectRow({ project, pushedAt }: { project: Project; pushedAt: 
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h4 className="text-xl font-medium">
           <Link
-            href={`/projects/${project.id}`}
+            href={`/projects/${project.id}/`}
             className="group inline-flex items-center gap-1.5 text-ink"
           >
             {project.title}
@@ -39,7 +39,7 @@ export function ProjectRow({ project, pushedAt }: { project: Project; pushedAt: 
             filled={hasBuildLog}
             label={hasBuildLog ? 'full build log on file' : 'summary only, no build log published'}
           />
-          {project.id} · verified {formatVerifiedDate(pushedAt)}
+          {project.id} · updated {formatVerifiedDate(pushedAt)}
           <ChevronDown
             className={`h-3 w-3 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${expanded ? '-rotate-180' : ''}`}
           />
@@ -105,6 +105,26 @@ export function ProjectRow({ project, pushedAt }: { project: Project; pushedAt: 
               className="text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"
             >
               source
+            </a>
+          </>
+        )}
+        {project.ciWorkflow && (
+          <>
+            {' · '}
+            <a
+              href={`https://github.com/OrenSegal/${project.id}/actions/workflows/${project.ciWorkflow}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block align-middle"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://github.com/OrenSegal/${project.id}/actions/workflows/${project.ciWorkflow}/badge.svg?branch=main`}
+                alt={`CI status for ${project.id}`}
+                height={20}
+                className="h-5 w-auto"
+                loading="lazy"
+              />
             </a>
           </>
         )}

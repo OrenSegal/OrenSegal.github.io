@@ -17,7 +17,8 @@ export default function Hero() {
 
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-dim">
           I ran my incident agent, rootcause, 525 times across seven model and
-          effort settings. Accuracy stayed at 77-84% with overlapping
+          effort settings. Accuracy stayed at{' '}
+          <span className="whitespace-nowrap">77-84%</span> with overlapping
           intervals. Cost per solved incident varied 25x.
         </p>
 
