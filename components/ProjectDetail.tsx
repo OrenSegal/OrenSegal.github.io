@@ -2,6 +2,7 @@ import { Project } from '@/lib/projects'
 import { CATEGORIES } from '@/components/Projects'
 import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { RootcauseResults } from '@/components/RootcauseResults'
 
 interface ProjectDetailProps {
   project: Project
@@ -36,6 +37,19 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             View source on GitHub
             <ArrowUpRight className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" />
           </a>
+        )}
+
+        {project.id === 'rootcause' && (
+          <div className="mt-14 border-t border-line pt-10">
+            <h2 className="text-xl font-medium text-ink">Results</h2>
+            <RootcauseResults />
+            <Link
+              href="/writing/rootcause-benchmark/"
+              className="mt-6 inline-flex text-sm font-medium text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+            >
+              Read the write-up
+            </Link>
+          </div>
         )}
 
         {project.flightLog && (

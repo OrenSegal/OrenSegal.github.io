@@ -7,6 +7,7 @@ export interface Project {
   category: 'ai-agents' | 'ai-infra' | 'data-engineering' | 'dev-tools'
   image: string
   demoUrl?: string
+  ciWorkflow?: string // file name under .github/workflows, drives the live CI badge
   featured: boolean
   color: string
   icon: string
@@ -30,6 +31,7 @@ export const projects: Project[] = [
     category: 'ai-agents',
     image: '🔎',
     demoUrl: 'https://github.com/OrenSegal/rootcause',
+    ciWorkflow: 'ci.yml',
     featured: true,
     color: 'from-sky-500 to-indigo-500',
     icon: '🔎',
@@ -61,6 +63,7 @@ export const projects: Project[] = [
     category: 'ai-infra',
     image: '🧂',
     demoUrl: 'https://github.com/OrenSegal/sous',
+    ciWorkflow: 'ci.yml',
     featured: true,
     color: 'from-amber-500 to-orange-500',
     icon: '🧂',
@@ -91,6 +94,7 @@ export const projects: Project[] = [
     category: 'ai-agents',
     image: '🎯',
     demoUrl: 'https://github.com/OrenSegal/signal-scout',
+    ciWorkflow: 'ci.yml',
     featured: true,
     color: 'from-purple-500 to-pink-500',
     icon: '🎯',
@@ -121,6 +125,7 @@ export const projects: Project[] = [
     category: 'ai-infra',
     image: '🔍',
     demoUrl: 'https://github.com/OrenSegal/cited',
+    ciWorkflow: 'ci.yml',
     featured: true,
     color: 'from-orange-500 to-red-500',
     icon: '🔍',
@@ -150,6 +155,7 @@ export const projects: Project[] = [
     category: 'dev-tools',
     image: '🧱',
     demoUrl: 'https://github.com/OrenSegal/architecture-lint',
+    ciWorkflow: 'ci.yml',
     featured: false,
     color: 'from-yellow-500 to-orange-500',
     icon: '🧱',
@@ -179,6 +185,7 @@ export const projects: Project[] = [
     category: 'ai-infra',
     image: '🔒',
     demoUrl: 'https://github.com/OrenSegal/scoped',
+    ciWorkflow: 'ci.yml',
     featured: false,
     color: 'from-emerald-500 to-teal-500',
     icon: '🔒',
@@ -208,6 +215,7 @@ export const projects: Project[] = [
     category: 'dev-tools',
     image: '🧪',
     demoUrl: 'https://github.com/OrenSegal/litmus',
+    ciWorkflow: 'ci.yml',
     featured: true,
     color: 'from-pink-500 to-rose-500',
     icon: '🧪',
