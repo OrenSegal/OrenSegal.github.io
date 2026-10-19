@@ -1,10 +1,11 @@
-import { Mail, Github, Linkedin } from 'lucide-react'
+import { Mail, Github, Linkedin, FileText } from 'lucide-react'
 import { DepthTag } from '@/components/DepthTag'
 
 const channels = [
   { label: 'Email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
   { label: 'GitHub', value: 'github.com/OrenSegal', href: 'https://github.com/OrenSegal', icon: Github, external: true },
   { label: 'LinkedIn', value: 'linkedin.com/in/oren-segal', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin, external: true },
+  { label: 'Resume', value: 'Resume: /resume.pdf', href: '/resume.pdf', icon: FileText },
 ]
 
 export default function Contact() {

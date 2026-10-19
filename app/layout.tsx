@@ -34,6 +34,21 @@ export const metadata: Metadata = {
   },
 }
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Oren Segal',
+  jobTitle: 'Applied AI Engineer',
+  url: 'https://orensegal.github.io',
+  sameAs: ['https://github.com/OrenSegal', 'https://linkedin.com/in/oren-segal'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brooklyn',
+    addressRegion: 'NY',
+    addressCountry: 'US',
+  },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -42,6 +57,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans bg-panel min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Navigation />
         <main className="min-h-screen">
           {children}
