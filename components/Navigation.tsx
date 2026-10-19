@@ -10,6 +10,8 @@ export default function Navigation() {
   const navItems = [
     { name: 'Work', href: '/#work' },
     { name: 'About', href: '/#about' },
+    { name: 'Writing', href: '/writing/rootcause-benchmark/' },
+    { name: 'Resume', href: '/resume.pdf' },
     { name: 'Contact', href: '/#contact' },
   ]
 
@@ -22,15 +24,18 @@ export default function Navigation() {
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm text-ink-dim transition-colors hover:text-ink"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const Tag = item.href.endsWith('.pdf') ? 'a' : Link
+              return (
+                <Tag
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm text-ink-dim transition-colors hover:text-ink"
+                >
+                  {item.name}
+                </Tag>
+              )
+            })}
           </div>
 
           <button
@@ -46,16 +51,19 @@ export default function Navigation() {
       {isOpen && (
         <div className="border-t border-line md:hidden">
           <div className="space-y-1 px-4 py-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-2 text-sm text-ink-dim transition-colors hover:text-ink"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const Tag = item.href.endsWith('.pdf') ? 'a' : Link
+              return (
+                <Tag
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-2 text-sm text-ink-dim transition-colors hover:text-ink"
+                >
+                  {item.name}
+                </Tag>
+              )
+            })}
           </div>
         </div>
       )}
