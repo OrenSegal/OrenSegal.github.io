@@ -15,22 +15,37 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Oren Segal | AI Engineer',
-  description: 'AI engineer building Shelfie with Claude Code agents, plus open-source tools that check what agents and LLMs produce.',
-  keywords: ['AI', 'Machine Learning', 'Data Engineering', 'Portfolio', 'Claude Code', 'LLM'],
+  title: 'Oren Segal | Applied AI Engineer',
+  description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
+  keywords: ['Applied AI Engineer', 'AI Agents', 'LLM Evals', 'MCP', 'Claude Code', 'Python'],
   authors: [{ name: 'Oren Segal' }],
   metadataBase: new URL('https://orensegal.github.io'),
   openGraph: {
-    title: 'Oren Segal | AI Engineer',
-    description: 'Shelfie, and open-source tools that check what agents and LLMs produce',
+    title: 'Oren Segal | Applied AI Engineer',
+    description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, AI Engineer' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, Applied AI Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oren Segal | AI Engineer',
-    description: 'Shelfie, and open-source tools that check what agents and LLMs produce',
+    title: 'Oren Segal | Applied AI Engineer',
+    description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
     images: ['/og-image.png'],
+  },
+}
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Oren Segal',
+  jobTitle: 'Applied AI Engineer',
+  url: 'https://orensegal.github.io',
+  sameAs: ['https://github.com/OrenSegal', 'https://linkedin.com/in/oren-segal'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brooklyn',
+    addressRegion: 'NY',
+    addressCountry: 'US',
   },
 }
 
@@ -42,6 +57,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans bg-panel min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Navigation />
         <main className="min-h-screen">
           {children}
