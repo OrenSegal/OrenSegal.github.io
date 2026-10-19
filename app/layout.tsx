@@ -15,21 +15,21 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Oren Segal | AI Engineer',
-  description: 'AI engineer building Shelfie with Claude Code agents, plus open-source tools that check what agents and LLMs produce.',
-  keywords: ['AI', 'Machine Learning', 'Data Engineering', 'Portfolio', 'Claude Code', 'LLM'],
+  title: 'Oren Segal | Applied AI Engineer',
+  description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
+  keywords: ['Applied AI Engineer', 'AI Agents', 'LLM Evals', 'MCP', 'Claude Code', 'Python'],
   authors: [{ name: 'Oren Segal' }],
   metadataBase: new URL('https://orensegal.github.io'),
   openGraph: {
-    title: 'Oren Segal | AI Engineer',
-    description: 'Shelfie, and open-source tools that check what agents and LLMs produce',
+    title: 'Oren Segal | Applied AI Engineer',
+    description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, AI Engineer' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, Applied AI Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oren Segal | AI Engineer',
-    description: 'Shelfie, and open-source tools that check what agents and LLMs produce',
+    title: 'Oren Segal | Applied AI Engineer',
+    description: 'Applied AI engineer. I build agents and the evals and CI checks that show whether they work: rootcause, sous, litmus, and Shelfie, an iOS app in closed beta.',
     images: ['/og-image.png'],
   },
 }
