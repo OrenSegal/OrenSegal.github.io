@@ -1,39 +1,40 @@
 # orensegal.github.io
 
-Oren Segal's portfolio — a Next.js site (statically exported to GitHub Pages)
-showcasing shipped AI agent, LLM infrastructure, and data engineering
-projects.
+Oren Segal's portfolio: a Next.js site, statically exported to GitHub Pages,
+that links each AI agent and eval project to its public repo and writes up the
+rootcause benchmark.
 
 Live at [orensegal.github.io](https://orensegal.github.io).
+
+```
+npm ci
+npm run dev
+npm run build   # static export to out/
+```
 
 ## Stack
 
 Next.js 14 (App Router, static export), React, TypeScript, Tailwind CSS,
-Framer Motion, lucide-react icons.
+lucide-react icons.
 
 ## Structure
 
 ```
-app/                    routes (home, 404, /projects/[id] detail pages)
-components/             page sections (Hero, About, FeaturedProjects, AllProjects, Contact, Footer, Navigation)
-lib/projects.ts         project data — single source of truth for the site's project list
+app/                    routes (home, 404, /projects/[id], /writing/rootcause-benchmark)
+components/             page sections (Hero, About, Projects, ProjectRow, ProjectDetail, RootcauseResults, Contact, Footer, Navigation)
+lib/projects.ts         project data, the single source of truth for the project list
+lib/project-stats.json  star counts and last-push dates, refreshed by scripts/fetch-github-stats.mjs at prebuild
 ```
 
-Project cards and detail pages are both driven by `lib/projects.ts`; add or
-edit a project there rather than in a component.
+Project rows and detail pages are both driven by `lib/projects.ts`; add or
+edit a project there rather than in a component. A new project also needs its
+repo slug in `PROJECT_REPOS` in `scripts/fetch-github-stats.mjs`.
 
-## Development
+## Deploy
 
-```
-npm install
-npm run dev
-```
+`.github/workflows/deploy.yml` builds and deploys `out/` to GitHub Pages on
+every push to `main`.
 
-## Build
+## License
 
-```
-npm run build
-```
-
-Static export goes to `out/`, deployed via `.github/workflows/deploy.yml`
-(GitHub Actions → GitHub Pages) on every push to `main`.
+Code is MIT (see [LICENSE](LICENSE)).
