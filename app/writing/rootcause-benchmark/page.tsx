@@ -5,7 +5,7 @@ import { RootcauseResults } from '@/components/RootcauseResults'
 
 const title = 'The benchmark that didn\'t pick a winner'
 const description =
-  'I ran my incident agent 525 times across seven settings. Accuracy stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
+  'I ran 525 graded runs of my incident benchmark, rootcause, across seven settings. Accuracy stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
 
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
@@ -100,7 +100,7 @@ export default function RootcauseBenchmarkPage() {
             </a>{' '}
             to find the root cause of production incidents and failed CI runs.
             Before deciding which model it should run on, I wanted a number I
-            could defend, so I ran it 525 times. The number I got wasn&apos;t
+            could defend, so I ran its benchmark 525 times. The number I got wasn&apos;t
             the one I went looking for.
           </p>
         </div>
