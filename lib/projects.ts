@@ -100,20 +100,20 @@ export const projects: Project[] = [
     icon: '🎯',
     keyFeatures: [
       'Turns a startup URL into a ranked shortlist of prospects, segments, and companies',
-      'Every claim is backed by a public, checkable source, so nothing in the report is fabricated',
-      'Shared, deterministic report renderer reused across the whole skill family',
+      'Every prospect cites a public source; verify_sources.py re-fetches it, and a claim that is not on the page stops the report before it is written',
+      'Sorts every candidate into one of three types (person, segment, company), each with its own scoring and next action',
       'Ships as a standalone Claude Code / OpenCode plugin',
     ],
     techStack: ['Python', 'Claude Code Skills', 'OpenCode'],
-    impact: 'Cuts first-customer research from days of manual digging to one evidence-backed report.',
+    impact: 'A prospect whose cited evidence is not on the page is dropped, opener included, before you see the report.',
     flightLog: {
       problem: 'LLM-generated market research reads well but is routinely wrong: a model will confidently name a "prospect" or cite a "signal" that isn\'t actually there when you go look. For go-to-market research specifically, a fabricated lead costs real outreach time before anyone notices.',
       decisions: [
-        'Built verify_sources.py as a hard gate: it re-fetches every cited source and confirms the claimed evidence is actually on the page before a claim is allowed into the report. Nothing ships unchecked.',
-        'Extracted the report rendering into a shared, deterministic component reused across the whole skill family, so formatting bugs and prompt drift get fixed once instead of per-skill.',
+        'Built verify_sources.py as a hard gate: it re-fetches every cited source and confirms the claimed evidence is actually on the page before a claim is allowed into the report. A bot-walled source with no archive copy is marked snippet-only, not verified.',
+        'Made CI run the real validation, scoring and verification code on fixture reports with saved pages, so a code change can turn the eval red; three planted bugs each did (signal-scout#3).',
         'Shipped as a standalone Claude Code / OpenCode plugin rather than a hosted service, so it runs against a user\'s own Claude Code session with no separate backend to operate.',
       ],
-      outcome: 'The verification step became the template for catching AI fabrication elsewhere: its containment-checking approach was later generalized into its own standalone tool, verify-before-ship.',
+      outcome: 'The verification step became the template for catching AI fabrication elsewhere: its containment-checking approach was later generalized into its own standalone tool, cited.',
     },
   },
   {

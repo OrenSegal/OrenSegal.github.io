@@ -5,7 +5,7 @@ import { RootcauseResults } from '@/components/RootcauseResults'
 
 const title = 'The benchmark that didn\'t pick a winner'
 const description =
-  'I ran 525 graded runs of my incident benchmark, rootcause, across seven settings. Accuracy stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
+  'I ran 525 graded runs of my incident benchmark, rootcause, with Claude Code\'s own agent loop as the investigator, across seven settings. Accuracy stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
 
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
@@ -57,7 +57,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'The brief, mutation-tested',
     paragraphs: [
-      'I also ran litmus, my mutation tester for eval suites, against the investigator\'s brief: delete an instruction, invert a rule, make a fact wrong, truncate it. None of the 11 mutants that ran was killed. Their pass rates fell between 72% and 84%, against 79% for the original. The twelfth, an emptied brief, could not run because the API rejects an empty system prompt.',
+      'I also mutation-tested the investigator\'s brief with the operators from litmus, my mutation tester for eval suites: delete an instruction, invert a rule, make a fact wrong, truncate it. 0 of 12 mutants were killed: 11 survived and 1 was inconclusive. The 11 survivors had pass rates between 72% and 84%, against 79% for the original. The inconclusive one, an emptied brief, could not run because the API rejects an empty system prompt.',
       'That says more about the suite than about the brief. No scenario depends on any single instruction, so the suite could not catch a regression in one.',
     ],
   },
@@ -100,8 +100,9 @@ export default function RootcauseBenchmarkPage() {
             </a>{' '}
             to find the root cause of production incidents and failed CI runs.
             Before deciding which model it should run on, I wanted a number I
-            could defend, so I ran its benchmark 525 times. The number I got wasn&apos;t
-            the one I went looking for.
+            could defend, so I ran its benchmark 525 times, with Claude Code&apos;s own agent loop
+            as the investigator over rootcause&apos;s tools and grader. The number I
+            got wasn&apos;t the one I went looking for.
           </p>
         </div>
 

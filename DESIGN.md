@@ -65,7 +65,7 @@ This build supersedes the prior "no governing metaphor" plain system (retired th
 
 Inside Work, each project is a utility line crossing the spine via a horizontal connector tick. Clicking a project's toggle expands it in place with a tactile grid-height reveal — not an accordion library — showing the project's real Problem/Decisions/Outcome build log where one exists, or Key Features/Impact where it doesn't. Accent green marks exactly three things across the whole system: interaction state (hover/focus/selection, inherited from the prior system), the active/expanded utility line (tick, chevron, toggle text), and the filled status dot as a binary data affirmative (has-a-build-log). It never fills a background or colors a heading.
 
-No fabricated metrics anywhere: every number and date on the page (verified repo count, last-verified date, per-project pushed date, open-source percent) is sourced at build time from the live GitHub API via `scripts/fetch-github-stats.mjs`, all-or-nothing — there is no invented fallback value if a fetch fails.
+No fabricated metrics anywhere: every GitHub-derived number and date on the page (per-project star count and last-push date) is sourced at build time from the live GitHub API via `scripts/fetch-github-stats.mjs`, all-or-nothing — there is no invented fallback value if a fetch fails.
 
 **Key Characteristics:**
 - Near-black ground (`#0a0b0c`) read as literal depth, not just a background — four independent sections (Hero, Projects, About, Contact) render as a `border-l border-line pl-5` cutaway spine with a rotated `-90deg` depth label
