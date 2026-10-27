@@ -69,7 +69,7 @@ No fabricated metrics anywhere: every GitHub-derived number and date on the page
 
 **Key Characteristics:**
 - Near-black ground (`#0a0b0c`) read as literal depth, not just a background — four independent sections (Hero, Projects, About, Contact) render as a `border-l border-line pl-5` cutaway spine with a rotated `-90deg` depth label
-- Two type families with strict division of labor: Space Grotesk for every heading and every sentence of prose; JetBrains Mono confined to three machine-sourced-fact sites at 10–12px (depth tags, the Hero verified line, each project's id/date toggle) — never prose, never headings
+- Two type families with strict division of labor: Space Grotesk for every heading and every sentence of prose; JetBrains Mono confined to two machine-sourced-fact sites at 10–12px (depth tags, each project's id/date toggle) — never prose, never headings
 - Accent green (`#8fd6a8`) has exactly three jobs: interaction state, the expanded project row's active marking, and the filled `StatusDot` as a static binary data signal — it is not restricted to hover-only the way the prior system had it
 - Each project is a "utility line": a horizontal connector tick (`w-5`, matching the spine's own `pl-5` gutter exactly, so the line visibly touches the spine) that goes accent when its row is expanded
 - Expansion is a tactile `grid-template-rows` reveal (`0fr` → `1fr`, 500ms), not an accordion library — real Problem/Decisions/Outcome or Key Features/Impact copy, never placeholder text
@@ -78,7 +78,7 @@ No fabricated metrics anywhere: every GitHub-derived number and date on the page
 ## Colors
 
 ### Primary
-- **Accent Green** (`#8fd6a8`): three jobs, no more. (1) Interaction state — link hover/focus-visible, the `::selection` highlight, icon hover on Contact channel rows and the project title arrow. (2) The expanded project row's active marking — the connector tick (`bg-accent` vs. resting `bg-line`), the chevron, and the toggle button's own text color all switch to accent together while `expanded` is true. (3) `StatusDot`'s filled state (`fill-accent`) — a static, non-interactive data affirmative meaning "this project has a full build log on file," rendered at rest in both Hero (system status) and every `ProjectRow` toggle.
+- **Accent Green** (`#8fd6a8`): three jobs, no more. (1) Interaction state — link hover/focus-visible, the `::selection` highlight, icon hover on Contact channel rows and the project title arrow. (2) The expanded project row's active marking — the connector tick (`bg-accent` vs. resting `bg-line`), the chevron, and the toggle button's own text color all switch to accent together while `expanded` is true. (3) `StatusDot`'s filled state (`fill-accent`) — a static, non-interactive data affirmative meaning "this project has a full build log on file," rendered at rest in both Hero (availability line) and every `ProjectRow` toggle.
 - **Accent Green, Dim** (`#4b7a5d`): the resting-state companion — underline color on inline links before hover (`decoration-accent-dim`), scrollbar-thumb hover.
 
 ### Neutral
@@ -95,13 +95,12 @@ No fabricated metrics anywhere: every GitHub-derived number and date on the page
 
 **Display/Body Font:** Space Grotesk, loaded via `next/font` as `--font-sans` (`app/layout.tsx`). Carries every heading and every sentence of prose on the page — Hero's h1, section headings, category headings, project titles, all body copy.
 
-**Mono Font:** JetBrains Mono, loaded via `next/font` as `--font-mono` (`app/layout.tsx`), mapped in `tailwind.config.ts`. This is a scoped reintroduction, not the prior system's general type switch — mono is confined to three machine-sourced-fact sites, always small (10–12px) and never prose or a heading:
+**Mono Font:** JetBrains Mono, loaded via `next/font` as `--font-mono` (`app/layout.tsx`), mapped in `tailwind.config.ts`. This is a scoped reintroduction, not the prior system's general type switch — mono is confined to two machine-sourced-fact sites, always small (10–12px) and never prose or a heading:
 1. `DepthTag` — the rotated depth label (`font-mono text-[10px] uppercase tracking-widest text-ink-faint`; `tracking-widest` = 0.1em, scoped to this one site).
-2. Hero's last-verified line (`font-mono text-xs tabular text-ink-faint`, normal tracking).
-3. Each `ProjectRow`'s id + verified-date toggle (`font-mono text-xs tabular`, normal tracking) — note this one is NOT always ink-faint: it goes `text-accent` when its row is expanded, per the Accent-as-Signal Rule. Mono marks *what kind of content it is* (a machine-sourced fact), color marks *state*; the two are independent.
+2. Each `ProjectRow`'s id + updated-date toggle (`font-mono text-xs tabular`, normal tracking) — note this one is NOT always ink-faint: it goes `text-accent` when its row is expanded, per the Accent-as-Signal Rule. Mono marks *what kind of content it is* (a machine-sourced fact), color marks *state*; the two are independent.
 
 ### Named Rules
-**The Scoped Mono Rule.** JetBrains Mono renders exactly three things: the depth-tag label, the Hero verified-count timestamp line, and each project's id/date toggle. All three are small, tabular-leaning, machine-sourced facts. Mono never appears in a heading, in prose, or in a label larger than `text-xs`. Adding mono to a new element requires that element to be a similarly small, machine-sourced fact — not a stylistic accent.
+**The Scoped Mono Rule.** JetBrains Mono renders exactly two things: the depth-tag label and each project's id/date toggle. Both are small, tabular-leaning, machine-sourced facts. Mono never appears in a heading, in prose, or in a label larger than `text-xs`. Adding mono to a new element requires that element to be a similarly small, machine-sourced fact — not a stylistic accent.
 
 ### Hierarchy
 - **Display** (Space Grotesk 500, `text-3xl`→`text-4xl`, `leading-[1.15]`): Hero's `<h1>`.
@@ -111,7 +110,7 @@ No fabricated metrics anywhere: every GitHub-derived number and date on the page
 - **Body** (400, `text-base`–`text-lg`, `leading-relaxed`): About's paragraphs, project descriptions, Contact's intro, flight-log problem/outcome copy.
 - **Label** (500, `text-sm`, `uppercase`, `tracking-wide`): project-detail sub-headers only (`app/projects/[id]/page.tsx`, unchanged this session — "Problem", "Decisions", "Outcome", "Key features", "Impact", "Tech stack").
 - **Meta** (400, `text-sm`, `text-ink-faint`): tech-stack lines, footer copyright, stack list in About.
-- **Meta-Mono** (400, `text-[10px]`–`text-xs`, mono, `tabular` where numeric): depth tags, Hero verified line, project id/date toggle. See Scoped Mono Rule above.
+- **Meta-Mono** (400, `text-[10px]`–`text-xs`, mono, `tabular` where numeric): depth tags, project id/date toggle. See Scoped Mono Rule above.
 
 ## Layout
 
@@ -121,7 +120,7 @@ Sections stack full-bleed, separated by `border-t border-line`, `py-24` rhythm; 
 
 Work's project rows and Contact's channel rows share the same divider idiom (`border-b border-line`, `first:pt-0 last:border-b-0`) but at different intervals: project rows are `py-8` (32px, the section's own rhythm), channel rows are `py-4` (16px, a tighter interval for the shorter contact list). Each project row additionally carries a `relative` position and an absolutely-positioned connector tick (`-left-5 top-[15px] h-px w-5`) that visually bridges the row to the spine — the tick's `w-5` exactly matches the spine's `pl-5` gutter, so a utility line reads as physically touching the spine rather than floating beside it.
 
-Hero's verification band (`mt-8 max-w-xl border-y border-line py-4`, top-and-bottom hairline around the status line and last-verified line) is a single-use arrangement scoped to the Hero — it is not a reusable "banded" component; describe new similar bands by their `border-y` idiom directly rather than inventing a named component for one instance.
+Hero's availability band (`mt-8 max-w-xl border-y border-line py-4`, top-and-bottom hairline around the availability status line) is a single-use arrangement scoped to the Hero — it is not a reusable "banded" component; describe new similar bands by their `border-y` idiom directly rather than inventing a named component for one instance.
 
 ## Elevation & Depth
 
@@ -140,7 +139,7 @@ No bordered cards, chips, or buttons. The only curved shapes are `rounded-full` 
 A rotated (`-rotate-90`, `origin-top-left`), absolutely positioned (`-left-[9px] top-0`), uppercase mono `text-[10px]` label in `text-ink-faint`, `aria-hidden="true"`. Reads: "surface" (Hero), "shallow utility" (Projects), "deepest" (About), "resurfacing" (Contact). This is **not** a kicker/eyebrow: it sits outside the text column entirely (rotated into the spine's own margin, not stacked above a heading), carries no heading-pairing semantics, and is hidden from assistive tech. It is the cutaway's native margin annotation — a survey marking on the cross-section, not a label-above-title device. Do not generalize it into a horizontal eyebrow anywhere else in the system.
 
 ### StatusDot (`components/StatusDot.tsx`)
-An 8×8 SVG circle, two states: filled accent (`fill-accent`) or outlined ink-faint (`stroke-ink-faint`, `strokeWidth 1.25`, no fill). This is a static data indicator, not an interaction or hover state — in Hero it always renders filled (verified-count line), and in each `ProjectRow` toggle it reflects whether `project.flightLog` exists (filled = full build log on file, outlined = summary only), with an SVG `<title>` carrying the distinction for assistive tech. Do not treat this component's accent fill as license to make other static UI accent — its rule (see Accent-as-Signal) is scoped to exactly this binary-data case.
+An 8×8 SVG circle, two states: filled accent (`fill-accent`) or outlined ink-faint (`stroke-ink-faint`, `strokeWidth 1.25`, no fill). This is a static data indicator, not an interaction or hover state — in Hero it always renders filled (availability line), and in each `ProjectRow` toggle it reflects whether `project.flightLog` exists (filled = full build log on file, outlined = summary only), with an SVG `<title>` carrying the distinction for assistive tech. Do not treat this component's accent fill as license to make other static UI accent — its rule (see Accent-as-Signal) is scoped to exactly this binary-data case.
 
 ### Utility Line (project row, `components/ProjectRow.tsx`)
 The system's signature interactive pattern, replacing what would otherwise be a card. Structure: title link with trailing `ArrowUpRight` (accent on hover) → mono id/date toggle button with `StatusDot` and `ChevronDown` (whole toggle turns accent while expanded) → description → a `grid-template-rows` reveal (`0fr`→`1fr`, 500ms, `cubic-bezier(0.16,1,0.3,1)`) containing either flight-log Problem/Decisions/Outcome or Key Features/Impact, in a `border-l border-line pl-4` inset → tech-stack meta line with optional "source" link. The horizontal connector tick (`bg-line` resting, `bg-accent` expanded) is the visual joint between this line and the section spine.
@@ -156,7 +155,7 @@ Fixed top bar, `bg-panel/95`, `border-b border-line`, `h-16`, `max-w-3xl` inner 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** confine mono (JetBrains Mono) to the three scoped sites — depth tags, Hero's verified line, project id/date toggles — always small and always a machine-sourced fact. Do not use mono for a heading or a sentence of prose.
+- **Do** confine mono (JetBrains Mono) to the two scoped sites — depth tags and project id/date toggles — always small and always a machine-sourced fact. Do not use mono for a heading or a sentence of prose.
 - **Do** use `border-l border-line pl-5` plus a `DepthTag` for any new full-width section that should read as part of the cutaway — this is the system's section-level pattern now, not just Hero/Work/About/Contact's private choice.
 - **Do** spend accent green only on the three named jobs (interaction, active utility line, filled status dot). A new static element does not get accent green unless it is a genuine binary data affirmative like `StatusDot`.
 - **Do** keep the connector-tick width (`w-5`) matched to the spine gutter (`pl-5`) if adding new lines crossing a spine — the visual join depends on the two values being equal.
