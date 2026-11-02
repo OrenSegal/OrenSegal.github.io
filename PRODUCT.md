@@ -33,7 +33,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 
 - Name: Oren Segal.
 - Target title/framing: "Applied AI Engineer", not "AI & Data Science." Open to Applied AI Engineer roles, New York or remote, US permanent resident (no sponsorship needed).
-- Lead proof: rootcause benchmark (525 runs, seven model and effort settings, accuracy 77-84% with overlapping intervals, cost per solved incident varied 25x), written up at `/writing/rootcause-benchmark/`.
+- Lead proof: rootcause benchmark (525 runs, seven model and effort settings, pass rates 77-84% with overlapping intervals, cost per solved incident varied 25x), written up at `/writing/rootcause-benchmark/`.
 - Visual identity is explicitly **open for full replacement** — the current dark/purple-gradient/glassmorphism look was AI-template-generated and should be treated as anti-reference only, not preserved.
 
 ## Evidence on Hand
