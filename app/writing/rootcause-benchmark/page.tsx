@@ -5,7 +5,7 @@ import { RootcauseResults } from '@/components/RootcauseResults'
 
 const title = 'The benchmark that didn\'t pick a winner'
 const description =
-  'I ran 525 graded runs of my incident benchmark, rootcause, with Claude Code\'s own agent loop as the investigator, across seven settings. Accuracy stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
+  'I ran 525 graded runs of my incident benchmark, rootcause, with Claude Code\'s own agent loop as the investigator, across seven settings. Pass rates stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
 
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
@@ -38,6 +38,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
     heading: '',
     paragraphs: [
       'Every setting landed between 77% and 84%, and every interval overlaps every other one. At 75 runs per setting, a gap under about ten to twelve points is noise. Cost did separate them, by about 25x: from $0.0033 per solved incident for Haiku to $0.081 for Opus at high effort. Opus at medium effort was at least as accurate as Opus at high, for less. The extra reasoning bought nothing I could measure.',
+      'That flat result depends on my grader. Two scenarios fail in every run and make up 42 of the 107 failures, and 53 failures are wrong on the service alone. Drop the service check and Opus at high effort scores 93%, Haiku 85% and Sonnet 83%, with the Opus-Sonnet gap at 3 to 20 points when I resample scenarios. Overlapping intervals did not show the models are equal.',
       'The hybrid-search row has the highest point, and it is tempting to credit retrieval for it. I can\'t. With the search tool available and named in the brief, Opus called it in 3 of 75 runs in each retrieval setting.',
     ],
   },
@@ -45,7 +46,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
     heading: 'Splitting the work didn\'t pay either',
     paragraphs: [
       'A separate 300-run comparison held the model at Opus 5.5 high and changed the harness instead: my hand-written loop against the same investigation rebuilt as a LangGraph graph, each run as a single agent and as an orchestrator with workers. Everything else was shared, down to the grader.',
-      'The two frameworks were indistinguishable. The orchestrator with workers cost about three times as much per solved incident ($0.3745 against $0.1149 in my loop, $0.3430 against $0.1114 in LangGraph) and took about twice as long, for no measurable gain in either harness.',
+      'I found no detectable difference between the two frameworks, though the single-agent accuracy gap could be anywhere from -8 to +3 points. The orchestrator with workers cost about three times as much per solved incident ($0.3745 against $0.1149 in my loop, $0.3430 against $0.1114 in LangGraph) and took about twice as long, for no measurable gain in either harness.',
     ],
   },
   {
@@ -57,7 +58,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'The brief, mutation-tested',
     paragraphs: [
-      'I also mutation-tested the investigator\'s brief with the operators from litmus, my mutation tester for eval suites: delete an instruction, invert a rule, make a fact wrong, truncate it. 0 of 12 mutants were killed: 11 survived and 1 was inconclusive. The 11 survivors had pass rates between 72% and 84%, against 79% for the original. The inconclusive one, an emptied brief, could not run because the API rejects an empty system prompt.',
+      'I also mutation-tested the investigator\'s brief with the operators from litmus, my mutation tester for eval suites: delete an instruction, invert a rule, make a fact wrong, truncate it. 0 of 12 mutants were killed: 11 survived and 1 was inconclusive. The 11 survivors had pass rates between 72% and 84%, against 79% for the original. The inconclusive one, an emptied brief, could not run because the API rejects an empty system prompt. Two survivors touch a rule the harness already enforces through its output schema, so they could not fail.',
       'That says more about the suite than about the brief. No scenario depends on any single instruction, so the suite could not catch a regression in one.',
     ],
   },
@@ -71,7 +72,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'What I take from it',
     paragraphs: [
-      'When the accuracy intervals overlap, accuracy is not the axis to choose on. Pick the cheapest setting that sits inside the interval. On this suite that is Haiku 5.5, at about a twenty-fifth of the cost of Opus at high effort.',
+      'If the accuracy your task needs is what this grader scores, overlapping intervals leave cost as the axis to choose on, and the cheapest setting here is Haiku 5.5, at about a twenty-fifth of the cost of Opus at high effort. If you need the category right more than the exact service, Opus earns more of its price. Run the comparison with your own grader before deciding.',
       'The more useful next step is a suite that can tell settings apart: scenarios where a single rule of the brief decides the outcome, a grader that accepts more than one defensible service (decided before looking at model answers), and a retrieval step the agent has to take, so search can actually be measured.',
     ],
   },
