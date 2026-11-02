@@ -18,7 +18,7 @@ export default function Hero() {
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-dim">
           I ran 525 graded runs of my incident benchmark, rootcause, with
           Claude Code&apos;s own agent loop as the investigator, across seven
-          configurations of model, effort and retrieval. Accuracy stayed at{' '}
+          configurations of model, effort and retrieval. Pass rates stayed at{' '}
           <span className="whitespace-nowrap">77-84%</span> with overlapping
           intervals. Cost per solved incident varied 25x.
         </p>
