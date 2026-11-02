@@ -278,7 +278,7 @@ export const projects: Project[] = [
       'The budget check runs before the request goes out, with separate caps for identified and anonymous callers',
     ],
     techStack: ['Swift', 'Swift Package Manager', 'GitHub Actions'],
-    impact: 'A runaway loop runs out of calls at the cap, though concurrent calls can overshoot it, as the README explains. The kit has no published cost benchmark, and the README says savings depend on your traffic.',
+    impact: 'A runaway loop or a burst of concurrent calls runs out of calls at the cap, because each call reserves its estimate first. The kit has no published cost benchmark, and the README says savings depend on your traffic.',
   },
   {
     id: 'signal-skills',
