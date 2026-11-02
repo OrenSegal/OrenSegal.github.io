@@ -26,7 +26,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 
 - Static site only — no server, no database, no forms that submit anywhere real (contact is `mailto:`/external profile links only).
 - Must build cleanly under Next.js static export (a prior real bug: any `onClick`/event handler in a Server Component without `'use client'` silently breaks the entire static export).
-- Projects are categorized as `ai-agents`, `ai-infra`, `data-engineering`, `dev-tools`.
+- Projects are categorized as `ai-agents`, `ai-infra`, `evals`, `dev-tools`.
 - `npm run lint` and `npm run build` both pass with ESLint enforced at build time (no `ignoreDuringBuilds`).
 
 ## Brand Commitments

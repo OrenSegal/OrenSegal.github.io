@@ -23,6 +23,11 @@ const PROJECT_REPOS = [
   'architecture-lint',
   'scoped',
   'litmus',
+  'rag-generation',
+  'llm-gateway-kit',
+  'signal-skills',
+  'blast-shield',
+  'deuce',
 ]
 
 async function fetchRepoData() {
