@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { DepthTag } from '@/components/DepthTag'
 
 const stack = [
@@ -99,8 +100,12 @@ export default function About() {
           <p>
             Before this I spent five years as a senior data analyst at Reshet
             13, an Israeli TV network, building the Python and SQL pipelines and
-            forecasting models the business ran on. I moved to New York in 2023
-            and retrained full time in AI/ML before starting Shelfie.
+            forecasting models the business ran on.{' '}
+            <Link href="/writing/reshet-pricing-model/" className="text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+              How I got a pricing model adopted there
+            </Link>
+            . I moved to New York in 2023 and retrained full time in AI/ML
+            before starting Shelfie.
           </p>
         </div>
 
