@@ -1,25 +1,24 @@
 import { Mail, Github, Linkedin, FileText } from 'lucide-react'
-import { DepthTag } from '@/components/DepthTag'
 
 const channels = [
-  { label: 'Email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
-  { label: 'GitHub', value: 'github.com/OrenSegal', href: 'https://github.com/OrenSegal', icon: Github, external: true },
-  { label: 'LinkedIn', value: 'linkedin.com/in/oren-segal', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin, external: true },
-  { label: 'Resume', value: 'Resume: /resume.pdf', href: '/resume.pdf', icon: FileText },
+  { label: 'email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
+  { label: 'github', value: 'github.com/OrenSegal', href: 'https://github.com/OrenSegal', icon: Github, external: true },
+  { label: 'linkedin', value: 'linkedin.com/in/oren-segal', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin, external: true },
+  { label: 'resume', value: 'one page, pdf', href: '/resume.pdf', icon: FileText },
 ]
 
 export default function Contact() {
   return (
-    <section id="contact" className="border-t border-line px-4 py-24 sm:px-6">
-      <div className="relative mx-auto max-w-3xl border-l border-line pl-5">
-        <DepthTag label="resurfacing" />
-        <h2 className="mb-3 text-2xl font-medium text-ink">Get in touch</h2>
-        <p className="mb-10 max-w-xl text-lg leading-relaxed text-ink-dim">
-          Have a problem worth solving, or just want to talk shop about agent
-          infrastructure? Email is the fastest way to reach me.
+    <section id="contact" className="px-4 pb-24 pt-24 sm:px-6 sm:pt-32">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-[16vw] font-light lowercase leading-[0.92] tracking-[-0.04em] text-ink sm:text-8xl">
+          contact
+        </h2>
+        <p className="mt-4 max-w-xl text-lg text-ink-dim">
+          Email is the fastest way to reach me. Happy to talk shop about evals, gateways, or anything to do with kitchens.
         </p>
 
-        <div>
+        <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4">
           {channels.map((channel) => {
             const Icon = channel.icon
             return (
@@ -28,12 +27,13 @@ export default function Contact() {
                 href={channel.href}
                 target={channel.external ? '_blank' : undefined}
                 rel={channel.external ? 'noopener noreferrer' : undefined}
-                className="group flex items-center gap-3 border-b border-line py-4 first:pt-0 last:border-b-0"
+                className="group flex aspect-square flex-col justify-between bg-panel-face p-4 text-ink transition-colors hover:bg-accent hover:text-panel sm:p-5 md:aspect-[3/2]"
               >
-                <Icon className="h-4 w-4 flex-shrink-0 text-ink-faint transition-colors group-hover:text-accent" />
-                <span className="text-ink transition-colors group-hover:text-accent">
-                  {channel.value}
-                </span>
+                <Icon className="h-5 w-5" aria-hidden="true" />
+                <div>
+                  <p className="text-2xl font-medium leading-tight">{channel.label}</p>
+                  <p className="mt-1 break-all text-sm text-ink-dim group-hover:text-panel/80">{channel.value}</p>
+                </div>
               </a>
             )
           })}

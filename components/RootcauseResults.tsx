@@ -1,15 +1,4 @@
-// Every number is copied from the rootcause repo's committed sweep summary,
-// results/sweeps/models-and-retrieval-2026-10-15/summary.json (pass_rate,
-// ci_low, ci_high, cost_per_pass), rounded the way its README table prints them.
-const ROWS = [
-  { label: 'Opus 5.5, high', pass: 79, low: 68, high: 86, cost: 0.081 },
-  { label: 'Opus 5.5, medium', pass: 81, low: 71, high: 89, cost: 0.0686 },
-  { label: 'Opus 5.5, low', pass: 79, low: 68, high: 86, cost: 0.0468 },
-  { label: 'Sonnet 5.5, high', pass: 80, low: 70, high: 87, cost: 0.0325 },
-  { label: 'Haiku 5.5, high', pass: 77, low: 67, high: 85, cost: 0.0033 },
-  { label: 'Opus 5.5, high + BM25 search', pass: 77, low: 67, high: 85, cost: 0.0822 },
-  { label: 'Opus 5.5, high + hybrid search', pass: 84, low: 74, high: 91, cost: 0.075 },
-]
+import { ROWS, RESULTS_URL, CHOSEN_INDEX } from '@/lib/rootcause-results'
 
 const AXIS_MIN = 60
 const AXIS_MAX = 95
@@ -23,6 +12,7 @@ export function RootcauseResults() {
         Pass rate with 95% Wilson interval, and cost per solved incident, for
         each setting. 75 runs per setting (25 incidents, three runs each), 525
         in total. The shaded band marks 77-84%, the range every point falls in.
+        Orange marks the cheapest setting whose interval overlaps every other.
       </figcaption>
 
       <table className="w-full border-collapse text-sm">
@@ -36,8 +26,8 @@ export function RootcauseResults() {
           </tr>
         </thead>
         <tbody>
-          {ROWS.map((r) => (
-            <tr key={r.label} className="border-t border-line align-middle">
+          {ROWS.map((r, i) => (
+            <tr key={r.label} className="align-middle">
               <th scope="row" className="py-2.5 pr-3 text-left font-normal text-ink-dim">
                 {r.label}
               </th>
@@ -48,7 +38,7 @@ export function RootcauseResults() {
                   aria-hidden="true"
                 >
                   <span
-                    className="absolute inset-y-0 bg-line"
+                    className="absolute inset-y-0 bg-panel-face"
                     style={{ left: `${pct(77)}%`, width: `${pct(84) - pct(77)}%` }}
                   />
                   <span
@@ -56,7 +46,7 @@ export function RootcauseResults() {
                     style={{ left: `${pct(r.low)}%`, width: `${pct(r.high) - pct(r.low)}%` }}
                   />
                   <span
-                    className="absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink"
+                    className={`absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full ${i === CHOSEN_INDEX ? 'bg-accent' : 'bg-ink'}`}
                     style={{ left: `${pct(r.pass)}%` }}
                   />
                 </div>
@@ -83,7 +73,7 @@ export function RootcauseResults() {
       <p className="mt-4 text-xs leading-relaxed text-ink-faint">
         Source:{' '}
         <a
-          href="https://github.com/OrenSegal/rootcause/tree/main/results/sweeps/models-and-retrieval-2026-10-15"
+          href={RESULTS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="underline decoration-accent-dim underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"

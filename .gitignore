@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable working files (keep config, design.json and surface briefs)
+.impeccable/review/
+.impeccable/questions/
+.impeccable/mocks/
+.impeccable/decision-*.json
+.impeccable/brief-body.md
+.impeccable/hook.cache.json

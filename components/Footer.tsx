@@ -10,9 +10,11 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="border-t border-line px-4 py-10 sm:px-6">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-ink-faint">© {currentYear} Oren Segal</p>
+    <footer className="px-4 py-10 sm:px-6">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+        <p className="font-mono text-xs lowercase text-ink-faint">
+          © {currentYear} oren segal · brooklyn, ny · orange marks a struck value, nothing else
+        </p>
         <div className="flex gap-5">
           {socialLinks.map((link) => {
             const Icon = link.icon
@@ -22,7 +24,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink-faint transition-colors hover:text-ink"
+                className="text-ink-faint transition-colors hover:text-accent"
                 aria-label={link.name}
               >
                 <Icon className="h-4 w-4" />

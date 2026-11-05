@@ -21,12 +21,13 @@ lucide-react icons.
 
 ```
 app/                    routes (home, 404, /projects/[id], /writing/rootcause-benchmark)
-components/             page sections (Hero, About, Projects, ProjectRow, ProjectDetail, RootcauseResults, Contact, Footer, Navigation)
+components/             page sections (Hero, StruckStack, ShelfieTile, Projects, LiveTile, About, Contact, ProjectDetail, RootcauseResults, Footer, Navigation)
 lib/projects.ts         project data, the single source of truth for the project list
 lib/project-stats.json  star counts and last-push dates, refreshed by scripts/fetch-github-stats.mjs at prebuild
+lib/rootcause-results.ts the seven benchmark settings, copied from the rootcause sweep summary
 ```
 
-Project rows and detail pages are both driven by `lib/projects.ts`; add or
+Project tiles and detail pages are both driven by `lib/projects.ts`; add or
 edit a project there rather than in a component. A new project also needs its
 repo slug in `PROJECT_REPOS` in `scripts/fetch-github-stats.mjs`.
 
