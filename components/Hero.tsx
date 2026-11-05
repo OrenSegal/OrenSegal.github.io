@@ -46,7 +46,7 @@ export default function Hero() {
               <StatusDot />
             </span>
             <span className="text-sm text-ink">
-              Open to Applied AI Engineer roles · New York or remote · US
+              Open to Applied AI Engineer and Forward Deployed Engineer roles · New York or remote · US
               permanent resident, no sponsorship needed
             </span>
           </div>
