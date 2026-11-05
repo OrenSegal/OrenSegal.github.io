@@ -143,7 +143,7 @@ export const projects: Project[] = [
         'Made it run before publication rather than as an audit afterwards: flagged claims go to a person to confirm or cut before anything ships.',
         'Kept the check narrow and deterministic: re-fetch the source, confirm the claim is actually in it, rather than asking another model to grade the first model\'s honesty.',
       ],
-      outcome: 'Any project that generates cited claims can now pull in a reusable pre-publish citation check instead of bolting a one-off script onto a single skill.',
+      outcome: 'In cited#1 a made-up funding round scored as a near match, so numbers and names in a claim now have to be on the page.',
     },
   },
   {

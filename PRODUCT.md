@@ -34,7 +34,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 - Name: Oren Segal.
 - Target title/framing: "Applied AI Engineer", not "AI & Data Science." Open to Applied AI Engineer roles, New York or remote, US permanent resident (no sponsorship needed).
 - Lead proof: rootcause benchmark (525 runs, seven model and effort settings, pass rates 77-84% with overlapping intervals, cost per solved incident varied 25x), written up at `/writing/rootcause-benchmark/`.
-- Visual identity is explicitly **open for full replacement** — the current dark/purple-gradient/glassmorphism look was AI-template-generated and should be treated as anti-reference only, not preserved.
+- Visual identity is the "Utility Cutaway" system documented in `DESIGN.md`: a near-black ground read as depth, each section a vertical spine with a rotated depth label, each project a utility line that expands in place to its build log; Space Grotesk for prose, JetBrains Mono only for machine-sourced facts, one accent green. The earlier dark/purple-gradient/glassmorphism template look is retired and stays an anti-reference.
 
 ## Evidence on Hand
 
@@ -46,6 +46,11 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `architecture-lint` — module boundary linter with ratchet baseline
 - `scoped` — file locks for concurrent Claude Code sessions
 - `litmus` — mutation testing for eval suites
+- `rag-generation` — retrieval eval: BM25, dense and hybrid on a labelled query set
+- `llm-gateway-kit` — cost and reliability layer for Swift apps
+- `signal-skills` — agent skills that mine podcasts and reviews into cited build proposals
+- `blast-shield` — Claude Code mod that shows what a risky command will change before it runs
+- `deuce` — post-merge cleanup for agent worktrees
 
 Each project row shows its live GitHub Actions badge (`ciWorkflow` in `lib/projects.ts`) and its last-push date as "updated". Shelfie (closed TestFlight beta, shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 
