@@ -10,31 +10,38 @@ const config: Config = {
     extend: {
       colors: {
         panel: {
-          DEFAULT: '#0a0b0c',
-          face: '#121315',
+          DEFAULT: '#000000',
+          face: '#141414',
         },
-        line: '#232527',
+        line: '#1f1f1f',
         ink: {
-          DEFAULT: '#f2f1ea',
-          dim: '#9a9d9f',
-          faint: '#7a7d7f',
+          DEFAULT: '#ffffff',
+          dim: 'rgba(255,255,255,0.72)',
+          faint: 'rgba(255,255,255,0.45)',
+          ghost: 'rgba(255,255,255,0.5)',
         },
         accent: {
-          DEFAULT: '#8fd6a8',
-          dim: '#4b7a5d',
+          DEFAULT: '#ff8c1a',
+          dim: '#b35f12',
         },
+        field: '#1b3ac4',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
       animation: {
-        'rise': 'rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both',
+        rise: 'rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both',
+        glide: 'glide 900ms cubic-bezier(0.16, 1, 0.3, 1) both',
       },
       keyframes: {
         rise: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        glide: {
+          '0%': { transform: 'translateX(48px)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
     },

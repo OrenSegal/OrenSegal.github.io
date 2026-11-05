@@ -45,7 +45,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'Splitting the work didn\'t pay either',
     paragraphs: [
-      'A separate 300-run comparison held the model at Opus 5.5 high and changed the harness instead: my hand-written loop against the same investigation rebuilt as a LangGraph graph, each run as a single agent and as an orchestrator with workers. Everything else was shared, down to the grader.',
+      'A separate 300-run comparison held the model at Opus 5.5 high and changed the harness instead: my framework-free loop against the same investigation rebuilt as a LangGraph graph, each run as a single agent and as an orchestrator with workers. Everything else was shared, down to the grader.',
       'I found no detectable difference between the two frameworks, though the single-agent accuracy gap could be anywhere from -8 to +3 points. The orchestrator with workers cost about three times as much per solved incident ($0.3745 against $0.1149 in my loop, $0.3430 against $0.1114 in LangGraph) and took about twice as long, for no measurable gain in either harness.',
     ],
   },

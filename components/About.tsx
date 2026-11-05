@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import { DepthTag } from '@/components/DepthTag'
 
 const stack = [
-  'Python', 'TypeScript', 'Swift', 'React', 'SQL', 'Postgres', 'pgvector', 'SQLite', 'Bash',
-  'Claude API', 'Claude Code', 'MCP', 'LangGraph', 'OpenTelemetry', 'GitHub Actions',
+  'Python', 'TypeScript', 'Swift', 'SQL', 'Postgres', 'pgvector', 'SQLite', 'Bash',
+  'Claude API', 'Claude Code', 'Gemini API', 'MCP', 'OpenTelemetry', 'GitHub Actions',
 ]
 
 const GH = 'https://github.com/OrenSegal'
@@ -52,7 +51,7 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
   {
     label: 'Agent loop and evals',
     items: [
-      { name: 'hand-written loop', href: `${GH}/rootcause/blob/main/src/rootcause/application/agent.py` },
+      { name: 'framework-free loop', href: `${GH}/rootcause/blob/main/src/rootcause/application/agent.py` },
       { name: 'litmus result', href: `${GH}/rootcause/blob/main/results/litmus/2026-10-15.md` },
       { name: 'sous evals', href: `${GH}/sous/tree/main/evals` },
       { name: 'cited evals', href: `${GH}/cited/tree/main/evals` },
@@ -60,84 +59,69 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
   },
 ]
 
+const link = 'text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent'
+
 export default function About() {
   return (
-    <section id="about" className="border-t border-line px-4 py-24 sm:px-6">
-      <div className="relative mx-auto max-w-3xl border-l border-line pl-5">
-        <DepthTag label="deepest" />
-        <h2 className="mb-8 text-2xl font-medium text-ink">About</h2>
+    <section id="about" className="px-4 pt-24 sm:px-6 sm:pt-32">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-[16vw] font-light lowercase leading-[0.92] tracking-[-0.04em] text-ink sm:text-8xl">
+          about
+        </h2>
 
-        <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-ink-dim">
-          <p>
-            I&apos;m an applied AI engineer in Brooklyn. Most of my work is the
-            part of an agent system nobody demos: the eval that says how often
-            it&apos;s right, what each correct answer costs, and the check that
-            stops an agent from reporting work it didn&apos;t do.
-          </p>
-          <p>
-            I&apos;m also building{' '}
-            <a
-              href="https://shelfie.food"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
-            >
-              Shelfie
-            </a>
-            , a vision-based iOS kitchen app in closed TestFlight beta. You walk
-            the camera past your fridge and pantry once, and it builds the
-            inventory that meal plans, grocery lists and expiry reminders run
-            on. Claude Code agents write much of its code. I own the
-            architecture, the review, and the CI that catches work that looks
-            finished without being finished.
-          </p>
-          <p>
-            The projects here came out of that work: measuring an incident
-            agent, mutation-testing eval suites, checking citations against
-            their sources, and keeping parallel agent sessions off the same
-            file.
-          </p>
-          <p>
-            Before this I spent five years as a senior data analyst at Reshet
-            13, an Israeli TV network, building the Python and SQL pipelines and
-            forecasting models the business ran on.{' '}
-            <Link href="/writing/reshet-pricing-model/" className="text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
-              How I got a pricing model adopted there
-            </Link>
-            . I moved to New York in 2023 and retrained full time in AI/ML
-            before starting Shelfie.
-          </p>
-        </div>
-
-        <h3 id="toolkit" className="mb-4 mt-12 text-lg font-medium text-ink-dim">
-          Hooks, skills and tools I wrote
-        </h3>
-        <dl className="max-w-2xl space-y-3 text-sm leading-relaxed">
-          {toolkit.map((group) => (
-            <div key={group.label} className="sm:flex sm:gap-4">
-              <dt className="flex-shrink-0 text-ink-faint sm:w-44">{group.label}</dt>
-              <dd className="text-ink-dim">
-                {group.items.map((item, i) => (
-                  <span key={item.name}>
-                    {i > 0 && ' · '}
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline decoration-accent-dim underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"
-                    >
-                      {item.name}
-                    </a>
-                  </span>
-                ))}
-              </dd>
+        <div className="mt-8 grid grid-cols-1 gap-2 md:grid-cols-4">
+          <div className="bg-panel-face p-5 md:col-span-2 sm:p-6">
+            <div className="max-w-xl space-y-5 text-base leading-relaxed text-ink-dim sm:text-lg">
+              <p>
+                I&apos;m an applied AI engineer in Brooklyn. Most of my work is the
+                part of an LLM system nobody demos: the eval that says how often
+                it&apos;s right, what each correct answer costs, and the check that
+                stops an agent from reporting work it didn&apos;t do.
+              </p>
+              <p>
+                <a href="https://shelfie.food" target="_blank" rel="noopener noreferrer" className={link}>Shelfie</a>{' '}
+                is the product. I own its architecture, the review and the checks,
+                across the Swift app, the Postgres and TypeScript backend and CI.
+                The open-source projects here came out of that work: measuring an
+                incident agent, mutation-testing eval suites, checking citations
+                against their sources, and keeping parallel agent sessions off the
+                same file.
+              </p>
+              <p>
+                Before this I spent five years as a Senior Data Analyst at Reshet
+                13, an Israeli TV network, building the audience analytics system
+                and the forecasting and pricing models the business ran on.{' '}
+                <Link href="/writing/reshet-pricing-model/" className={link}>
+                  How I got a pricing model adopted there
+                </Link>
+                . I moved to New York in 2023 and retrained full time in AI/ML
+                before starting Shelfie.
+              </p>
             </div>
-          ))}
-        </dl>
+          </div>
 
-        <p className="mt-10 text-sm leading-relaxed text-ink-faint">
-          {stack.join(' · ')}
-        </p>
+          <div className="bg-panel-face p-5 md:col-span-2 sm:p-6">
+            <h3 className="text-lg font-medium lowercase text-ink">hooks, skills and tools i wrote</h3>
+            <dl className="mt-4 space-y-3 text-sm leading-relaxed">
+              {toolkit.map((group) => (
+                <div key={group.label} className="sm:flex sm:gap-4">
+                  <dt className="flex-shrink-0 lowercase text-ink-faint sm:w-44">{group.label}</dt>
+                  <dd className="text-ink-dim">
+                    {group.items.map((item, i) => (
+                      <span key={item.name}>
+                        {i > 0 && ' · '}
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+                          {item.name}
+                        </a>
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-8 text-sm leading-relaxed text-ink-faint">{stack.join(' · ')}</p>
+          </div>
+        </div>
       </div>
     </section>
   )

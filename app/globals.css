@@ -11,8 +11,87 @@ html {
 }
 
 body {
-  background: #0a0b0c;
-  color: #f2f1ea;
+  background: #000000;
+  color: #ffffff;
+  caret-color: #ff8c1a;
+}
+
+/* Browser surfaces carry the design too */
+::selection {
+  background: #ff8c1a;
+  color: #000000;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #141414;
+  border-radius: 0;
+  border: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8c1a;
+}
+
+:focus-visible {
+  outline: 2px solid #ff8c1a;
+  outline-offset: 2px;
+}
+
+/* Live tiles: the title is struck on hover or focus, and the foot swaps its
+   meta line for the verified strip. Nothing moves that the visitor is reading. */
+.tile-title {
+  transition: color 200ms ease, text-shadow 200ms ease;
+}
+
+.tile:hover .tile-title,
+.tile:focus-visible .tile-title {
+  color: #ff8c1a;
+  text-shadow: 0 0 24px rgba(255, 140, 26, 0.45);
+}
+
+.tile-foot {
+  position: relative;
+}
+
+.tile-meta,
+.tile-live {
+  transition: opacity 250ms ease;
+}
+
+.tile-live {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+.tile:hover .tile-live,
+.tile:focus-visible .tile-live {
+  opacity: 1;
+}
+
+.tile:hover .tile-meta,
+.tile:focus-visible .tile-meta {
+  opacity: 0;
+}
+
+.tile:active {
+  transform: scale(0.99);
+}
+
+/* The one glow the world allows: a struck value. */
+.struck {
+  color: #ff8c1a;
+  text-shadow: 0 0 24px rgba(255, 140, 26, 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -24,35 +103,6 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-}
-
-/* Browser surfaces carry the design too */
-::selection {
-  background: #8fd6a8;
-  color: #0a0b0c;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0b0c;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #232527;
-  border-radius: 0;
-  border: 2px solid #0a0b0c;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #4b7a5d;
-}
-
-:focus-visible {
-  outline: 2px solid #8fd6a8;
-  outline-offset: 2px;
 }
 
 @layer utilities {

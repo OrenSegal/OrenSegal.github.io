@@ -1,7 +1,6 @@
 import { projects, Project } from '@/lib/projects'
 import projectStats from '@/lib/project-stats.json'
-import { DepthTag } from '@/components/DepthTag'
-import { ProjectRow } from '@/components/ProjectRow'
+import { LiveTile } from '@/components/LiveTile'
 
 const STATS: Record<string, { stars: number; pushedAt: string | null }> = projectStats
 
@@ -12,37 +11,97 @@ export const CATEGORIES: { id: Project['category']; label: string }[] = [
   { id: 'dev-tools', label: 'Developer Tools' },
 ]
 
-export default function Projects() {
-  return (
-    <section id="work" className="border-t border-line px-4 py-24 sm:px-6">
-      <div className="relative mx-auto max-w-3xl border-l border-line pl-5">
-        <DepthTag label="shallow utility" />
+// The wall shows the work that carries the thesis. The rest stays public and
+// reachable: the sous parts ship from the sous marketplace, and the others are
+// listed below the wall by name.
+const WALL = ['rootcause', 'sous', 'litmus', 'cited', 'llm-gateway-kit', 'signal-scout']
+const SOUS_PARTS = ['scoped', 'deuce', 'blast-shield']
+const MORE = ['rag-generation', 'architecture-lint', 'signal-skills']
 
-        <h2 className="mb-2 text-2xl font-medium text-ink">Work</h2>
-        <p className="mb-12 text-ink-dim">
-          {projects.length} shipped projects, every one with a public repo.
+// Wording follows the profile README's "Pull requests where a check proved less than it claimed".
+const CHECKS = [
+  {
+    ref: 'scoped#1',
+    href: 'https://github.com/OrenSegal/scoped/pull/1',
+    line: 'The only concurrency test ran on one connection. Racing real processes let two sessions claim the same file; the PR fixes both causes.',
+  },
+  {
+    ref: 'cited#1',
+    href: 'https://github.com/OrenSegal/cited/pull/1',
+    line: 'A made-up funding round scored as a near match. Numbers and names in a claim now have to be on the page.',
+  },
+  {
+    ref: 'signal-scout#3',
+    href: 'https://github.com/OrenSegal/signal-scout/pull/3',
+    line: 'The eval job graded hand-written outputs, so no change could fail it. It now runs the pipeline on fixtures, and three planted bugs each turn it red.',
+  },
+]
+
+const byId = (id: string) => projects.find((p) => p.id === id)!
+
+export default function Projects() {
+  const wall = WALL.map(byId)
+  return (
+    <section id="work" className="px-4 pt-24 sm:px-6 sm:pt-32">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-[16vw] font-light lowercase leading-[0.92] tracking-[-0.04em] text-ink sm:text-8xl">
+          work
+        </h2>
+        <p className="mt-4 max-w-xl text-lg text-ink-dim">
+          Six projects carry the argument; all {projects.length} are public with CI.
+          Each tile opens its build log. The figures on them are copied from each
+          repo&apos;s own results, and the push dates are fetched from GitHub when
+          the site builds.
         </p>
 
-        {CATEGORIES.map((category) => {
-          const items = projects.filter((p) => p.category === category.id)
-          if (items.length === 0) return null
-          return (
-            <div key={category.id} className="mb-14 last:mb-0">
-              <h3 className="mb-6 text-lg font-medium text-ink-dim">
-                {category.label}
-              </h3>
-              <div>
-                {items.map((project) => (
-                  <ProjectRow
-                    key={project.id}
-                    project={project}
-                    pushedAt={STATS[project.id]?.pushedAt ?? null}
-                  />
-                ))}
-              </div>
-            </div>
-          )
-        })}
+        <div className="mt-10 grid grid-cols-1 gap-2 md:grid-cols-4" style={{ gridAutoFlow: 'dense' }}>
+          {wall.map((project) => (
+            <LiveTile
+              key={project.id}
+              project={project}
+              pushedAt={STATS[project.id]?.pushedAt ?? null}
+              parts={project.id === 'sous' ? SOUS_PARTS.map(byId) : undefined}
+            />
+          ))}
+        </div>
+
+        <h3 className="mt-14 text-2xl font-light lowercase leading-none tracking-[-0.03em] text-ink sm:text-3xl">
+          checks that proved less than they claimed
+        </h3>
+        <p className="mt-2 max-w-xl text-sm text-ink-dim">
+          Three pull requests where my own test or eval turned out not to test anything, and what each one does now.
+        </p>
+        <ul className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-3">
+          {CHECKS.map((pr) => (
+            <li key={pr.ref}>
+              <a href={pr.href} target="_blank" rel="noopener noreferrer" className="tile flex h-full flex-col bg-panel-face p-4 sm:p-5">
+                <p className="text-sm leading-snug text-ink-dim">{pr.line}</p>
+                <p className="tile-title mt-auto pt-4 font-mono text-xs text-ink">{pr.ref} →</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-ink-faint">
+          Also on GitHub:{' '}
+          {MORE.map((id, i) => {
+            const p = byId(id)
+            return (
+              <span key={id}>
+                {i > 0 && ', '}
+                <a href={`/projects/${id}/`} className="text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+                  {p.title.toLowerCase()}
+                </a>{' '}
+                ({p.subtitle.toLowerCase()})
+              </span>
+            )
+          })}
+          . Everything else is at{' '}
+          <a href="https://github.com/OrenSegal" target="_blank" rel="noopener noreferrer" className="text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+            github.com/OrenSegal
+          </a>
+          .
+        </p>
       </div>
     </section>
   )

@@ -1,28 +1,43 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-09T00:00:00Z",
-  "title": "Design System: Oren Segal Portfolio — Utility Cutaway",
+  "generatedAt": "2026-11-05T00:00:00Z",
+  "title": "Design System: Oren Segal Portfolio — Metro Typographic Tiles",
   "extensions": {
     "colorMeta": {
-      "panel": { "role": "neutral", "displayName": "Panel Black", "canonical": "#0a0b0c" },
-      "line": { "role": "neutral", "displayName": "Line", "canonical": "#232527" },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#f2f1ea" },
-      "ink-dim": { "role": "neutral", "displayName": "Ink Dim", "canonical": "#9a9d9f" },
-      "ink-faint": { "role": "neutral", "displayName": "Ink Faint", "canonical": "#7a7d7f" },
-      "accent": { "role": "primary", "displayName": "Accent Green", "canonical": "#8fd6a8" },
-      "accent-dim": { "role": "primary", "displayName": "Accent Green, Dim", "canonical": "#4b7a5d" }
+      "panel": { "role": "neutral", "displayName": "Panel Black", "canonical": "#000000" },
+      "panel-face": { "role": "neutral", "displayName": "Panel Face", "canonical": "#141414" },
+      "line": { "role": "neutral", "displayName": "Line", "canonical": "#1f1f1f" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#ffffff" },
+      "ink-dim": { "role": "neutral", "displayName": "Ink Dim", "canonical": "rgba(255,255,255,0.72)" },
+      "ink-faint": { "role": "neutral", "displayName": "Ink Faint", "canonical": "rgba(255,255,255,0.45)" },
+      "ink-ghost": { "role": "neutral", "displayName": "Ink Ghost", "canonical": "rgba(255,255,255,0.5)" },
+      "accent": { "role": "primary", "displayName": "Sodium Orange", "canonical": "#ff8c1a" },
+      "accent-dim": { "role": "primary", "displayName": "Sodium Orange, Dim", "canonical": "#b35f12" },
+      "field": { "role": "secondary", "displayName": "Transit Cobalt", "canonical": "#1b3ac4" }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero h1 only." },
-      "body": { "displayName": "Body", "purpose": "All prose: About, project descriptions, Contact intro, flight-log copy." },
-      "label": { "displayName": "Label", "purpose": "Project-detail sub-headers (Problem/Decisions/Outcome/Key features/Impact/Tech stack) only. Unchanged this session." },
-      "meta-mono": { "displayName": "Meta Mono", "purpose": "JetBrains Mono, confined to three machine-sourced-fact sites: DepthTag label (10px, tracking-widest/0.1em, the one site with extra tracking), Hero verified-count line, and ProjectRow id/date toggle (both normal tracking). Never prose or headings; color (ink-faint vs accent) tracks interaction state independently of the mono choice." }
+      "display": { "displayName": "Display", "purpose": "Hero headline 'applied ai engineer': 12.5vw nowrap on desktop so it crops off the right edge; 19vw, two lines, on phones." },
+      "headline": { "displayName": "Headline", "purpose": "Section words work / about / contact: 6rem from sm, 16vw below." },
+      "struck-figure": { "displayName": "Struck Figure", "purpose": "The 25x in the benchmark tile, with the .struck glow; 5.5rem on phones." },
+      "tile-title": { "displayName": "Tile Title", "purpose": "Project name on every live tile, 'shelfie', 'all repos', ProjectDetail h1. Wide tiles 2.25-3rem, standard tiles 1.875-2.25rem. Struck orange with the glow on tile hover/focus." },
+      "body": { "displayName": "Body", "purpose": "About prose, writing-page prose (1.125rem), detail copy. Tile blurbs 0.875-1rem at leading-snug, mt-2 under the title." },
+      "action": { "displayName": "Action", "purpose": "Lowercase actions and nav items: Hero's three actions, wordmark. Contact labels same weight at 1.5rem." },
+      "mono": { "displayName": "Mono", "purpose": "JetBrains Mono 12px for machine-sourced figures only (dates, costs, pass rates, counts, availability line, the tile foot and its verified strip). Always the last line of a tile." },
+      "mono-demo": { "displayName": "Mono Demo", "purpose": "JetBrains Mono 11px, ink-faint, tabular: labels, axis figures and captions inside a tile's data demonstration." }
     },
-    "shadows": [],
+    "shadows": [
+      { "name": "struck-glow", "value": "text-shadow: 0 0 24px rgba(255, 140, 26, 0.45)", "purpose": "The only glow in the system, on a struck value (lit benchmark row, 25x figure, hovered live-tile title). No box-shadow, blur or gradient anywhere." }
+    ],
     "motion": [
-      { "name": "rise", "value": "700ms cubic-bezier(0.16, 1, 0.3, 1) both, translateY(10px) -> 0 with opacity 0 -> 1", "purpose": "Hero entrance only." },
-      { "name": "utility-line-reveal", "value": "transition-[grid-template-rows] 500ms cubic-bezier(0.16, 1, 0.3, 1), grid-rows-[0fr] -> grid-rows-[1fr]", "purpose": "In-place tactile expansion of a ProjectRow's flight-log/key-features detail. Not an accordion library." },
-      { "name": "chevron-rotate", "value": "transition-transform 300ms cubic-bezier(0.16, 1, 0.3, 1), rotate 0 -> -180deg", "purpose": "ProjectRow toggle chevron, paired with the reveal above. Same curve as rise and the reveal — one easing for all transform/size motion in the system." }
+      { "name": "ease-standard", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one ease for the headline glide." },
+      { "name": "glide", "value": "900ms ease-standard both, translateX(48px) -> 0", "purpose": "Hero headline entrance from the right edge; the only load animation and the only translation in the system." },
+      { "name": "tile-strike", "value": "color 200ms ease, text-shadow 200ms ease", "purpose": "Live-tile title goes orange with the glow on hover / focus-visible." },
+      { "name": "tile-foot-swap", "value": "opacity 250ms ease, meta line 1 -> 0 and verified strip 0 -> 1", "purpose": "Live-tile foot swaps category/date for the CI badge, push date and link. Nothing moves." },
+      { "name": "tile-press", "value": ".tile:active transform: scale(0.99)", "purpose": "1% press feedback on a live tile." },
+      { "name": "struck-row", "value": "color 200ms", "purpose": "Benchmark row lighting on hover/focus and returning on leave/blur." },
+      { "name": "colour-default", "value": "transition-colors 150ms", "purpose": "Tile inversion to orange, link hover." },
+      { "name": "reduced-motion", "value": "animation-duration and transition-duration 0.001ms, scroll-behavior auto", "purpose": "prefers-reduced-motion kill switch in app/globals.css." },
+      { "name": "rise", "value": "700ms ease-standard, opacity 0 -> 1, translateY(10px) -> 0", "purpose": "Defined in tailwind.config.ts but unrendered in the shipped tree." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -31,111 +46,109 @@
   },
   "components": [
     {
-      "name": "Depth Tag",
-      "kind": "custom",
-      "refersTo": "meta-mono",
-      "description": "Rotated -90deg, absolutely positioned, aria-hidden mono label naming a section's depth in the cutaway (surface/shallow utility/deepest/resurfacing). Not a kicker: sits outside the text column in the spine's own margin, no heading-pairing semantics, hidden from assistive tech.",
-      "html": "<span aria-hidden=\"true\" class=\"ds-depth-tag\">shallow utility</span>",
-      "css": ".ds-depth-tag { position: absolute; left: -9px; top: 0; transform-origin: top left; transform: rotate(-90deg); white-space: nowrap; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #7a7d7f; pointer-events: none; }"
+      "name": "Live Tile",
+      "kind": "card",
+      "refersTo": "tile-live",
+      "description": "Signature tile sized to its content: light lowercase title, two-sentence blurb, optional data demonstration, mono foot 'category · updated date'. On hover or focus the title is struck orange with the glow and the foot swaps by opacity for the verified strip: CI badge, push date, 'open the build log →'.",
+      "html": "<a href=\"#\" class=\"ds-tile\" aria-label=\"rootcause: An agent that works out why an incident happened. Updated Oct 15, 2026.\"><h3 class=\"ds-tile-title\">rootcause</h3><p class=\"ds-tile-blurb\">An agent that works out why an incident happened or a CI run failed. No framework underneath, and every claim about how well it works comes from graded runs you can rerun from the repo.</p><div class=\"ds-tile-foot\"><p class=\"ds-tile-meta\">evals and retrieval · updated oct 15, 2026</p><p class=\"ds-tile-live\" aria-hidden=\"true\"><span class=\"ds-tile-badge\">ci passing</span><span>pushed oct 15, 2026 · open the build log →</span></p></div></a>",
+      "css": ".ds-tile { display: flex; flex-direction: column; position: relative; width: 300px; min-height: 224px; padding: 16px; background: #141414; color: #ffffff; text-decoration: none; font-family: var(--font-sans), sans-serif; } .ds-tile:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; } .ds-tile:active { transform: scale(0.99); } .ds-tile-title { margin: 0; font-size: 30px; font-weight: 300; line-height: 1; letter-spacing: -0.03em; text-transform: lowercase; transition: color 200ms ease, text-shadow 200ms ease; } .ds-tile:hover .ds-tile-title, .ds-tile:focus-visible .ds-tile-title { color: #ff8c1a; text-shadow: 0 0 24px rgba(255, 140, 26, 0.45); } .ds-tile-blurb { margin: 8px 0 0; font-size: 14px; line-height: 1.375; color: rgba(255,255,255,0.72); } .ds-tile-foot { position: relative; margin-top: auto; padding-top: 20px; } .ds-tile-meta, .ds-tile-live { margin: 0; font-family: var(--font-mono), monospace; font-size: 12px; transition: opacity 250ms ease; } .ds-tile-meta { text-transform: lowercase; color: rgba(255,255,255,0.45); } .ds-tile-live { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; opacity: 0; color: #ff8c1a; } .ds-tile-badge { display: inline-block; height: 20px; padding: 0 6px; line-height: 20px; font-size: 11px; background: #ffffff; color: #000000; } .ds-tile:hover .ds-tile-live, .ds-tile:focus-visible .ds-tile-live { opacity: 1; } .ds-tile:hover .ds-tile-meta, .ds-tile:focus-visible .ds-tile-meta { opacity: 0; } @media (prefers-reduced-motion: reduce) { .ds-tile-title, .ds-tile-meta, .ds-tile-live { transition-duration: 0.001ms; } }"
     },
     {
-      "name": "Status Dot",
+      "name": "Tile Demo (planted bugs)",
       "kind": "custom",
-      "refersTo": "accent",
-      "description": "8x8 SVG static data indicator, not a hover/active state signal. Filled accent circle = has a full build log on file; outlined ink-faint circle = summary only. Used at rest in Hero (verified-count line) and in each ProjectRow toggle.",
-      "html": "<svg width=\"8\" height=\"8\" viewBox=\"0 0 8 8\"><circle cx=\"4\" cy=\"4\" r=\"4\" fill=\"#8fd6a8\"/></svg>",
-      "css": "/* filled: fill #8fd6a8, r=4. outlined: fill none, stroke #7a7d7f, stroke-width 1.25, r=3.25 */"
+      "refersTo": "tile-live",
+      "description": "Data-only figure inside a featured tile, numbers copied from the repo. Square 20px cells: orange marks a positive result (a caught bug, a killed mutant), ghost marks an alternative, panel marks could-not-run. Mono 11px caption.",
+      "html": "<figure class=\"ds-demo\" aria-label=\"3 planted bugs, 3 caught by CI\"><div class=\"ds-demo-cells\"><span class=\"ds-demo-cell ds-demo-on\" title=\"caught\"></span><span class=\"ds-demo-cell ds-demo-on\" title=\"caught\"></span><span class=\"ds-demo-cell ds-demo-on\" title=\"caught\"></span></div><figcaption class=\"ds-demo-caption\">Three bugs planted in the verification code, one at a time. CI went red on each.</figcaption></figure>",
+      "css": ".ds-demo { margin: 16px 0 0; padding: 16px; width: 300px; background: #141414; } .ds-demo-cells { display: flex; gap: 6px; } .ds-demo-cell { width: 20px; height: 20px; background: rgba(255,255,255,0.5); } .ds-demo-on { background: #ff8c1a; } .ds-demo-off { background: #000000; } .ds-demo-caption { margin: 8px 0 0; font-family: var(--font-mono), monospace; font-size: 11px; line-height: 1.375; color: rgba(255,255,255,0.45); }"
     },
     {
-      "name": "Utility Line (Project Row)",
-      "kind": "custom",
-      "refersTo": "utility-line-toggle",
-      "description": "Signature interactive pattern replacing a card: title with trailing arrow, mono id/date toggle with StatusDot and chevron (goes accent while expanded), horizontal connector tick joining the row to the section spine (bg-line at rest, bg-accent expanded), and a grid-template-rows reveal of real Problem/Decisions/Outcome or Key Features/Impact copy.",
-      "html": "<div class=\"ds-utility-line\"><span class=\"ds-connector-tick\"></span><h4 class=\"ds-utility-line-title\">Project Title</h4><button class=\"ds-utility-line-toggle\" aria-expanded=\"false\"><svg class=\"ds-status-dot\"></svg>project-id · verified Jan 1, 2026</button></div>",
-      "css": ".ds-utility-line { position: relative; border-bottom: 1px solid #232527; padding: 32px 0; } .ds-connector-tick { position: absolute; left: -20px; top: 15px; height: 1px; width: 20px; background: #232527; transition: background-color 0.3s; } .ds-utility-line.expanded .ds-connector-tick { background: #8fd6a8; } .ds-utility-line-toggle { font-family: var(--font-mono); font-size: 12px; color: #7a7d7f; } .ds-utility-line.expanded .ds-utility-line-toggle { color: #8fd6a8; } .ds-utility-line-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1); } .ds-utility-line.expanded .ds-utility-line-detail { grid-template-rows: 1fr; }"
+      "name": "Cobalt Tile",
+      "kind": "card",
+      "refersTo": "tile-cobalt",
+      "description": "Flat cobalt content flood (Shelfie tile; llm-gateway-kit live tile). Shelfie tile inverts to orange on hover.",
+      "html": "<a href=\"#\" class=\"ds-tile-cobalt\"><h2 class=\"ds-tile-cobalt-title\">shelfie</h2><p class=\"ds-tile-cobalt-desc\">A vision-powered kitchen app. Swift on the phone, Postgres and TypeScript behind it.</p><ul class=\"ds-tile-cobalt-list\"><li><span class=\"ds-tile-cobalt-dot\"></span>A camera sweep builds a live kitchen inventory.</li><li><span class=\"ds-tile-cobalt-dot\"></span>Recipes rank availability-first.</li></ul><p class=\"ds-tile-cobalt-action\">shelfie.food →</p><p class=\"ds-tile-cobalt-foot\">founder · ios · closed beta</p></a>",
+      "css": ".ds-tile-cobalt { display: flex; flex-direction: column; width: 320px; padding: 20px; background: #1b3ac4; color: #ffffff; text-decoration: none; font-family: var(--font-sans), sans-serif; transition: background-color 150ms, color 150ms; } .ds-tile-cobalt:hover, .ds-tile-cobalt:focus-visible { background: #ff8c1a; color: #000000; } .ds-tile-cobalt:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; } .ds-tile-cobalt-title { margin: 0; font-size: 36px; font-weight: 300; line-height: 1; letter-spacing: -0.03em; text-transform: lowercase; } .ds-tile-cobalt-desc { margin: 8px 0 0; font-size: 16px; color: rgba(255,255,255,0.72); } .ds-tile-cobalt-list { list-style: none; margin: 20px 0 0; padding: 0; font-size: 14px; line-height: 1.375; color: rgba(255,255,255,0.72); } .ds-tile-cobalt-list li { display: flex; gap: 10px; margin-top: 10px; } .ds-tile-cobalt-dot { flex-shrink: 0; margin-top: 0.55em; width: 4px; height: 4px; background: currentColor; } .ds-tile-cobalt:hover .ds-tile-cobalt-desc, .ds-tile-cobalt:hover .ds-tile-cobalt-list { color: rgba(0,0,0,0.8); } .ds-tile-cobalt-action { margin: 20px 0 0; font-size: 14px; font-weight: 500; } .ds-tile-cobalt-foot { margin: 16px 0 0; font-family: var(--font-mono), monospace; font-size: 12px; color: rgba(255,255,255,0.72); } .ds-tile-cobalt:hover .ds-tile-cobalt-foot { color: rgba(0,0,0,0.7); }"
     },
     {
-      "name": "Inline Text Link",
+      "name": "Struck Stack Row",
       "kind": "custom",
-      "refersTo": "link-inline",
-      "description": "In-sentence link with a dim underline at rest that brightens on hover — Hero's GitHub-percentage link, project 'source' links.",
-      "html": "<a href=\"#\" class=\"ds-link-inline\">42% of it open source, verifiable on GitHub</a>",
-      "css": ".ds-link-inline { color: #f2f1ea; text-decoration: underline; text-decoration-color: #4b7a5d; text-underline-offset: 4px; transition: color 0.15s, text-decoration-color 0.15s; } .ds-link-inline:hover, .ds-link-inline:focus-visible { text-decoration-color: #8fd6a8; } .ds-link-inline:focus-visible { outline: 2px solid #8fd6a8; outline-offset: 2px; }"
+      "refersTo": "struck-row-ghost",
+      "description": "One benchmark setting as a ghost row; the chosen or hovered row is struck orange with the system's only glow. Label in body size, pass rate and cost in tabular mono.",
+      "html": "<ul class=\"ds-stack\"><li><button type=\"button\" class=\"ds-stack-row\" aria-pressed=\"false\"><span class=\"ds-stack-label\">opus 5.5, high effort</span><span class=\"ds-stack-figs\"><span>81% <span class=\"ds-stack-ci\">(71-89)</span></span><span>$0.0821</span></span></button></li><li><button type=\"button\" class=\"ds-stack-row ds-struck\" aria-pressed=\"true\"><span class=\"ds-stack-label\">haiku 5.5, default</span><span class=\"ds-stack-figs\"><span>80% <span class=\"ds-stack-ci\">(69-88)</span></span><span>$0.0033</span></span></button></li></ul>",
+      "css": ".ds-stack { list-style: none; margin: 0; padding: 20px; background: #141414; width: 360px; font-family: var(--font-sans), sans-serif; } .ds-stack-row { display: flex; width: 100%; flex-wrap: wrap; align-items: baseline; gap: 0 16px; padding: 4px 0; background: none; border: 0; text-align: left; cursor: pointer; color: rgba(255,255,255,0.5); font: inherit; transition: color 200ms; } .ds-stack-row:hover, .ds-stack-row:focus-visible { color: rgba(255,255,255,0.72); } .ds-stack-row:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; } .ds-stack-row.ds-struck, .ds-stack-row.ds-struck:hover { color: #ff8c1a; text-shadow: 0 0 24px rgba(255, 140, 26, 0.45); } .ds-stack-label { flex: 1; min-width: 11rem; font-size: 14px; } .ds-stack-figs { display: flex; gap: 16px; white-space: nowrap; font-family: var(--font-mono), monospace; font-size: 12px; font-variant-numeric: tabular-nums; } .ds-stack-ci { opacity: 0.7; }"
+    },
+    {
+      "name": "Contact Tile",
+      "kind": "card",
+      "refersTo": "tile-link",
+      "description": "Charcoal link tile with a Lucide icon top-left and label/value bottom-left; inverts to orange on hover.",
+      "html": "<a href=\"mailto:orenssegal@gmail.com\" class=\"ds-contact\"><svg class=\"ds-contact-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-10 5L2 7\"/></svg><div><p class=\"ds-contact-label\">email</p><p class=\"ds-contact-value\">orenssegal@gmail.com</p></div></a>",
+      "css": ".ds-contact { display: flex; flex-direction: column; justify-content: space-between; width: 240px; aspect-ratio: 3 / 2; padding: 16px; background: #141414; color: #ffffff; text-decoration: none; font-family: var(--font-sans), sans-serif; transition: background-color 150ms, color 150ms; } .ds-contact:hover, .ds-contact:focus-visible { background: #ff8c1a; color: #000000; } .ds-contact:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; } .ds-contact-label { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.25; } .ds-contact-value { margin: 4px 0 0; font-size: 14px; word-break: break-all; color: rgba(255,255,255,0.72); } .ds-contact:hover .ds-contact-value { color: rgba(0,0,0,0.8); }"
     },
     {
       "name": "Action Link",
       "kind": "custom",
+      "refersTo": "action-link",
+      "description": "Lowercase medium-weight action in ink, orange on hover: Hero's three actions, 'read the benchmark →'.",
+      "html": "<a href=\"#\" class=\"ds-action\">read the benchmark</a>",
+      "css": ".ds-action { font-family: var(--font-sans), sans-serif; font-size: 14px; font-weight: 500; text-transform: lowercase; color: #ffffff; text-decoration: none; transition: color 150ms; } .ds-action:hover { color: #ff8c1a; } .ds-action:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Inline Prose Link",
+      "kind": "custom",
       "refersTo": "link-inline",
-      "description": "Standalone call-to-action link with a trailing arrow icon that nudges on hover — 'See the work'.",
-      "html": "<a href=\"#\" class=\"ds-link-action\">See the work <svg class=\"ds-link-action-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
-      "css": ".ds-link-action { display: inline-flex; align-items: center; gap: 8px; color: #f2f1ea; font-size: 14px; font-weight: 500; } .ds-link-action-icon { transition: transform 0.15s; } .ds-link-action:hover .ds-link-action-icon { transform: translateX(4px); } .ds-link-action:focus-visible { outline: 2px solid #8fd6a8; outline-offset: 2px; }"
+      "description": "In-sentence link with a dim orange underline at rest; text and underline go orange on hover. About, ProjectDetail, writing pages.",
+      "html": "<p class=\"ds-prose\"><a href=\"#\" class=\"ds-link-inline\">Shelfie</a> is the product.</p>",
+      "css": ".ds-prose { font-family: var(--font-sans), sans-serif; font-size: 16px; line-height: 1.625; color: rgba(255,255,255,0.72); } .ds-link-inline { color: #ffffff; text-decoration: underline; text-decoration-color: #b35f12; text-underline-offset: 4px; transition: color 150ms, text-decoration-color 150ms; } .ds-link-inline:hover { color: #ff8c1a; text-decoration-color: #ff8c1a; } .ds-link-inline:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; }"
     },
     {
       "name": "Nav Link",
       "kind": "nav",
-      "refersTo": "link-list-item",
-      "description": "Top navigation — dim by default, brightens on hover, no underline.",
-      "html": "<a href=\"#\" class=\"ds-nav-link\">Work</a>",
-      "css": ".ds-nav-link { color: #9a9d9f; font-size: 14px; transition: color 0.15s; } .ds-nav-link:hover { color: #f2f1ea; } .ds-nav-link:focus-visible { outline: 2px solid #8fd6a8; outline-offset: 2px; }"
-    },
-    {
-      "name": "Contact Channel Row",
-      "kind": "custom",
-      "refersTo": "link-list-item",
-      "description": "Icon + label link row in Contact, py-4 (16px) interval; icon and text transition to accent together as one hover target (interaction-state accent, not the utility-line active state).",
-      "html": "<a href=\"#\" class=\"ds-channel-row\"><svg class=\"ds-channel-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-10 5L2 7\"/></svg><span class=\"ds-channel-label\">orenssegal@gmail.com</span></a>",
-      "css": ".ds-channel-row { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #232527; padding: 16px 0; } .ds-channel-row:first-child { padding-top: 0; } .ds-channel-row:last-child { border-bottom: none; } .ds-channel-icon { color: #7a7d7f; transition: color 0.15s; flex-shrink: 0; } .ds-channel-label { color: #f2f1ea; transition: color 0.15s; } .ds-channel-row:hover .ds-channel-icon, .ds-channel-row:hover .ds-channel-label { color: #8fd6a8; }"
-    },
-    {
-      "name": "Section Spine",
-      "kind": "custom",
-      "refersTo": "spacing.spine-gutter",
-      "description": "The cutaway metaphor's core structural device: every full-width section wraps its content in a left-bordered spine carrying a DepthTag. Replaces the prior system's plain section divider as the section-level pattern.",
-      "html": "<section class=\"ds-section\"><div class=\"ds-spine\"><span class=\"ds-depth-tag\">shallow utility</span>Content</div></section>",
-      "css": ".ds-section { border-top: 1px solid #232527; padding: 96px 16px; } @media (min-width: 640px) { .ds-section { padding-left: 24px; padding-right: 24px; } } .ds-spine { position: relative; max-width: 768px; margin: 0 auto; border-left: 1px solid #232527; padding-left: 20px; }"
-    },
-    {
-      "name": "Detail Sub-header Label",
-      "kind": "custom",
-      "refersTo": "label",
-      "description": "Uppercase, tracked sub-header scoped to the project-detail page only (Problem/Decisions/Outcome/Key features/Impact/Tech stack) — not a general kicker. Unchanged this session.",
-      "html": "<h3 class=\"ds-detail-label\">Key features</h3>",
-      "css": ".ds-detail-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #7a7d7f; }"
+      "refersTo": "nav-link",
+      "description": "Lowercase nav item, dim at rest, orange on hover, in a borderless 64px bar.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-mark\">oren segal</a><div class=\"ds-nav-items\"><a href=\"#\" class=\"ds-nav-link\">work</a><a href=\"#\" class=\"ds-nav-link\">about</a><a href=\"#\" class=\"ds-nav-link\">writing</a><a href=\"#\" class=\"ds-nav-link\">contact</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 16px; background: rgba(0,0,0,0.95); font-family: var(--font-sans), sans-serif; font-size: 14px; text-transform: lowercase; } .ds-nav-mark { font-weight: 500; color: #ffffff; text-decoration: none; } .ds-nav-items { display: flex; gap: 32px; } .ds-nav-link { color: rgba(255,255,255,0.72); text-decoration: none; transition: color 150ms; } .ds-nav-link:hover { color: #ff8c1a; } .ds-nav-link:focus-visible, .ds-nav-mark:focus-visible { outline: 2px solid #ff8c1a; outline-offset: 2px; }"
     }
   ],
   "narrative": {
-    "northStar": "Utility Cutaway — the page is a literal underground utility cross-section; what a visitor sees on the surface sits on real strata of infrastructure work beneath it",
-    "overview": "This build supersedes the prior 'no governing metaphor' plain system and the earlier, never-shipped 'Night Flight-Deck' instrument-panel direction. The current shipped system stages the page as a literal underground utility cross-section: the near-black ground (#0a0b0c) is depth. Every major section — Hero, Work, About, Contact — is a vertical cutaway spine (border-l border-line pl-5), each carrying a rotated depth label naming how far down it sits: 'surface' (Hero), 'shallow utility' (Work), 'deepest' (About), 'resurfacing' (Contact). Inside Work, each project is a utility line crossing the spine via a horizontal connector tick; clicking a project's toggle expands it in place with a tactile grid-height reveal, showing real Problem/Decisions/Outcome or Key Features/Impact copy. Accent green marks exactly three things: interaction state, the active/expanded utility line, and the filled status dot as a binary data affirmative — it never fills a background or colors a heading. No fabricated metrics anywhere: every number and date is sourced at build time from the live GitHub API, all-or-nothing.",
+    "northStar": "The Type Is the Interface",
+    "overview": "This system replaces the retired \"Utility Cutaway\" (spines, depth tags, green accent; do not resurrect its rules) with one world: Metro's typographic tiles. The ground is pure black (panel). Every section opens with a giant, light, lowercase Urbanist word set so large that on desktop the Hero headline runs off the right edge on purpose; the crop is the promise of a next pane. Beneath each word the content sits in flat charcoal tiles (panel-face) separated only by an 8px black gutter. There is no chrome: no borders, rules, gradients, box-shadows or blur on the home page. Grouping is adjacency.\n\nThe struck cathode stack lends exactly one discipline, the ghost/struck state. In the benchmark tile every one of the seven real settings is present as an unlit ghost (ink-ghost) and the cheapest-equal one is struck forward in sodium orange with the system's only glow. The same orange is the only live colour anywhere: the struck title of a hovered tile, hovered link, focus ring, selection, scrollbar thumb on hover, caret, and the positive mark in a tile's data demonstration. The footer states the rule in the page's own voice: \"orange marks a struck value, nothing else.\" Transit cobalt (field) floods tiles only when the tile's content is Shelfie-derived (the Shelfie tile and the llm-gateway-kit tile); it is content, never decoration.\n\nMono is JetBrains Mono at 12px (11px inside a data demonstration) and marks machine-sourced figures: dates, costs, pass rates, run counts, availability line. Inside a tile it is always the last line. Motion is one ease (cubic-bezier(0.16, 1, 0.3, 1)) for the headline's glide in from the right; everything after that is colour and opacity. A hovered or focused live tile strikes its title and swaps its foot line for the verified strip by opacity; nothing the visitor is reading moves. A press scales the tile 1%. prefers-reduced-motion disables all of it.",
     "keyCharacteristics": [
-      "Near-black ground (#0a0b0c) read as literal depth — four sections render as a border-l cutaway spine with a rotated -90deg depth label",
-      "Two type families with strict division of labor: Space Grotesk for every heading/sentence; JetBrains Mono confined to three machine-sourced-fact sites (depth tags, Hero verified line, project id/date toggle) at 10-12px, never prose or headings",
-      "Accent green (#8fd6a8) has exactly three jobs: interaction state, the expanded project row's active marking, and the filled StatusDot as a static binary data signal",
-      "Each project is a utility line: a horizontal connector tick (w-5, matching the spine's pl-5 gutter exactly) that goes accent when its row is expanded",
-      "Expansion is a tactile grid-template-rows reveal (0fr -> 1fr, 500ms), not an accordion library",
-      "One motion curve (cubic-bezier(0.16, 1, 0.3, 1)) drives Hero's entrance, the row reveal, and the chevron rotation"
+      "Pure black ground (panel), charcoal tiles (panel-face), one 8px gutter; no second structural device",
+      "Giant light lowercase headlines: 12.5vw desktop / 19vw two-line phone for the Hero; 6rem desktop / 16vw phone for section words; all at line-height 0.92, -0.04em",
+      "Sodium orange (accent) is the only live colour and owns every struck state; the .struck text-shadow is the only glow",
+      "Transit cobalt (field) floods exactly two content tiles (Shelfie, llm-gateway-kit); no other tile is coloured at rest",
+      "Ghost/struck: all alternatives present at ink-ghost, the chosen one struck orange; hover lights a row, leave returns the chosen row",
+      "JetBrains Mono 12px for machine-sourced figures only, always the foot of a tile",
+      "Live tiles size to their content: title, two-sentence blurb, an optional figure copied from the repo, and a mono foot that becomes the verified strip (CI badge, push date, link) on hover or focus"
     ],
     "rules": [
-      { "name": "The Accent-as-Signal Rule", "body": "Accent green is spent on exactly three things: interaction (hover/focus/selection), the one active utility line's marking (tick, chevron, toggle text while expanded), and the filled status dot as a binary data affirmative. It is never a background fill, never a static heading color, and there is no second accent hue. A resting filled StatusDot is accent by design (data, not decoration) — do not 'fix' it to ink-faint.", "section": "colors" },
-      { "name": "The Scoped Mono Rule", "body": "JetBrains Mono renders exactly three things: the depth-tag label, the Hero verified-count timestamp line, and each project's id/date toggle. All three are small (10-12px), machine-sourced facts. Mono never appears in a heading, in prose, or at a larger size. The ProjectRow toggle's mono text still switches ink-faint to accent with expansion state — mono marks content type, color marks state; the two are independent.", "section": "typography" },
-      { "name": "The One Rendered Surface Rule", "body": "Exactly one background tone is painted on the page (panel, #0a0b0c). Depth is expressed by hairline dividers and the cutaway-spine device (border-l spines plus rotated depth labels), never by a second background fill, a shadow, or a blur.", "section": "elevation" }
+      { "name": "The One Live Colour Rule", "body": "Orange is the only colour that responds. It is spent on struck states (chosen value, hover, focus, selection) and on the positive mark of a figure whose alternatives are shown as ghosts. If something is orange at rest, it must be the chosen value of a set whose alternatives are visible as ghosts.", "section": "colors" },
+      { "name": "The Content Flood Rule", "body": "Cobalt floods a tile only because of what the tile contains (Shelfie-derived work). Two tiles carry it. A third needs the same content reason, not a layout one.", "section": "colors" },
+      { "name": "The Foot-of-Tile Rule", "body": "Inside a tile, mono is the last line. It never sits above a heading, never sets a heading, never carries a sentence of prose. Mono tells the reader a figure came from a machine (build-time GitHub stats, committed benchmark results, a repo's own README), not from copy.", "section": "typography" },
+      { "name": "The Lowercase Rule", "body": "Every headline, tile title, action and nav item on the home page is lowercase and light (300) or medium (500). Writing-page and detail-page h1/h2 may set 500 at 1.875rem-2.25rem in sentence case; that is the Read-mode register, not the home page's.", "section": "typography" },
+      { "name": "The One Glow Rule", "body": "The only glow in the system is the .struck text-shadow on a struck value. No box-shadow, drop-shadow, blur or gradient anywhere; a tile is flat charcoal, cobalt, or orange.", "section": "elevation" }
     ],
     "dos": [
-      "Do confine mono (JetBrains Mono) to the three scoped sites — depth tags, Hero's verified line, project id/date toggles — always small and always a machine-sourced fact. Do not use mono for a heading or a sentence of prose.",
-      "Do use border-l border-line pl-5 plus a DepthTag for any new full-width section that should read as part of the cutaway.",
-      "Do spend accent green only on the three named jobs (interaction, active utility line, filled status dot).",
-      "Do keep the connector-tick width (w-5) matched to the spine gutter (pl-5) if adding new lines crossing a spine.",
-      "Do respect prefers-reduced-motion: app/globals.css collapses all animation/transition durations to near-zero."
+      "Do open every home-page section with one giant light lowercase word (6rem desktop / 16vw phone, 0.92, -0.04em) and keep the Hero headline at 12.5vw nowrap so it crops off the right edge on desktop.",
+      "Do build every new home-page surface as a flat panel-face tile in the gap-2 grid, p-4 sm:p-5 or p-5 sm:p-6, sized to its content, with the title at the top, a blurb at mt-2, the foot pushed down with mt-auto, and the mono figure as the last line.",
+      "Do spend orange only on struck states: hover, focus, selection, the chosen value of a visible set, and the positive mark in a figure whose alternatives are ghosts.",
+      "Do show every alternative as an ink-ghost row or cell when presenting a chosen value, and return the chosen row to lit on mouse-leave or blur-out.",
+      "Do use JetBrains Mono at 0.75rem (11px inside a demonstration) for any figure a machine produced (dates, costs, pass rates, counts) and nothing else.",
+      "Do keep motion to the one ease cubic-bezier(0.16, 1, 0.3, 1) for the 900ms headline glide, 200-250ms colour and opacity transitions for hover states, and the 1% press scale; honour prefers-reduced-motion, which collapses the durations.",
+      "Do flood a tile cobalt (field) only when its content is Shelfie-derived, via tone: 'cobalt' in lib/projects.ts.",
+      "Do give a tile a data demonstration only when its repo publishes the figure, copy the number verbatim, and name the source in a comment; a project without a published figure gets no demo."
     ],
     "donts": [
-      "Don't use a max-height or opacity-only accordion for a new in-place expansion — the system's technique is a grid-template-rows (0fr <-> 1fr) reveal, confirmed by ProjectRow's existing implementation.",
-      "Don't treat StatusDot's resting accent fill as a general license for static accent color elsewhere — it is scoped to genuine binary data indicators.",
-      "Don't widen mono past the three scoped sites, and don't let it inherit the color rule from prose.",
-      "Don't add a second background/surface tone, a shadow, a blur, or a gradient.",
-      "Don't box content in bordered cards — the structural unit is the hairline divider plus the spine/tick device for Work's utility lines.",
-      "Don't add a category filter/toggle to Work.",
-      "Don't turn DepthTag into a horizontal eyebrow/kicker pattern anywhere else on the site.",
-      "Don't treat panel.face (#121315, added to tailwind.config.ts this session) as an active token — zero usages across .tsx/.css in the shipped tree; it is leftover, not part of the system.",
-      "Don't treat lib/projects.ts's image/icon emoji fields or gradient color strings as design-system material — neither is rendered by ProjectRow or Projects.tsx; they are dead legacy data, not a glyph-icon or gradient rule."
+      "Don't add borders, hairline rules, gradients, box-shadows or blur on the home page, and no border-radius beyond the 8px interval point; the single line hairline and the round chart dots are Read-page exceptions.",
+      "Don't colour a heading, a resting tile or a resting link orange unless it is the struck value of a set whose ghosts are visible.",
+      "Don't add a second accent hue, a hover colour other than orange, or a second tile surface tone.",
+      "Don't place mono above a heading inside a tile, set a heading in mono, or set prose in mono.",
+      "Don't set a home-page headline, tile title or nav item in Title Case or at weight 600; the loaded 600 weight is unrendered.",
+      "Don't reintroduce the retired cutaway devices (left-border spines, rotated depth tags, connector ticks, green accent), the \"hero sentence plus card list\" shape, or the removed 3D tile flip; a hover state changes colour and opacity, never the position of text being read.",
+      "Don't bounce or spring; the headline glides once and nothing else translates.",
+      "Don't give a tile a fixed aspect ratio that clips its blurb or demonstration.",
+      "Don't treat lib/projects.ts's image, icon or color gradient fields as design material; none renders."
     ]
   }
 }

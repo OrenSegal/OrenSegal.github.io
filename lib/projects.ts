@@ -2,6 +2,7 @@ export interface Project {
   id: string
   title: string
   subtitle: string
+  blurb: string // two plain sentences for the tile; the long description stays on the detail page
   description: string
   tags: string[]
   category: 'ai-agents' | 'ai-infra' | 'evals' | 'dev-tools'
@@ -9,6 +10,7 @@ export interface Project {
   demoUrl?: string
   ciWorkflow?: string // file name under .github/workflows, drives the live CI badge
   featured: boolean
+  tone?: 'cobalt' // flat cobalt face: content derived from Shelfie
   color: string
   icon: string
   keyFeatures: string[]
@@ -25,8 +27,9 @@ export const projects: Project[] = [
   {
     id: 'rootcause',
     title: 'rootcause',
-    subtitle: 'An Incident Agent Built Without a Framework, and Measured',
-    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written by hand over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost.',
+    subtitle: 'An incident agent built without a framework, and measured',
+    blurb: 'An agent that works out why an incident happened or a CI run failed. No framework underneath, and every claim about how well it works comes from graded runs you can rerun from the repo.',
+    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost.',
     tags: ['AI Agents', 'Evals', 'MCP', 'RAG', 'OpenTelemetry', 'Python'],
     category: 'ai-agents',
     image: '🔎',
@@ -36,7 +39,7 @@ export const projects: Project[] = [
     color: 'from-sky-500 to-indigo-500',
     icon: '🔎',
     keyFeatures: [
-      'A hand-written tool loop with an append-only event log, so a crashed run resumes without repeating a side effect',
+      'A framework-free tool loop with an append-only event log, so a crashed run resumes without repeating a side effect',
       'Approval gate for production actions, a check in the loop that rejects answers citing evidence no tool returned, and a prompt-injection scenario where obeying a planted instruction fails the run',
       'Sweeps that repeat every scenario per model and effort level, with Wilson intervals, pass^k and cost per solved incident',
       'Retrieval over past postmortems, from BM25 to embeddings to a fused hybrid, evaluated on its own before it reaches the agent',
@@ -57,7 +60,8 @@ export const projects: Project[] = [
   {
     id: 'sous',
     title: 'sous',
-    subtitle: 'Checks What Coding Agents Actually Do',
+    subtitle: 'Checks what coding agents actually do',
+    blurb: 'The checks I run coding agents under. It blocks destructive commands and secret reads, fails a test run that executed nothing, and flags tests that were weakened to pass.',
     description: 'A Claude Code harness you install in one command, plus a doctor that checks it still holds. It blocks destructive commands and secret reads, fails a green test run that executed nothing, flags the edit that made tests pass by weakening them, and names any plugin that changed since you approved it.',
     tags: ['Claude Code', 'Agent Safety', 'CI', 'Bash', 'Python'],
     category: 'ai-infra',
@@ -88,7 +92,8 @@ export const projects: Project[] = [
   {
     id: 'signal-scout',
     title: 'Signal Scout',
-    subtitle: 'Evidence-Backed Go-to-Market Research Agent',
+    subtitle: 'Evidence-backed go-to-market research agent',
+    blurb: "Give it a startup's URL and it returns a shortlist of likely first customers, each tied to a public source it re-fetched. A claim that isn't on the page never makes the report.",
     description: 'A Claude Code / OpenCode skill that turns a startup URL into an evidence-backed shortlist of first customers, market segments, and companies to pitch, using public signals only.',
     tags: ['AI Agents', 'Market Research', 'Claude Code', 'LLM'],
     category: 'ai-agents',
@@ -119,7 +124,8 @@ export const projects: Project[] = [
   {
     id: 'cited',
     title: 'cited',
-    subtitle: 'Checks Cited Claims Against Their Sources',
+    subtitle: 'Checks cited claims against their sources',
+    blurb: "Fetches every page an LLM cites and flags the claims whose words, numbers or names aren't on it. It runs before anything is published, not as an audit afterwards.",
     description: 'A fact-checking gate for anything an LLM writes with citations: fetches every cited page and flags any claim whose words, numbers or names it cannot find there, so a reviewer looks at those before anything is published.',
     tags: ['AI Reliability', 'Fact-Checking', 'Python'],
     category: 'ai-infra',
@@ -149,7 +155,8 @@ export const projects: Project[] = [
   {
     id: 'architecture-lint',
     title: 'Architecture Lint',
-    subtitle: 'Module Boundary Linter with a Ratchet',
+    subtitle: 'Module boundary linter with a ratchet',
+    blurb: 'A module-boundary linter you can turn on today. It records how many violations exist and fails CI only when the count goes up.',
     description: 'A single bash script that checks module boundaries in TypeScript and Swift codebases, with a count-based baseline so you can turn it on before cleaning up existing violations.',
     tags: ['Developer Tools', 'Static Analysis', 'CI/CD'],
     category: 'dev-tools',
@@ -179,7 +186,8 @@ export const projects: Project[] = [
   {
     id: 'scoped',
     title: 'Scoped',
-    subtitle: 'File Locks for Concurrent Claude Code Sessions',
+    subtitle: 'File locks for concurrent Claude Code sessions',
+    blurb: 'Stops two Claude Code sessions from editing the same file. A hook blocks the edit itself, so it holds even when the model never calls the lock.',
     description: 'An MCP server plus a PreToolUse hook that stops two Claude Code sessions from editing the same file at once. The hook blocks the edit itself, so it works even when the model never calls the tools.',
     tags: ['MCP', 'Claude Code', 'Multi-Agent', 'SQLite'],
     category: 'ai-infra',
@@ -209,7 +217,8 @@ export const projects: Project[] = [
   {
     id: 'litmus',
     title: 'Litmus',
-    subtitle: 'Mutation Testing for Eval Suites',
+    subtitle: 'Mutation testing for eval suites',
+    blurb: 'Mutation testing for eval suites. It breaks the skill on purpose and reports how many of the broken copies the evals caught. My own suite caught none.',
     description: 'Asks whether an eval suite can fail. It breaks the skill under test on purpose (deletes an instruction, inverts a rule, swaps tool names, plants a wrong number), runs the evals against each broken copy, and reports how many they caught.',
     tags: ['LLM Evals', 'Mutation Testing', 'Claude Code', 'Python'],
     category: 'evals',
@@ -240,7 +249,8 @@ export const projects: Project[] = [
   {
     id: 'rag-generation',
     title: 'Retrieval Eval',
-    subtitle: 'BM25, Dense and Hybrid on a Labelled Query Set',
+    subtitle: 'BM25, dense and hybrid on a labelled query set',
+    blurb: 'BM25, a local embedding model and a hybrid, scored on the same 55 labelled queries over 1,365 wine reviews, with intervals. Hybrid won on MRR and tied on recall.',
     description: 'A small retrieval eval over 1,365 wine reviews. It scores BM25, a local embedding model and a reciprocal-rank-fusion hybrid on the same 55 labelled queries, with bootstrap intervals and paired differences.',
     tags: ['RAG', 'Retrieval', 'Evals', 'Embeddings', 'Python'],
     category: 'evals',
@@ -262,7 +272,8 @@ export const projects: Project[] = [
   {
     id: 'llm-gateway-kit',
     title: 'LLM Gateway Kit',
-    subtitle: 'Cost and Reliability Layer for Swift Apps',
+    subtitle: 'Cost and reliability layer for Swift apps, with patterns from the Shelfie gateway',
+    blurb: "A Swift package between an app and its LLM providers: a semantic cache, provider fallback, and a daily spend cap that refuses the call instead of sending it. The patterns come from Shelfie's gateway.",
     description: 'A Swift package that sits between an app and its LLM providers. It caches paraphrased prompts and similar images, falls back across providers, and refuses a call once a daily spending cap is hit. Its patterns come from the gateway in Shelfie, which runs its own server-side version.',
     tags: ['LLM Gateway', 'Cost Control', 'Semantic Cache', 'Swift'],
     category: 'ai-infra',
@@ -270,6 +281,7 @@ export const projects: Project[] = [
     demoUrl: 'https://github.com/OrenSegal/llm-gateway-kit',
     ciWorkflow: 'ci.yml',
     featured: true,
+    tone: 'cobalt',
     color: 'from-cyan-500 to-blue-500',
     icon: '🚦',
     keyFeatures: [
@@ -283,7 +295,8 @@ export const projects: Project[] = [
   {
     id: 'signal-skills',
     title: 'signal-skills',
-    subtitle: 'Agent Skills That Mine Podcasts and Reviews',
+    subtitle: 'Agent skills that mine podcasts and reviews',
+    blurb: "Six Claude Code and Codex skills that mine podcasts and reviews into cited build proposals, with a ledger so the same idea doesn't come back on the next run.",
     description: 'Six skills for Claude Code and Codex that mine podcasts and user reviews, turn the findings into cited build proposals, and render them as a report. Results build up in a ledger between runs.',
     tags: ['Agent Skills', 'Claude Code', 'Codex', 'Python'],
     category: 'ai-agents',
@@ -305,7 +318,8 @@ export const projects: Project[] = [
   {
     id: 'blast-shield',
     title: 'Blast Shield',
-    subtitle: 'Shows What a Risky Command Will Change',
+    subtitle: 'Shows what a risky command will change',
+    blurb: 'Holds a risky shell command, shows what it would change and whether you can undo it, and runs it only when you press Proceed. A fork of Blast Radius, with wider coverage.',
     description: 'A Claude Code mod that holds a risky shell command, shows what it would touch and whether you can undo it, and runs it only when you press Proceed. A fork of Blast Radius, the mod Anthropic\'s DevRel team shared. The hold-and-ask design is theirs; I widened the coverage and the explanations.',
     tags: ['Claude Code', 'Mods', 'Agent Safety', 'JavaScript'],
     category: 'dev-tools',
@@ -326,7 +340,8 @@ export const projects: Project[] = [
   {
     id: 'deuce',
     title: 'deuce',
-    subtitle: 'Post-Merge Cleanup for Agent Worktrees',
+    subtitle: 'Post-merge cleanup for agent worktrees',
+    blurb: 'Cleans up the worktrees and branches that merged agent work leaves behind. Dry run by default, and it asks GitHub about the PR, which is the only way to see a squash merge.',
     description: 'A Claude Code plugin and CLI that removes the worktrees and branches left behind by merged agent work. The default is a dry run, and it asks GitHub about the pull request, which is the only way to see a squash merge.',
     tags: ['Claude Code', 'Plugin', 'Git', 'Python'],
     category: 'dev-tools',
