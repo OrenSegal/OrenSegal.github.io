@@ -34,7 +34,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 - Name: Oren Segal.
 - Target title/framing: "Applied AI Engineer", not "AI & Data Science." Open to Applied AI Engineer roles, New York or remote, US permanent resident (no sponsorship needed).
 - Lead proof: rootcause benchmark (525 runs, seven model and effort settings, pass rates 77-84% with overlapping intervals, cost per solved incident varied 25x), written up at `/writing/rootcause-benchmark/`.
-- Visual identity is the "Utility Cutaway" system documented in `DESIGN.md`: a near-black ground read as depth, each section a vertical spine with a rotated depth label, each project a utility line that expands in place to its build log; Space Grotesk for prose, JetBrains Mono only for machine-sourced facts, one accent green. The earlier dark/purple-gradient/glassmorphism template look is retired and stays an anti-reference.
+- Visual identity is the "Utility Cutaway" system documented in `DESIGN.md`: a near-black ground read as depth, each section a vertical hairline spine (the rotated depth labels were removed on 2026-11-05 because they clipped on mobile), three flagship projects that lead with one number and a visual drawn from committed results, and a one-line table for the rest; Space Grotesk for prose, JetBrains Mono only for machine-sourced facts, one accent green. The earlier dark/purple-gradient/glassmorphism template look is retired and stays an anti-reference.
 
 ## Evidence on Hand
 
@@ -52,7 +52,7 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `blast-shield` — Claude Code mod that shows what a risky command will change before it runs
 - `deuce` — post-merge cleanup for agent worktrees
 
-Each project row shows its live GitHub Actions badge (`ciWorkflow` in `lib/projects.ts`) and its last-push date as "updated". Shelfie (closed TestFlight beta, shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
+The home page shows three flagships (rootcause, litmus, cited) with a visual each, a "Checks that proved less than they claimed" section (scoped#1, cited#1, signal-scout#3), and a one-line table of the rest with each project's live GitHub Actions badge (`ciWorkflow` in `lib/projects.ts`) and last-push date. Problem/Decisions/Outcome are on the detail pages only. `/writing/` indexes the two posts. Shelfie (closed TestFlight beta, shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 
 ## Product Principles
 

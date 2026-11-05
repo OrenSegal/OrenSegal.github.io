@@ -10,7 +10,7 @@ export default function Navigation() {
   const navItems = [
     { name: 'Work', href: '/#work' },
     { name: 'About', href: '/#about' },
-    { name: 'Writing', href: '/writing/rootcause-benchmark/' },
+    { name: 'Writing', href: '/writing/' },
     { name: 'Resume', href: '/resume.pdf' },
     { name: 'Contact', href: '/#contact' },
   ]
