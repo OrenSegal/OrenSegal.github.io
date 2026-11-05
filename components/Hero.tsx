@@ -6,7 +6,7 @@ const linkClass =
 // Each chip is a number already stated in the profile README and on this site.
 const chips = [
   { label: '525 graded runs', href: '#rootcause' },
-  { label: 'cost per solve 25x apart', href: '#rootcause' },
+  { label: '25x cost per solved incident', href: '#rootcause' },
   { label: '0 of 12 mutants killed', href: '#litmus' },
 ]
 

@@ -130,7 +130,7 @@
       "name": "Contact Channel Row",
       "kind": "custom",
       "refersTo": "link-list-item",
-      "description": "Icon + label link row in Contact, py-4 (16px) interval; icon and text transition to accent together as one hover target (interaction-state accent, not the utility-line active state).",
+      "description": "Icon + label link row in Contact, py-4 (16px) interval; icon and text transition to accent together as one hover target.",
       "html": "<a href=\"#\" class=\"ds-channel-row\"><svg class=\"ds-channel-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-10 5L2 7\"/></svg><span class=\"ds-channel-label\">orenssegal@gmail.com</span></a>",
       "css": ".ds-channel-row { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #232527; padding: 16px 0; } .ds-channel-row:first-child { padding-top: 0; } .ds-channel-row:last-child { border-bottom: none; } .ds-channel-icon { color: #7a7d7f; transition: color 0.15s; flex-shrink: 0; } .ds-channel-label { color: #f2f1ea; transition: color 0.15s; } .ds-channel-row:hover .ds-channel-icon, .ds-channel-row:hover .ds-channel-label { color: #8fd6a8; }"
     },
