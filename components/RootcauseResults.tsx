@@ -1,7 +1,7 @@
 // Every number is copied from the rootcause repo's committed sweep summary,
 // results/sweeps/models-and-retrieval-2026-10-15/summary.json (pass_rate,
 // ci_low, ci_high, cost_per_pass), rounded the way its README table prints them.
-const ROWS = [
+export const ROWS = [
   { label: 'Opus 5.5, high', pass: 79, low: 68, high: 86, cost: 0.081 },
   { label: 'Opus 5.5, medium', pass: 81, low: 71, high: 89, cost: 0.0686 },
   { label: 'Opus 5.5, low', pass: 79, low: 68, high: 86, cost: 0.0468 },

@@ -21,7 +21,7 @@ lucide-react icons.
 
 ```
 app/                    routes (home, 404, /projects/[id], /writing/rootcause-benchmark)
-components/             page sections (Hero, About, Projects, ProjectRow, ProjectDetail, RootcauseResults, Contact, Footer, Navigation)
+components/             page sections (Hero, Flagships, Checks, Projects, About, ProjectDetail, RootcauseResults, Contact, Footer, Navigation)
 lib/projects.ts         project data, the single source of truth for the project list
 lib/project-stats.json  star counts and last-push dates, refreshed by scripts/fetch-github-stats.mjs at prebuild
 ```
