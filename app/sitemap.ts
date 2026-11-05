@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE}/` },
     { url: `${BASE}/writing/rootcause-benchmark/` },
+    { url: `${BASE}/writing/reshet-pricing-model/` },
     ...projects.map((p) => ({ url: `${BASE}/projects/${p.id}/` })),
   ]
 }
