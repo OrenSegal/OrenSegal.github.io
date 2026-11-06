@@ -63,17 +63,25 @@ const sections: { heading: string; paragraphs: string[] }[] = [
     ],
   },
   {
+    heading: 'The follow-up: eight scenarios built to kill mutants',
+    paragraphs: [
+      'So I built the suite the first run called for. Eight new scenarios, each named for one rule of the brief and designed so that rule decides the outcome. The grader now accepts a set of defensible services per scenario, written before any model answered, with the old single-service grade kept behind a flag. Three scenarios are held out, never used to change the brief or the grader. Every new scenario requires the agent to search past postmortems, so search is a measured step.',
+      'Run once at three model tiers, 72 runs: Opus 24 of 24, Sonnet 24 of 24, Haiku 21 of 24. The suite does not separate the top two tiers, and Haiku\'s three misses were all a wrong category with the right service and evidence. Every run searched, but only because the brief now says to and the grader requires it, so that shows instruction-following, not that search helps.',
+      'Then I mutation-tested the retrieval brief against the new scenarios: 112 runs, 14 mutants. 2 were killed, 11 survived and 1 was inconclusive. Both kills are the search requirement: delete the search line, or truncate the brief past it, and the grader fails every run because a search it demands is no longer asked for. Deleting or inverting any behavioural rule, such as gather evidence first or finish with the structured answer, survived. Scenarios built around single rules did not catch a single rule being broken. The original problem is half fixed: the suite now catches a brief that stops asking for search, and still cannot catch a regression in a behavioural instruction.',
+    ],
+  },
+  {
     heading: 'What it doesn\'t show',
     paragraphs: [
       'The intervals treat each run as independent. Repeats of one scenario are correlated, so the real uncertainty is somewhat wider than the chart shows, which only strengthens the main finding.',
-      'There is no held-out set: the scenarios, the corpus and the labels share an author, which limits how far any of this generalizes. Every live run went through Claude Code, with costs as Claude Code reports them at API list prices; the native Anthropic API adapter is tested only against a mocked transport. Some failures are disagreements with a strict grader that accepts one service per scenario, not clear misses.',
+      'The held-out split in the follow-up controls for tuning, not authorship: the scenarios, the corpus and the labels share an author, which limits how far any of this generalizes. Every live run went through Claude Code, with costs as Claude Code reports them at API list prices; the native Anthropic API adapter is tested only against a mocked transport. In the 525-run sweep, some failures are disagreements with a strict grader that accepts one service per scenario, not clear misses; the accepted-service grade came after, and I did not widen those scenarios, since their answers were already published.',
     ],
   },
   {
     heading: 'What I take from it',
     paragraphs: [
       'If the accuracy your task needs is what this grader scores, overlapping intervals leave cost as the axis to choose on, and the cheapest setting here is Haiku 5.5, at about a twenty-fifth of the cost of Opus at high effort. If you need the category right more than the exact service, Opus earns more of its price. Run the comparison with your own grader before deciding.',
-      'The more useful next step is a suite that can tell settings apart: scenarios where a single rule of the brief decides the outcome, a grader that accepts more than one defensible service (decided before looking at model answers), and a retrieval step the agent has to take, so search can actually be measured.',
+      'A suite that can tell settings apart is harder than it looks. I built the pieces: scenarios aimed at single rules, a pre-registered multi-service grader, a held-out split and a required search step. Mutation testing says it still does not catch a broken behavioural rule. The next try needs harder traps, several runs per mutant, and a weaker model as the baseline.',
     ],
   },
 ]
