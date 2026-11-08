@@ -39,7 +39,7 @@ const CHECKS = [
 
 const byId = (id: string) => projects.find((p) => p.id === id)!
 const RECORDED = projects.filter((p) => p.records?.decisions).map((p) => p.id)
-const LIMITED = ['rootcause', 'litmus', 'cited', 'scoped', 'llm-gateway-kit']
+const LIMITED = projects.filter((p) => p.records?.limitations).map((p) => p.id)
 const inline = 'text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent'
 
 export default function Projects() {

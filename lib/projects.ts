@@ -6,13 +6,11 @@ export interface Project {
   description: string
   tags: string[]
   category: 'ai-agents' | 'ai-infra' | 'evals' | 'dev-tools'
-  image: string
   demoUrl?: string
+  pageUrl?: string // the project's own GitHub Pages site, when it has one
   ciWorkflow?: string // file name under .github/workflows, drives the live CI badge
   featured: boolean
   tone?: 'cobalt' // flat cobalt face: content derived from Shelfie
-  color: string
-  icon: string
   keyFeatures: string[]
   techStack: string[]
   impact: string
@@ -37,12 +35,9 @@ export const projects: Project[] = [
     description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost. Those evals are 30 written incidents and 3 recorded CI failures; it has not run against a live system, and the Azure deploy in the repo has never been dispatched.',
     tags: ['AI Agents', 'Evals', 'MCP', 'RAG', 'OpenTelemetry', 'Python'],
     category: 'ai-agents',
-    image: '🔎',
     demoUrl: 'https://github.com/OrenSegal/rootcause',
     ciWorkflow: 'ci.yml',
     featured: true,
-    color: 'from-sky-500 to-indigo-500',
-    icon: '🔎',
     keyFeatures: [
       'A framework-free tool loop with an append-only event log, so a crashed run resumes without repeating a side effect',
       'Approval gate for production actions, a check in the loop that rejects answers citing evidence no tool returned, and a prompt-injection scenario where obeying a planted instruction fails the run',
@@ -71,12 +66,9 @@ export const projects: Project[] = [
     description: 'A Claude Code harness you install in one command, plus a doctor that checks it still holds. It blocks destructive commands and secret reads, fails a green test run that executed nothing, flags the edit that made tests pass by weakening them, and names any plugin that changed since you approved it.',
     tags: ['Claude Code', 'Agent Safety', 'CI', 'Bash', 'Python'],
     category: 'ai-infra',
-    image: '🧂',
     demoUrl: 'https://github.com/OrenSegal/sous',
     ciWorkflow: 'ci.yml',
     featured: true,
-    color: 'from-amber-500 to-orange-500',
-    icon: '🧂',
     keyFeatures: [
       'A PreToolUse guard that stops the spellings deny rules miss, such as /bin/rm -rf, sh -c and git -C . push -f',
       'tests-ran exits 1 when a test log shows zero executed tests; tests-weakened reads a diff and flags deleted, skipped or loosened tests',
@@ -99,16 +91,14 @@ export const projects: Project[] = [
     id: 'signal-scout',
     title: 'Signal Scout',
     subtitle: 'Evidence-backed go-to-market research agent',
-    blurb: "Give it a startup's URL and it returns a shortlist of likely first customers, each tied to a public source it re-fetched. A claim that isn't on the page never makes the report.",
+    blurb: "Give it a startup's URL and it returns a shortlist of likely first customers, each tied to a public source it re-fetched. A prospect whose cited evidence is clearly missing from the page is dropped; partial matches are flagged for review.",
     description: 'A Claude Code / OpenCode skill that turns a startup URL into an evidence-backed shortlist of first customers, market segments, and companies to pitch, using public signals only.',
     tags: ['AI Agents', 'Market Research', 'Claude Code', 'LLM'],
     category: 'ai-agents',
-    image: '🎯',
     demoUrl: 'https://github.com/OrenSegal/signal-scout',
+    pageUrl: 'https://orensegal.github.io/signal-scout/',
     ciWorkflow: 'ci.yml',
     featured: true,
-    color: 'from-purple-500 to-pink-500',
-    icon: '🎯',
     keyFeatures: [
       'Turns a startup URL into a ranked shortlist of prospects, segments, and companies',
       'Every prospect cites a public source; verify_sources.py re-fetches it, a prospect whose cited evidence is clearly missing from the page is dropped before the report is written, and partial matches stay flagged for review',
@@ -124,7 +114,7 @@ export const projects: Project[] = [
         'Made CI run the real validation, scoring and verification code on fixture reports with saved pages, so a code change can turn the eval red; three planted bugs each did (signal-scout#3).',
         'Shipped as a standalone Claude Code / OpenCode plugin rather than a hosted service, so it runs against a user\'s own Claude Code session with no separate backend to operate.',
       ],
-      outcome: 'The verification step became the template for catching AI fabrication elsewhere: its containment-checking approach was later generalized into its own standalone tool, cited.',
+      outcome: 'cited began as this verification step and grew into its own tool. Fixes made there later came back: the check that numbers and names in a claim are on the page, and the fetcher that refuses private addresses, were ported from cited in 1.7.0.',
     },
   },
   {
@@ -136,12 +126,9 @@ export const projects: Project[] = [
     description: 'A citation-checking gate for anything an LLM writes with citations: fetches every cited page and flags any claim whose words, numbers or names it cannot find there, so a reviewer looks at those before anything is published. It checks that a claim is on the page, not that the page is true.',
     tags: ['AI Reliability', 'Citation Checking', 'Python'],
     category: 'ai-infra',
-    image: '🔍',
     demoUrl: 'https://github.com/OrenSegal/cited',
     ciWorkflow: 'ci.yml',
     featured: true,
-    color: 'from-orange-500 to-red-500',
-    icon: '🔍',
     keyFeatures: [
       'Re-fetches every source an LLM cites and checks that the claim\'s key words, numbers and names appear in it',
       'Flags unsupported citations for a person to confirm or cut. On its own benchmark (29 claims about one page, labelled by me) it flagged 10 of 15 unsupported claims: recall 0.67, 95% interval 0.41-0.90, precision 0.67 (0.42-0.91)',
@@ -161,19 +148,16 @@ export const projects: Project[] = [
   },
   {
     id: 'architecture-lint',
-    records: { limitations: `${GH}/architecture-lint#limitations` },
+    records: { limitations: `${GH}/sous/tree/main/plugins/architecture-lint#limitations` },
     title: 'Architecture Lint',
     subtitle: 'Module boundary linter with a ratchet',
     blurb: 'A module-boundary linter you can turn on today. It records how many violations exist and fails CI only when the count goes up.',
     description: 'A single bash script that checks module boundaries in TypeScript and Swift codebases, with a count-based baseline so you can turn it on before cleaning up existing violations.',
     tags: ['Developer Tools', 'Static Analysis', 'CI/CD'],
     category: 'dev-tools',
-    image: '🧱',
-    demoUrl: 'https://github.com/OrenSegal/architecture-lint',
+    demoUrl: 'https://github.com/OrenSegal/sous/tree/main/plugins/architecture-lint',
     ciWorkflow: 'ci.yml',
     featured: false,
-    color: 'from-yellow-500 to-orange-500',
-    icon: '🧱',
     keyFeatures: [
       'Baseline records how many violations each rule has today; CI fails when a count goes up',
       'Boundary rules live in one list at the top of the script, with no annotations in your code',
@@ -193,19 +177,16 @@ export const projects: Project[] = [
   },
   {
     id: 'scoped',
-    records: { limitations: `${GH}/scoped#limitations` },
+    records: { limitations: `${GH}/sous/tree/main/plugins/scoped#limitations` },
     title: 'Scoped',
     subtitle: 'File locks for concurrent Claude Code sessions',
     blurb: 'Stops two Claude Code sessions from editing the same file. A hook blocks the edit itself, so it holds even when the model never calls the lock.',
     description: 'An MCP server plus a PreToolUse hook that stops two Claude Code sessions from editing the same file at once. The hook blocks the edit itself, so it works even when the model never calls the tools.',
     tags: ['MCP', 'Claude Code', 'Multi-Agent', 'SQLite'],
     category: 'ai-infra',
-    image: '🔒',
-    demoUrl: 'https://github.com/OrenSegal/scoped',
+    demoUrl: 'https://github.com/OrenSegal/sous/tree/main/plugins/scoped',
     ciWorkflow: 'ci.yml',
     featured: false,
-    color: 'from-emerald-500 to-teal-500',
-    icon: '🔒',
     keyFeatures: [
       'A PreToolUse hook denies an Edit or Write on a file another session has claimed, and auto-claims unclaimed files',
       'A claim tool reserves files before a multi-file change; release, check and status free them early and show who holds what',
@@ -232,12 +213,10 @@ export const projects: Project[] = [
     description: 'Asks whether an eval suite can fail. It breaks the skill under test on purpose (deletes an instruction, inverts a rule, swaps tool names, plants a wrong number), runs the evals against each broken copy, and reports how many they caught.',
     tags: ['LLM Evals', 'Mutation Testing', 'Claude Code', 'Python'],
     category: 'evals',
-    image: '🧪',
     demoUrl: 'https://github.com/OrenSegal/litmus',
+    pageUrl: 'https://orensegal.github.io/litmus/',
     ciWorkflow: 'ci.yml',
     featured: true,
-    color: 'from-pink-500 to-rose-500',
-    icon: '🧪',
     keyFeatures: [
       'litmus vacuity finds graders that cannot fail, offline and for free, before any run is paid for',
       'litmus mutate reports a mutation score and lists every surviving mutant with its diff, so you see which part of the prompt nothing tests',
@@ -265,12 +244,9 @@ export const projects: Project[] = [
     description: 'A small retrieval eval over 1,365 wine reviews. It scores BM25, a local embedding model and a reciprocal-rank-fusion hybrid on the same 55 labelled queries, with bootstrap intervals and paired differences.',
     tags: ['RAG', 'Retrieval', 'Evals', 'Embeddings', 'Python'],
     category: 'evals',
-    image: '🍷',
     demoUrl: 'https://github.com/OrenSegal/rag-generation',
     ciWorkflow: 'test.yml',
     featured: true,
-    color: 'from-rose-500 to-red-500',
-    icon: '🍷',
     keyFeatures: [
       'BM25 wins when the query contains the label term. On paraphrases it mostly fails, and dense and hybrid do better',
       'Hybrid improved MRR by 0.10 (interval 0.02 to 0.18) and tied BM25 on recall, so the README calls it the safe default here and not a clear winner',
@@ -289,13 +265,10 @@ export const projects: Project[] = [
     description: 'A Swift package that sits between an app and its LLM providers. It caches paraphrased prompts and similar images, falls back across providers, and refuses a call once a daily spending cap is hit. Its patterns come from the gateway in Shelfie, which runs its own server-side version.',
     tags: ['LLM Gateway', 'Cost Control', 'Semantic Cache', 'Swift'],
     category: 'ai-infra',
-    image: '🚦',
     demoUrl: 'https://github.com/OrenSegal/llm-gateway-kit',
     ciWorkflow: 'ci.yml',
     featured: true,
     tone: 'cobalt',
-    color: 'from-cyan-500 to-blue-500',
-    icon: '🚦',
     keyFeatures: [
       'Prompts are matched on embedding similarity, images on a perceptual hash',
       'A cheap model runs first; a circuit breaker, a thrown error or a low confidence score escalates to the next tier',
@@ -312,12 +285,9 @@ export const projects: Project[] = [
     description: 'Six skills for Claude Code and Codex that mine podcasts and user reviews, turn the findings into cited build proposals, and render them as a report. Results build up in a ledger between runs.',
     tags: ['Agent Skills', 'Claude Code', 'Codex', 'Python'],
     category: 'ai-agents',
-    image: '🎙️',
     demoUrl: 'https://github.com/OrenSegal/signal-skills',
     ciWorkflow: 'check-shared-files.yml',
     featured: false,
-    color: 'from-violet-500 to-purple-500',
-    icon: '🎙️',
     keyFeatures: [
       'Extraction runs in batches on a cheap model. Only synthesis and judgment calls use the session model',
       'Falsifiable predictions from guests are tracked and later scored as confirmed, failed or stale',
@@ -329,19 +299,16 @@ export const projects: Project[] = [
   },
   {
     id: 'blast-shield',
-    records: { limitations: `${GH}/blast-shield#limits` },
+    records: { limitations: `${GH}/sous/tree/main/plugins/blast-shield#limits` },
     title: 'Blast Shield',
     subtitle: 'Shows what a risky command will change',
     blurb: 'Holds a risky shell command, shows what it would change and whether you can undo it, and runs it only when you press Proceed. A fork of Blast Radius, with wider coverage.',
     description: 'A Claude Code mod that holds a risky shell command, shows what it would touch and whether you can undo it, and runs it only when you press Proceed. A fork of Blast Radius, the mod Anthropic\'s DevRel team shared. The hold-and-ask design is theirs; I widened the coverage and the explanations.',
     tags: ['Claude Code', 'Mods', 'Agent Safety', 'JavaScript'],
     category: 'dev-tools',
-    image: '🛡️',
-    demoUrl: 'https://github.com/OrenSegal/blast-shield',
+    demoUrl: 'https://github.com/OrenSegal/sous/tree/main/plugins/blast-shield',
     ciWorkflow: 'test.yml',
     featured: false,
-    color: 'from-orange-500 to-red-500',
-    icon: '🛡️',
     keyFeatures: [
       'Measures with dry runs where the tool has one, such as git clean -n, kubectl --dry-run=client and terraform plan -destroy',
       'When a dry run fails, the pane says so and still holds the command',
@@ -352,19 +319,16 @@ export const projects: Project[] = [
   },
   {
     id: 'deuce',
-    records: { limitations: `${GH}/deuce#limitations` },
+    records: { limitations: `${GH}/sous/tree/main/plugins/deuce#limitations` },
     title: 'deuce',
     subtitle: 'Post-merge cleanup for agent worktrees',
     blurb: 'Cleans up the worktrees and branches that merged agent work leaves behind. Dry run by default, and it asks GitHub about the PR, which is the only way to see a squash merge.',
     description: 'A Claude Code plugin and CLI that removes the worktrees and branches left behind by merged agent work. The default is a dry run, and it asks GitHub about the pull request, which is the only way to see a squash merge.',
     tags: ['Claude Code', 'Plugin', 'Git', 'Python'],
     category: 'dev-tools',
-    image: '🧹',
-    demoUrl: 'https://github.com/OrenSegal/deuce',
+    demoUrl: 'https://github.com/OrenSegal/sous/tree/main/plugins/deuce',
     ciWorkflow: 'ci.yml',
     featured: false,
-    color: 'from-lime-500 to-green-500',
-    icon: '🧹',
     keyFeatures: [
       'Refuses on a dirty or locked worktree, commits missing from the merged PR, or a remote branch someone else pushed to',
       'Logs every applied action with the branch tip, and deuce undo --last recreates the last deleted branch',
