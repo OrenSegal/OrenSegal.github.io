@@ -20,17 +20,17 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   return {
     title: `${project.title} | Oren Segal`,
-    description: project.description,
+    description: project.blurb,
     keywords: project.tags,
     openGraph: {
       title: `${project.title} | Oren Segal`,
-      description: project.description,
+      description: project.blurb,
       images: ['/og-image.png'],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${project.title} | Oren Segal`,
-      description: project.description,
+      description: project.blurb,
       images: ['/og-image.png'],
     },
   }
