@@ -5,7 +5,7 @@ import { RootcauseResults } from '@/components/RootcauseResults'
 
 const title = 'The benchmark that didn\'t pick a winner'
 const description =
-  'I ran 525 graded runs of my incident benchmark, rootcause, with Claude Code\'s own agent loop as the investigator, across seven settings. Pass rates stayed at 77-84% with overlapping intervals; cost per solved incident varied 25x.'
+  'I ran 525 graded runs of my incident benchmark, rootcause, with Claude Code\'s own agent loop as the investigator, across seven settings. Cost per solved incident varied 25x; pass rates of 77-84% showed no detected difference, though the design could only detect gaps above about 13-19 points.'
 
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
@@ -25,7 +25,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
     paragraphs: [
       'The eval set is 25 incidents with known causes. Twenty-two are written as code, each around a mistake a responder could make under pressure, like a deploy that lands just before a vendor outage. The other three are real failed CI runs from sous, another of my repos.',
       'The scenarios plant decoys against the obvious heuristic, "blame the last deploy before the first error." That baseline gets three of them right. The ground truth stays out of every fixture the agent can read. The grader checks the category, the service, that every cited id is one a tool returned, and that no rollback hit an innocent deploy.',
-      'One good run proves little, so the sweep runs every scenario three times per setting, interleaved across settings. Harness failures (a crash, a timeout, a run served by the wrong model) are retried, never counted as wrong answers. Each setting gets a Wilson interval on its pass rate, pass^3 (all three attempts right, which is what you want from something on call), and cost per solved incident, which includes what the failed runs spent.',
+      'One good run proves little, so the sweep runs every scenario three times per setting, interleaved across settings. Harness failures (a crash, a timeout, a run served by the wrong model) are retried, never counted as wrong answers. Each setting gets a 95% interval on its pass rate from resampling incidents with their runs kept together, pass^3 (all three attempts right, which is what you want from something on call), and cost per solved incident, which includes what the failed runs spent.',
     ],
   },
   {
@@ -37,16 +37,16 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: '',
     paragraphs: [
-      'Every setting landed between 77% and 84%, and every interval overlaps every other one. At 75 runs per setting, a gap under about ten to twelve points is noise. Cost did separate them, by about 25x: from $0.0033 per solved incident for Haiku to $0.081 for Opus at high effort. Opus at medium effort was at least as accurate as Opus at high, for less. The extra reasoning bought nothing I could measure.',
-      'That flat result depends on my grader. Two scenarios fail in every run and make up 42 of the 107 failures, and 53 failures are wrong on the service alone. Drop the service check and Opus at high effort scores 93%, Haiku 85% and Sonnet 83%, with the Opus-Sonnet gap at 3 to 20 points when I resample scenarios. Overlapping intervals did not show the models are equal.',
-      'The hybrid-search row has the highest point, and it is tempting to credit retrieval for it. I can\'t. With the search tool available and named in the brief, Opus called it in 3 of 75 runs in each retrieval setting.',
+      'Cost separated them, by about 25x: from $0.0033 per solved incident for Haiku to $0.081 for Opus at high effort. Accuracy did not. Every setting landed between 77% and 84%, and no pair differed detectably. That is a statement about the design as much as the models: paired by incident, Opus at high effort minus Haiku is +1.3 points (-12.0 to +13.3), and the smallest gap this design would detect is about 19 points for that pair and 13 for Opus against Sonnet. Smaller differences are unresolved, not shown to be zero. Opus at medium effort was at least as accurate as Opus at high, for less; the extra reasoning bought nothing I could detect.',
+      'That result also depends on my grader. Two scenarios fail in every run and make up 42 of the 107 failures, and 53 failures are wrong on the service alone. Drop the service check and Opus at high effort scores 93%, Haiku 85% and Sonnet 83%, with the Opus-Sonnet gap at 3 to 20 points when I resample scenarios. That comparison was chosen after seeing the results and is not corrected for the others, so it is a hint, not a finding. Either way, no detected difference did not show the models are equal.',
+      'The hybrid-search row has the highest point, and it is tempting to credit retrieval for it. I can\'t. With the search tool available and named in the brief, Opus called it in 3 of 75 runs in each retrieval setting. Hybrid minus BM25 even has a resampled interval that excludes zero, but only 4 incidents differ, and it is one of 21 pairwise comparisons; after a Holm correction it is nothing.',
     ],
   },
   {
-    heading: 'Splitting the work didn\'t pay either',
+    heading: 'Splitting the work cost 3x',
     paragraphs: [
       'A separate 300-run comparison held the model at Opus 5.5 high and changed the harness instead: my framework-free loop against the same investigation rebuilt as a LangGraph graph, each run as a single agent and as an orchestrator with workers. Everything else was shared, down to the grader.',
-      'I found no detectable difference between the two frameworks, though the single-agent accuracy gap could be anywhere from -8 to +3 points. The orchestrator with workers cost about three times as much per solved incident ($0.3745 against $0.1149 in my loop, $0.3430 against $0.1114 in LangGraph) and took about twice as long, for no measurable gain in either harness.',
+      'The orchestrator with workers cost about three times as much per solved incident ($0.3745 against $0.1149 in my loop, $0.3430 against $0.1114 in LangGraph) and took about twice as long. Its accuracy did not differ detectably from a single agent: single minus orchestrator is +3.3 points (-4.0 to +12.0) pooled over both harnesses, and the design detects only gaps above about 12 points pooled and 15 per harness, so a smaller difference either way is not ruled out. I found no detectable difference between the two frameworks either.',
     ],
   },
   {
@@ -73,14 +73,14 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'What it doesn\'t show',
     paragraphs: [
-      'The intervals treat each run as independent. Repeats of one scenario are correlated, so the real uncertainty is somewhat wider than the chart shows, which only strengthens the main finding.',
+      'The 75 runs per setting are not 75 independent trials. Repeats of one incident mostly agree, and most incidents pass or fail all three times, so 75 runs carry roughly the information of 30. The intervals here resample incidents with their runs kept together, which makes them about 1.6 times as wide as intervals that treat every run as independent. Paired by incident, 25 incidents can detect only gaps above about 13 to 19 points between model tiers; detecting a 10-point gap between Opus and Haiku would take about 84 incidents. So the accuracy result is unresolved, not a tie. Cost is the finding that holds.',
       'The held-out split in the follow-up controls for tuning, not authorship: the scenarios, the corpus and the labels share an author, which limits how far any of this generalizes. Every live run went through Claude Code, with costs as Claude Code reports them at API list prices; the native Anthropic API adapter is tested only against a mocked transport. In the 525-run sweep, some failures are disagreements with a strict grader that accepts one service per scenario, not clear misses; the accepted-service grade came after, and I did not widen those scenarios, since their answers were already published.',
     ],
   },
   {
     heading: 'What I take from it',
     paragraphs: [
-      'If the accuracy your task needs is what this grader scores, overlapping intervals leave cost as the axis to choose on, and the cheapest setting here is Haiku 5.5, at about a twenty-fifth of the cost of Opus at high effort. If you need the category right more than the exact service, Opus earns more of its price. Run the comparison with your own grader before deciding.',
+      'If the accuracy your task needs is what this grader scores, cost is the only axis this benchmark resolves, and the cheapest setting here is Haiku 5.5, at about a twenty-fifth of the cost of Opus at high effort. If you need the category right more than the exact service, Opus earns more of its price. Run the comparison with your own grader before deciding.',
       'A suite that can tell settings apart is harder than it looks. I built the pieces: scenarios aimed at single rules, a pre-registered multi-service grader, a held-out split and a required search step. Mutation testing says it still does not catch a broken behavioural rule. The next try needs harder traps, several runs per mutant, and a weaker model as the baseline.',
     ],
   },

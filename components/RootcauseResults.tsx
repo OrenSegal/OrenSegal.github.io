@@ -1,7 +1,7 @@
 import { ROWS, RESULTS_URL, CHOSEN_INDEX } from '@/lib/rootcause-results'
 
 const AXIS_MIN = 60
-const AXIS_MAX = 95
+const AXIS_MAX = 100
 const COST_MAX = 0.09
 const pct = (v: number) => ((v - AXIS_MIN) / (AXIS_MAX - AXIS_MIN)) * 100
 
@@ -9,10 +9,10 @@ export function RootcauseResults() {
   return (
     <figure className="mt-10">
       <figcaption className="mb-5 max-w-xl text-sm leading-relaxed text-ink-dim">
-        Pass rate with 95% Wilson interval, and cost per solved incident, for
-        each setting. 75 runs per setting (25 incidents, three runs each), 525
+        Pass rate with 95% interval (incidents resampled, each incident&apos;s
+        runs kept together), and cost per solved incident, for each setting. 75 runs per setting (25 incidents, three runs each), 525
         in total. The shaded band marks 77-84%, the range every point falls in.
-        Orange marks the cheapest setting whose interval overlaps every other.
+        Orange marks the cheapest setting; no other was detectably more accurate.
       </figcaption>
 
       <table className="w-full border-collapse text-sm">
@@ -80,8 +80,9 @@ export function RootcauseResults() {
         >
           rootcause results/sweeps/models-and-retrieval-2026-10-15
         </a>
-        . Intervals treat each run as independent; repeats of one incident are
-        correlated, so the true uncertainty is somewhat wider.
+        . No pair of settings differed detectably, but paired by incident the
+        design detects only gaps above about 13-19 points between model tiers,
+        so smaller accuracy differences are unresolved, not zero.
       </p>
     </figure>
   )
