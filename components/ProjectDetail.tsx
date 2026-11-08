@@ -42,14 +42,19 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </a>
         )}
 
-        {project.records && (
+        {(project.records || project.pageUrl) && (
           <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {project.records.decisions && (
+            {project.pageUrl && (
+              <a href={project.pageUrl} target="_blank" rel="noopener noreferrer" className={recordLink}>
+                project page
+              </a>
+            )}
+            {project.records?.decisions && (
               <a href={project.records.decisions} target="_blank" rel="noopener noreferrer" className={recordLink}>
                 decision records
               </a>
             )}
-            {project.records.limitations && (
+            {project.records?.limitations && (
               <a href={project.records.limitations} target="_blank" rel="noopener noreferrer" className={recordLink}>
                 limitations
               </a>

@@ -14,7 +14,7 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
     label: 'Hooks',
     items: [
       { name: 'sous guard', href: `${GH}/sous/blob/main/hooks/sous-guard.sh` },
-      { name: 'scoped edit lock', href: `${GH}/scoped/blob/main/hooks/pretool-enforce.mjs` },
+      { name: 'scoped edit lock', href: `${GH}/sous/blob/main/plugins/scoped/hooks/pretool-enforce.mjs` },
     ],
   },
   {
@@ -22,7 +22,7 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
     items: [
       { name: 'signal-scout', href: `${GH}/signal-scout/tree/main/skills/signal-scout` },
       { name: 'test-audit', href: `${GH}/sous/tree/main/skills/test-audit` },
-      { name: 'deuce', href: `${GH}/deuce/tree/main/skills/deuce` },
+      { name: 'deuce', href: `${GH}/sous/tree/main/plugins/deuce/skills` },
       { name: 'podcast', href: `${GH}/signal-skills/tree/main/plugins/podcast` },
       { name: 'review-scout', href: `${GH}/signal-skills/tree/main/plugins/review-scout` },
       { name: 'ideation', href: `${GH}/signal-skills/tree/main/plugins/ideation` },
@@ -32,7 +32,7 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
     label: 'MCP servers',
     items: [
       { name: 'rootcause telemetry', href: `${GH}/rootcause/blob/main/src/rootcause/adapters/mcp_telemetry.py` },
-      { name: 'scoped', href: `${GH}/scoped/blob/main/bin/scoped-mcp` },
+      { name: 'scoped', href: `${GH}/sous/blob/main/plugins/scoped/bin/scoped-mcp` },
     ],
   },
   {
@@ -45,7 +45,7 @@ const toolkit: { label: string; items: { name: string; href: string }[] }[] = [
   {
     label: 'Mods',
     items: [
-      { name: 'blast-shield (fork)', href: `${GH}/blast-shield` },
+      { name: 'blast-shield (fork)', href: `${GH}/sous/tree/main/plugins/blast-shield` },
       { name: 'sous handoff', href: `${GH}/sous/tree/main/mods/handoff` },
     ],
   },
