@@ -41,7 +41,7 @@ export const projects: Project[] = [
     keyFeatures: [
       'A framework-free tool loop with an append-only event log, so a crashed run resumes without repeating a side effect',
       'Approval gate for production actions, a check in the loop that rejects answers citing evidence no tool returned, and a prompt-injection scenario where obeying a planted instruction fails the run',
-      'Sweeps that repeat every scenario per model and effort level, with Wilson intervals, pass^k and cost per solved incident',
+      'Sweeps that repeat every scenario per model and effort level, with intervals from resampling incidents, pass^k and cost per solved incident',
       'Retrieval over past postmortems, from BM25 to embeddings to a fused hybrid, evaluated on its own before it reaches the agent',
     ],
     techStack: ['Python', 'Claude API', 'Claude Code', 'MCP', 'OpenTelemetry', 'pytest', 'GitHub Actions'],

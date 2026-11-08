@@ -73,7 +73,7 @@ async function main() {
   <tspan x="80" dy="66">that show whether they work.</tspan>
 </text>
 
-<text x="80" y="400" font-family="OGDisplay" font-weight="500" font-size="26" fill="${COLORS.inkDim}">rootcause: 525 runs, accuracy flat at 77-84%, cost per solved incident varied 25x</text>
+<text x="80" y="400" font-family="OGDisplay" font-weight="500" font-size="26" fill="${COLORS.inkDim}">rootcause: 525 runs, cost per solved incident varied 25x, accuracy differences unresolved</text>
 
 <line x1="80" y1="480" x2="1120" y2="480" stroke="${COLORS.line}" stroke-width="1" />
 

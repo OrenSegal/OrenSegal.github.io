@@ -17,7 +17,7 @@ const posts: { href: string; title: string; summary: string; figure?: { value: s
     href: '/writing/rootcause-benchmark/',
     title: "The benchmark that didn't pick a winner",
     summary:
-      '525 graded runs of rootcause across seven settings. Pass rates stayed at 77-84% with overlapping intervals.',
+      '525 graded runs of rootcause across seven settings. Cost per solved incident varied 25x; pass rates of 77-84% showed no detected difference, though gaps under about 13-19 points would not have been detected.',
     figure: { value: '25x', label: 'spread in cost per solved incident' },
   },
   {
