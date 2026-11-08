@@ -21,15 +21,20 @@ export interface Project {
     decisions: string[]
     outcome: string
   }
+  // The repo's own decision records and limitations, so a reviewer reaches them in one click.
+  records?: { decisions?: string; limitations?: string }
 }
+
+const GH = 'https://github.com/OrenSegal'
 
 export const projects: Project[] = [
   {
     id: 'rootcause',
+    records: { decisions: `${GH}/rootcause/blob/main/docs/decisions.md`, limitations: `${GH}/rootcause#limitations` },
     title: 'rootcause',
     subtitle: 'An incident agent built without a framework, and measured',
     blurb: 'An agent that works out why an incident happened or a CI run failed. No framework underneath, and every claim about how well it works comes from graded runs you can rerun from the repo.',
-    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost.',
+    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost. Those evals are 30 written incidents and 3 recorded CI failures; it has not run against a live system, and the Azure deploy in the repo has never been dispatched.',
     tags: ['AI Agents', 'Evals', 'MCP', 'RAG', 'OpenTelemetry', 'Python'],
     category: 'ai-agents',
     image: '🔎',
@@ -50,7 +55,7 @@ export const projects: Project[] = [
       problem: 'A responder under pressure blames the last deploy before the errors. That heuristic is often wrong, and an agent can make the same mistake with more confidence. Most agent demos show one run that worked and say nothing about how often it would.',
       decisions: [
         'Wrote the loop instead of using a framework, so retries, approvals and crash recovery are explicit and testable.',
-        'Built every scenario around a decoy that defeats the last-deploy heuristic, and kept the ground truth out of everything the agent can read.',
+        'Built each scenario around a mistake a responder could make, several with a planted decoy that defeats the last-deploy heuristic, and kept the ground truth out of everything the agent can read.',
         'Kept harness failures out of the pass rate and checked that each run was served by the model it asked for, so the numbers measure the model and not the plumbing.',
         'Measured retrieval on its own first. Plain BM25 beat both embedding models on incident text, which is full of exact error strings.',
       ],
@@ -59,6 +64,7 @@ export const projects: Project[] = [
   },
   {
     id: 'sous',
+    records: { decisions: `${GH}/sous/blob/main/docs/decisions.md` },
     title: 'sous',
     subtitle: 'Checks what coding agents actually do',
     blurb: 'The checks I run coding agents under. It blocks destructive commands and secret reads, fails a test run that executed nothing, and flags tests that were weakened to pass.',
@@ -105,7 +111,7 @@ export const projects: Project[] = [
     icon: '🎯',
     keyFeatures: [
       'Turns a startup URL into a ranked shortlist of prospects, segments, and companies',
-      'Every prospect cites a public source; verify_sources.py re-fetches it, and a claim missing from the page stops the report before it is written; partial matches stay flagged for review',
+      'Every prospect cites a public source; verify_sources.py re-fetches it, a prospect whose cited evidence is clearly missing from the page is dropped before the report is written, and partial matches stay flagged for review',
       'Sorts every candidate into one of three types (person, segment, company), each with its own scoring and next action',
       'Ships as a standalone Claude Code / OpenCode plugin',
     ],
@@ -123,11 +129,12 @@ export const projects: Project[] = [
   },
   {
     id: 'cited',
+    records: { decisions: `${GH}/cited/blob/main/docs/decisions.md`, limitations: `${GH}/cited#limitations` },
     title: 'cited',
     subtitle: 'Checks cited claims against their sources',
-    blurb: "Fetches every page an LLM cites and flags the claims whose words, numbers or names aren't on it. It runs before anything is published, not as an audit afterwards.",
-    description: 'A fact-checking gate for anything an LLM writes with citations: fetches every cited page and flags any claim whose words, numbers or names it cannot find there, so a reviewer looks at those before anything is published.',
-    tags: ['AI Reliability', 'Fact-Checking', 'Python'],
+    blurb: "Fetches every page an LLM cites and flags claims whose words, numbers or names it can't find there, before anything is published. On its own 29-claim benchmark it caught 10 of 15 unsupported claims; swapped words still get through.",
+    description: 'A citation-checking gate for anything an LLM writes with citations: fetches every cited page and flags any claim whose words, numbers or names it cannot find there, so a reviewer looks at those before anything is published. It checks that a claim is on the page, not that the page is true.',
+    tags: ['AI Reliability', 'Citation Checking', 'Python'],
     category: 'ai-infra',
     image: '🔍',
     demoUrl: 'https://github.com/OrenSegal/cited',
@@ -137,13 +144,13 @@ export const projects: Project[] = [
     icon: '🔍',
     keyFeatures: [
       'Re-fetches every source an LLM cites and checks that the claim\'s key words, numbers and names appear in it',
-      'Flags unsupported citations for a person to confirm or cut',
+      'Flags unsupported citations for a person to confirm or cut. On its own benchmark (29 claims about one page, labelled by me) it flagged 10 of 15 unsupported claims: recall 0.67, 95% interval 0.41-0.90, precision 0.67 (0.42-0.91)',
       'Runs before publication, not as an audit afterwards',
     ],
     techStack: ['Python'],
     impact: '"The model cited a source" gets checked against the actual page before it ships, not assumed.',
     flightLog: {
-      problem: 'Signal Scout\'s source-verification step proved the pattern worked for one skill, but every other project generating AI text with citations needed the same guarantee, and copy-pasting the check into each one meant fixing the same fabrication bugs repeatedly.',
+      problem: 'Signal Scout\'s source-verification step proved the pattern worked for one skill, and every other project generating AI text with citations needed the same check.',
       decisions: [
         'Generalized the containment-checking methodology out of signal-scout into a standalone tool, so any LLM-writing pipeline can adopt it as a dependency instead of reimplementing it.',
         'Made it run before publication rather than as an audit afterwards: flagged claims go to a person to confirm or cut before anything ships.',
@@ -154,6 +161,7 @@ export const projects: Project[] = [
   },
   {
     id: 'architecture-lint',
+    records: { limitations: `${GH}/architecture-lint#limitations` },
     title: 'Architecture Lint',
     subtitle: 'Module boundary linter with a ratchet',
     blurb: 'A module-boundary linter you can turn on today. It records how many violations exist and fails CI only when the count goes up.',
@@ -169,7 +177,7 @@ export const projects: Project[] = [
     keyFeatures: [
       'Baseline records how many violations each rule has today; CI fails when a count goes up',
       'Boundary rules live in one list at the top of the script, with no annotations in your code',
-      'Needs only bash, grep and xargs; tested on Linux CI and macOS',
+      'Needs only bash, grep and xargs; runs in Linux CI and was run locally on macOS',
     ],
     techStack: ['Shell', 'CLI'],
     impact: 'Lets a team turn on architecture enforcement today, on a codebase with years of existing debt.',
@@ -185,6 +193,7 @@ export const projects: Project[] = [
   },
   {
     id: 'scoped',
+    records: { limitations: `${GH}/scoped#limitations` },
     title: 'Scoped',
     subtitle: 'File locks for concurrent Claude Code sessions',
     blurb: 'Stops two Claude Code sessions from editing the same file. A hook blocks the edit itself, so it holds even when the model never calls the lock.',
@@ -209,16 +218,17 @@ export const projects: Project[] = [
       decisions: [
         'Enforced in a PreToolUse hook rather than relying on tool calls, and made the hook fail open so a bug in the coordinator never blocks real work.',
         'Kept the lock in local SQLite and posted Linear comments only for visibility, since a network call with no compare-and-swap is the wrong place for the atomic part.',
-        'Tested the race with real OS processes sharing one database. Claims made one after another on a single connection passed; the multi-process tests exposed a check-then-insert race and a hook that ignored the insert result.',
+        'Tested the race with real OS processes sharing one database. Claims made one after another on a single connection passed; the multi-process tests exposed a missing SQLite busy timeout and a hook that ignored its own claim result (scoped#1).',
       ],
       outcome: 'In the process race tests, every round has exactly one winner and no errors. It has not been measured on a real multi-session fleet yet, and the README says so.',
     },
   },
   {
     id: 'litmus',
+    records: { decisions: `${GH}/litmus/blob/main/docs/decisions.md`, limitations: `${GH}/litmus#limits` },
     title: 'Litmus',
     subtitle: 'Mutation testing for eval suites',
-    blurb: 'Mutation testing for eval suites. It breaks the skill on purpose and reports how many of the broken copies the evals caught. My own suite caught none.',
+    blurb: 'Mutation testing for eval suites. It breaks the skill on purpose and reports how many broken copies the evals caught. My rootcause suite caught 0 of 12, one run per mutant.',
     description: 'Asks whether an eval suite can fail. It breaks the skill under test on purpose (deletes an instruction, inverts a rule, swaps tool names, plants a wrong number), runs the evals against each broken copy, and reports how many they caught.',
     tags: ['LLM Evals', 'Mutation Testing', 'Claude Code', 'Python'],
     category: 'evals',
@@ -243,11 +253,12 @@ export const projects: Project[] = [
         'Counted a mutant as caught only when a trusted run shows it. A baseline that was never green stops the run instead of producing a score.',
         'Put the free checks (vacuity, and audit of results you already have) first, so they fit on every PR, and left paid mutation runs for a schedule.',
       ],
-      outcome: 'I ran its operators on the rootcause investigator brief. The suite caught 0 of 12 broken copies (11 survived, 1 inconclusive). Two of those could not fail because the harness enforces the output format; the rest told me the suite needs scenarios that hinge on a single rule. There is no published score on a third-party suite yet.',
+      outcome: 'I ran its operators on the rootcause investigator brief: the suite caught 0 of 12 broken copies (11 survived, 1 inconclusive). Eight scenarios built around single rules later caught 2 of 14, both through the search requirement, none through a behavioural rule. On cited\'s suite it killed 5 of 14. Every run used one run per mutant, so run-to-run variance is not measured, and every suite scored so far is mine; there is no score on a third-party suite yet.',
     },
   },
   {
     id: 'rag-generation',
+    records: { limitations: `${GH}/rag-generation#how-the-labels-were-made-and-what-they-favor` },
     title: 'Retrieval Eval',
     subtitle: 'BM25, dense and hybrid on a labelled query set',
     blurb: 'BM25, a local embedding model and a hybrid, scored on the same 55 labelled queries over 1,365 wine reviews, with intervals. Hybrid won on MRR and tied on recall.',
@@ -271,6 +282,7 @@ export const projects: Project[] = [
   },
   {
     id: 'llm-gateway-kit',
+    records: { limitations: `${GH}/llm-gateway-kit#limitations` },
     title: 'LLM Gateway Kit',
     subtitle: 'Cost and reliability layer for Swift apps, with patterns from the Shelfie gateway',
     blurb: "A Swift package between an app and its LLM providers: a semantic cache, provider fallback, and a daily spend cap that refuses the call instead of sending it. The patterns come from Shelfie's gateway.",
@@ -317,6 +329,7 @@ export const projects: Project[] = [
   },
   {
     id: 'blast-shield',
+    records: { limitations: `${GH}/blast-shield#limits` },
     title: 'Blast Shield',
     subtitle: 'Shows what a risky command will change',
     blurb: 'Holds a risky shell command, shows what it would change and whether you can undo it, and runs it only when you press Proceed. A fork of Blast Radius, with wider coverage.',
@@ -339,6 +352,7 @@ export const projects: Project[] = [
   },
   {
     id: 'deuce',
+    records: { limitations: `${GH}/deuce#limitations` },
     title: 'deuce',
     subtitle: 'Post-merge cleanup for agent worktrees',
     blurb: 'Cleans up the worktrees and branches that merged agent work leaves behind. Dry run by default, and it asks GitHub about the PR, which is the only way to see a squash merge.',
