@@ -237,7 +237,7 @@ export const projects: Project[] = [
   },
   {
     id: 'rag-generation',
-    records: { limitations: `${GH}/rag-generation#how-the-labels-were-made-and-what-they-favor` },
+    records: { limitations: `${GH}/rag-generation#limitations` },
     title: 'Retrieval Eval',
     subtitle: 'BM25, dense and hybrid on a labelled query set',
     blurb: 'BM25, a local embedding model and a hybrid, scored on the same 55 labelled queries over 1,365 wine reviews, with intervals. Hybrid won on MRR and tied on recall.',
