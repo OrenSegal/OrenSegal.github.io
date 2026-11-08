@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 
 const title = 'Getting a pricing model adopted at Reshet 13'
 const description =
-  'At an Israeli TV network I built a regression that found underpriced primetime ad slots, then worked with the commercial team until they set prices from it. Gross ad revenue finished 17% above the prior year.'
+  'At an Israeli TV network I built a regression that found underpriced primetime ad slots, then worked with the commercial team until they set prices from it. How the model was built, and what the team changed in it.'
 
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
@@ -40,7 +40,7 @@ const sections: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'What happened',
     paragraphs: [
-      'The new pricing model went live in FY2022, and gross ad revenue finished 17% above FY2021. That is a year-over-year comparison with no holdout. I credit the model, but I can\'t fully separate it from the ad market that year.',
+      'The new pricing model went live in FY2022. Gross ad revenue that year finished 17% above FY2021. That is a before-and-after number with no holdout and no counterfactual, so it cannot separate the model from everything else that changed that year, and it does not show how much of the rise, if any, the model caused. What I can say is narrower: the team adopted the prices and rarely overrode them.',
     ],
   },
   {

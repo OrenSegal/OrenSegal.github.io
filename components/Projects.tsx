@@ -23,7 +23,7 @@ const CHECKS = [
   {
     ref: 'scoped#1',
     href: 'https://github.com/OrenSegal/scoped/pull/1',
-    line: 'The only concurrency test ran on one connection. Racing real processes let two sessions claim the same file; the PR fixes both causes.',
+    line: 'The only concurrency test ran on one connection. Racing real processes let two sessions edit the same file; the PR fixes both causes.',
   },
   {
     ref: 'cited#1',
@@ -38,6 +38,9 @@ const CHECKS = [
 ]
 
 const byId = (id: string) => projects.find((p) => p.id === id)!
+const RECORDED = projects.filter((p) => p.records?.decisions).map((p) => p.id)
+const LIMITED = ['rootcause', 'litmus', 'cited', 'scoped', 'llm-gateway-kit']
+const inline = 'text-ink underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent'
 
 export default function Projects() {
   const wall = WALL.map(byId)
@@ -82,14 +85,37 @@ export default function Projects() {
           ))}
         </ul>
 
-        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-ink-faint">
+        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-ink-dim">
+          Each repo keeps its own record of what it does not show. Decision
+          records, with the alternatives I rejected:{' '}
+          {RECORDED.map((id, i) => (
+            <span key={id}>
+              {i > 0 && ', '}
+              <a href={byId(id).records!.decisions} target="_blank" rel="noopener noreferrer" className={inline}>
+                {id}
+              </a>
+            </span>
+          ))}
+          . Limitations sections:{' '}
+          {LIMITED.map((id, i) => (
+            <span key={id}>
+              {i > 0 && ', '}
+              <a href={byId(id).records!.limitations} target="_blank" rel="noopener noreferrer" className={inline}>
+                {id}
+              </a>
+            </span>
+          ))}
+          .
+        </p>
+
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">
           Also on GitHub:{' '}
           {MORE.map((id, i) => {
             const p = byId(id)
             return (
               <span key={id}>
                 {i > 0 && ', '}
-                <a href={`/projects/${id}/`} className="text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+                <a href={`/projects/${id}/`} className={inline}>
                   {p.title.toLowerCase()}
                 </a>{' '}
                 ({p.subtitle.toLowerCase()})
@@ -97,7 +123,7 @@ export default function Projects() {
             )
           })}
           . Everything else is at{' '}
-          <a href="https://github.com/OrenSegal" target="_blank" rel="noopener noreferrer" className="text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+          <a href="https://github.com/OrenSegal" target="_blank" rel="noopener noreferrer" className={inline}>
             github.com/OrenSegal
           </a>
           .

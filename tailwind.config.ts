@@ -17,7 +17,7 @@ const config: Config = {
         ink: {
           DEFAULT: '#ffffff',
           dim: 'rgba(255,255,255,0.72)',
-          faint: 'rgba(255,255,255,0.45)',
+          faint: 'rgba(255,255,255,0.48)', // lowest alpha that clears 4.5:1 on #000 and #141414
           ghost: 'rgba(255,255,255,0.5)',
         },
         accent: {
