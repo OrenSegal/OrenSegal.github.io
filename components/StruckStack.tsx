@@ -23,7 +23,7 @@ export function StruckStack() {
           25<span className="text-[0.55em]">x</span>
         </span>
         <p className="mb-3 max-w-[16rem] text-sm leading-snug text-ink-dim">
-          cost per solved incident, between settings whose pass rates all overlap at 77-84%
+          cost per solved incident, between settings at 77-84% with no detected accuracy difference
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export function StruckStack() {
 
       <p className="mt-4 min-h-[2.5rem] text-sm leading-snug text-ink-dim" aria-live="polite">
         {lit === CHOSEN_INDEX
-          ? "Under this grader, Haiku 5.5's pass rate overlaps Opus 5.5 at high effort, for about one twenty-fifth of the cost."
+          ? "Under this grader, Haiku 5.5 was not detectably less accurate than Opus 5.5 at high effort, for about one twenty-fifth of the cost. Gaps under about 19 points would not have been detected."
           : `${row.label}: ${row.pass}% of incidents solved, $${row.cost.toFixed(4)} per solved incident.`}
       </p>
 

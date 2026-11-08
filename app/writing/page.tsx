@@ -11,13 +11,14 @@ export const metadata: Metadata = {
   openGraph: { title: 'Writing', description, images: ['/og-image.png'] },
 }
 
-// Each figure is stated in the post it links to; a post with no number gets no figure.
+// Each figure is stated in the post it links to. A post whose only number is not a
+// result it can attribute (Reshet's revenue rise had no holdout) gets no figure.
 const posts: { href: string; title: string; summary: string; figure?: { value: string; label: string } }[] = [
   {
     href: '/writing/rootcause-benchmark/',
     title: "The benchmark that didn't pick a winner",
     summary:
-      '525 graded runs of rootcause across seven settings. Pass rates stayed at 77-84% with overlapping intervals.',
+      '525 graded runs of rootcause across seven settings. Cost per solved incident varied 25x; pass rates of 77-84% showed no detected difference, though gaps under about 13-19 points would not have been detected.',
     figure: { value: '25x', label: 'spread in cost per solved incident' },
   },
   {
@@ -25,7 +26,6 @@ const posts: { href: string; title: string; summary: string; figure?: { value: s
     title: 'Getting a pricing model adopted at Reshet 13',
     summary:
       'A regression that found underpriced primetime ad slots, and the work with the commercial team until they set prices from it.',
-    figure: { value: '17%', label: 'gross ad revenue above the prior year, FY2022 against FY2021, no holdout' },
   },
 ]
 

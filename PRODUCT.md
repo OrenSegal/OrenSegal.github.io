@@ -33,7 +33,7 @@ Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHu
 
 - Name: Oren Segal.
 - Target title/framing: "Applied AI Engineer", not "AI & Data Science." Open to Applied AI Engineer roles, New York or remote, US permanent resident (no sponsorship needed).
-- Lead proof: rootcause benchmark (525 runs, seven model and effort settings, pass rates 77-84% with overlapping intervals, cost per solved incident varied 25x), written up at `/writing/rootcause-benchmark/`.
+- Lead proof: rootcause benchmark (525 runs, seven model and effort settings: cost per solved incident varied 25x; pass rates 77-84% with no detected difference, though the design detects only gaps above about 13-19 points between model tiers), written up at `/writing/rootcause-benchmark/`.
 - Visual identity is the Metro typographic-tile system documented in `DESIGN.md` (pure black, giant light lowercase Urbanist, flat tiles, one orange strike with the only glow, cobalt as a content flood on two tiles), chosen 2026-11-05 from an Impeccable direction round. Earlier looks (the AI-template gradient/glassmorphism page, the "Utility Cutaway" spine system) are retired and stay anti-references.
 
 ## Evidence on Hand
@@ -52,7 +52,7 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `blast-shield` — Claude Code mod (a fork of Blast Radius) that shows what a risky command will change
 - `deuce` — post-merge cleanup for agent worktrees
 
-The home page leads with the struck stack (the seven rootcause settings, one lit) and a cobalt Shelfie tile, then a wall of six project tiles (rootcause, sous with its marketplace parts scoped/deuce/blast-shield, litmus, cited, llm-gateway-kit, signal-scout), each with a two-sentence blurb, its live GitHub Actions badge on hover, its last-push date, and where the repo publishes a figure, a small demonstration copied from it. Three "checks that proved less than they claimed" (scoped#1, cited#1, signal-scout#3) follow the wall; the other three projects are listed by name. `/writing/` indexes the two posts. Shelfie (closed TestFlight beta, shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
+The home page leads with the struck stack (the seven rootcause settings, one lit) and a cobalt Shelfie tile, then a wall of six project tiles (rootcause, sous with its marketplace parts scoped/deuce/blast-shield, litmus, cited, llm-gateway-kit, signal-scout), each with a two-sentence blurb, its live GitHub Actions badge on hover, its last-push date, and where the repo publishes a figure, a small demonstration copied from it. Three "checks that proved less than they claimed" (scoped#1, cited#1, signal-scout#3) follow the wall; the other three projects are listed by name. `/writing/` indexes the two posts. Shelfie (pre-launch; external TestFlight beta not yet open; shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 
 ## Product Principles
 

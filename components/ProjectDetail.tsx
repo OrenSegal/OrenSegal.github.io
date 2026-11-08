@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { RootcauseResults } from '@/components/RootcauseResults'
 
+const recordLink =
+  'text-ink-dim underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent'
+
 interface ProjectDetailProps {
   project: Project
 }
@@ -37,6 +40,21 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             View source on GitHub
             <ArrowUpRight className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" />
           </a>
+        )}
+
+        {project.records && (
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {project.records.decisions && (
+              <a href={project.records.decisions} target="_blank" rel="noopener noreferrer" className={recordLink}>
+                decision records
+              </a>
+            )}
+            {project.records.limitations && (
+              <a href={project.records.limitations} target="_blank" rel="noopener noreferrer" className={recordLink}>
+                limitations
+              </a>
+            )}
+          </p>
         )}
 
         {project.id === 'rootcause' && (

@@ -44,7 +44,7 @@ function Orchestration() {
           </div>
         ))}
       </div>
-      <figcaption className={label}>cost per solved incident, 300 runs, Opus 5.5 high. Splitting the work cost about 3x for no measurable gain.</figcaption>
+      <figcaption className={label}>cost per solved incident, 300 runs, Opus 5.5 high. Splitting the work cost about 3x; no accuracy gain was detected, though gaps under about 12-15 points would not have been.</figcaption>
     </figure>
   )
 }

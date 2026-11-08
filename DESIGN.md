@@ -7,7 +7,7 @@ colors:
   line: "#1f1f1f"
   ink: "#ffffff"
   ink-dim: "rgba(255,255,255,0.72)"
-  ink-faint: "rgba(255,255,255,0.45)"
+  ink-faint: "rgba(255,255,255,0.48)"
   ink-ghost: "rgba(255,255,255,0.5)"
   accent: "#ff8c1a"
   accent-dim: "#b35f12"
@@ -153,7 +153,7 @@ A black field with white ink at three alphas, one hot orange and one cold cobalt
 - **Line** (`line`): one hairline, used once, as the `border-t` above the appendix note on the benchmark writing page. A Read-mode exception, not a home-page device.
 - **Ink** (`ink`): headlines, tile titles, action links, wordmark, the "single agent" cost bar and the MRR interval line in demonstrations.
 - **Ink Dim** (`ink-dim`): prose, tile blurbs, nav links at rest, ghost rows on hover.
-- **Ink Faint** (`ink-faint`): the mono foot of every tile, demonstration labels and captions, tech-stack line, footer, detail-page sub-headers, footer and ProjectDetail icons at rest.
+- **Ink Faint** (`ink-faint`, 0.48 alpha, the lowest that clears WCAG AA 4.5:1 on both `panel` and `panel-face`; on a cobalt tile use `ink-dim` instead): the mono foot of every tile, demonstration labels and captions, tech-stack line, footer, detail-page sub-headers, footer and ProjectDetail icons at rest.
 - **Ink Ghost** (`ink-ghost`): the unlit benchmark rows, the "orchestrator" cost bar, and the survived-mutant and uncaught cells in demonstrations: present-but-not-chosen. It sits at 0.5 alpha, between dim and faint; do not "fix" it to faint.
 
 ### Named Rules
