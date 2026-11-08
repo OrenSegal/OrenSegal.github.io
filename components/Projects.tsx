@@ -51,7 +51,7 @@ export default function Projects() {
           work
         </h2>
         <p className="mt-4 max-w-xl text-lg text-ink-dim">
-          Six projects carry the argument; all {projects.length} are public with CI.
+          Six projects carry the argument; all {projects.length} are public, with CI in each repo or in sous.
           Each tile opens its build log. The figures on them are copied from each
           repo&apos;s own results, and the push dates are fetched from GitHub when
           the site builds.
