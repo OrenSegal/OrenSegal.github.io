@@ -47,7 +47,7 @@ export function LiveTile({
       )}
 
       <div className="tile-foot mt-auto pt-5">
-        <p className="tile-meta font-mono text-xs lowercase text-ink-faint">
+        <p className={`tile-meta font-mono text-xs lowercase ${cobalt ? 'text-ink-dim' : 'text-ink-faint'}`}>
           {category} · updated {formatVerifiedDate(pushedAt)}
         </p>
         <p className="tile-live flex items-center gap-3 font-mono text-xs text-accent" aria-hidden="true">

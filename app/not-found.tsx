@@ -1,35 +1,30 @@
-'use client'
-
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Home, ArrowLeft } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Not found | Oren Segal',
+  robots: { index: false },
+}
+
+const action = 'text-sm font-medium lowercase text-ink transition-colors hover:text-accent'
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 sm:px-6">
-      <div className="flex flex-col items-start text-left">
-        <span className="text-lg font-medium text-ink-faint">404</span>
-        <h1 className="mt-2 text-2xl font-medium text-ink sm:text-3xl">Page not found</h1>
-        <p className="mt-3 max-w-md text-ink-dim">
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
+    <section className="flex min-h-screen flex-col justify-center overflow-hidden px-4 pt-16 sm:px-6">
+      <div className="mx-auto w-full max-w-6xl">
+        <p className="font-mono text-xs tabular text-ink-faint">404</p>
+        <h1 className="mt-4 font-light lowercase leading-[0.92] tracking-[-0.04em] text-ink text-[16vw] sm:text-8xl">
+          not found
+        </h1>
+        <p className="mt-6 max-w-xl text-lg text-ink-dim">
+          Nothing lives at this address. The work and the writing are one click away.
         </p>
-
-        <div className="mt-8 flex items-center gap-6">
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-ink"
-          >
-            <Home className="h-4 w-4" />
-            Go home
-          </Link>
-          <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 text-sm text-ink-dim transition-colors hover:text-ink"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Go back
-          </button>
-        </div>
+        <nav aria-label="recovery" className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+          <Link href="/" className={action}>home</Link>
+          <Link href="/#work" className={action}>work</Link>
+          <Link href="/writing/" className={action}>writing</Link>
+        </nav>
       </div>
-    </div>
+    </section>
   )
 }
