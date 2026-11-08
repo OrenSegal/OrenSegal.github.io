@@ -3,6 +3,7 @@ import Link from 'next/link'
 const stack = [
   'Python', 'TypeScript', 'Swift', 'SQL', 'Postgres', 'pgvector', 'SQLite', 'Bash',
   'Claude API', 'Claude Code', 'Gemini API', 'MCP', 'OpenTelemetry', 'GitHub Actions',
+  'pandas', 'scikit-learn', 'regression and forecasting', 'bootstrap intervals and power analysis',
 ]
 
 const GH = 'https://github.com/OrenSegal'
