@@ -1,6 +1,6 @@
 // Every line below is in cv.md and backed by code in the private Shelfie repo (checked
-// 2026-11-07). Shelfie is pre-launch: the external TestFlight beta has not opened, and
-// no user or usage numbers exist.
+// 2026-11-07). Shelfie is in closed beta: the external TestFlight beta has opened (owner's
+// statement, 2026-11-12). No user or usage numbers exist.
 const points = [
   'A camera sweep builds a live kitchen inventory that drives expiry tracking, recipe matching, nutrition and grocery restocking.',
   "Recipes rank availability-first, by what's on the shelf and expiring soon, to cut food waste and grocery spend.",
@@ -32,7 +32,7 @@ export function ShelfieTile() {
       </ul>
       <p className="mt-5 text-sm font-medium">shelfie.food →</p>
       <p className="mt-4 font-mono text-xs text-ink-dim group-hover:text-panel/70">
-        founder · ios · pre-launch
+        founder · ios · closed beta
       </p>
     </a>
   )
