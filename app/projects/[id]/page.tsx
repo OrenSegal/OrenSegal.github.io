@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       title: `${project.title} | Oren Segal`,
       description: project.blurb,
+      url: './',
       images: ['/og-image.png'],
     },
     twitter: {
