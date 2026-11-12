@@ -21,10 +21,12 @@ export const metadata: Metadata = {
   keywords: ['Applied AI Engineer', 'AI Agents', 'LLM Evals', 'MCP', 'Claude Code', 'Python'],
   authors: [{ name: 'Oren Segal' }],
   metadataBase: new URL('https://orensegal.github.io'),
+  alternates: { canonical: './' },
   openGraph: {
     title: 'Oren Segal | Applied AI Engineer',
     description: 'Applied AI engineer. I build LLM products and the evals that show whether they work: Shelfie, a vision-powered iOS kitchen app (pre-launch), and open-source tools like rootcause, sous and litmus.',
     type: 'website',
+    url: './',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Oren Segal, Applied AI Engineer' }],
   },
   twitter: {
