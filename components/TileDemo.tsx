@@ -127,12 +127,12 @@ function Cited() {
           ),
         )}
       </p>
-      <p className="mt-1 text-sm text-ink-faint">cited page: {CITED.page}</p>
+      <p className="mt-1 text-sm text-ink-faint">cited page, excerpt: {CITED.page}</p>
       <dl className="mt-2 font-mono text-[11px] leading-relaxed">
         <div className="flex gap-3"><dt className="w-12 flex-shrink-0 text-ink-faint">before</dt><dd className="text-ink-faint">{CITED.before}</dd></div>
         <div className="flex gap-3"><dt className="w-12 flex-shrink-0 text-ink-faint">after</dt><dd className="text-ink">{CITED.after}</dd></div>
       </dl>
-      <figcaption className={label}>The regression test from cited#1, rerun on current main. Dotted: the specifics the page does not contain.</figcaption>
+      <figcaption className={label}>The regression test from cited#1, rerun on current main against its full page text (on this one sentence alone the tool answers unverified: too little text). Dotted: the specifics the page does not contain.</figcaption>
     </figure>
   )
 }
