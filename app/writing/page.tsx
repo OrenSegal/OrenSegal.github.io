@@ -8,7 +8,8 @@ const description = 'Write-ups by Oren Segal: an incident-agent benchmark, and g
 export const metadata: Metadata = {
   title: `Writing | Oren Segal`,
   description,
-  openGraph: { title: 'Writing', description, images: ['/og-image.png'] },
+  openGraph: { title: 'Writing', description, url: './', images: ['/og-image.png'] },
+  twitter: { card: 'summary_large_image', title: 'Writing', description, images: ['/og-image.png'] },
 }
 
 // Each figure is stated in the post it links to. A post whose only number is not a

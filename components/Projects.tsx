@@ -122,7 +122,7 @@ export default function Projects() {
               </span>
             )
           })}
-          . Everything else is at{' '}
+          . <a href="/projects/" className={inline}>All {projects.length} projects</a>. Everything else is at{' '}
           <a href="https://github.com/OrenSegal" target="_blank" rel="noopener noreferrer" className={inline}>
             github.com/OrenSegal
           </a>
