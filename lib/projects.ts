@@ -32,7 +32,7 @@ export const projects: Project[] = [
     title: 'rootcause',
     subtitle: 'An incident agent built without a framework, and measured',
     blurb: 'An agent that works out why an incident happened or a CI run failed. No framework underneath, and every claim about how well it works comes from graded runs you can rerun from the repo.',
-    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost. Those evals are 30 written incidents and 3 recorded CI failures; it has not run against a live system, and the Azure deploy in the repo has never been dispatched.',
+    description: 'An agent that finds the root cause of production incidents and failed CI runs. The loop, tool execution, approval gate, crash recovery and multi-agent orchestration are written without a framework over MCP tools, and its performance claims come from evals scored against known causes, repeated and reported with intervals and cost. In the 525-run sweep, Claude Code\'s own agent loop did the investigating over rootcause\'s tools and grader; the hand-written loop was measured in the separate 300-run comparison against a LangGraph version. Those evals are 30 written incidents and 3 recorded CI failures; it has not run against a live system, and the Azure deploy in the repo has never been dispatched.',
     tags: ['AI Agents', 'Evals', 'MCP', 'RAG', 'OpenTelemetry', 'Python'],
     category: 'ai-agents',
     demoUrl: 'https://github.com/OrenSegal/rootcause',
@@ -139,7 +139,7 @@ export const projects: Project[] = [
     flightLog: {
       problem: 'Signal Scout\'s source-verification step proved the pattern worked for one skill, and every other project generating AI text with citations needed the same check.',
       decisions: [
-        'Generalized the containment-checking methodology out of signal-scout into a standalone tool, so any LLM-writing pipeline can adopt it as a dependency instead of reimplementing it.',
+        'Generalized the containment-checking methodology out of signal-scout into a standalone tool, so any LLM-writing pipeline can run it as a CLI or a Claude Code plugin instead of reimplementing it. There is no package to install.',
         'Made it run before publication rather than as an audit afterwards: flagged claims go to a person to confirm or cut before anything ships.',
         'Kept the check narrow and deterministic: re-fetch the source, confirm the claim is actually in it, rather than asking another model to grade the first model\'s honesty.',
       ],
@@ -240,7 +240,7 @@ export const projects: Project[] = [
     records: { limitations: `${GH}/rag-generation#limitations` },
     title: 'Retrieval Eval',
     subtitle: 'BM25, dense and hybrid on a labelled query set',
-    blurb: 'BM25, a local embedding model and a hybrid, scored on the same 55 labelled queries over 1,365 wine reviews, with intervals. Hybrid won on MRR and tied on recall.',
+    blurb: 'BM25, a local embedding model and a hybrid, scored on the same 55 labelled queries over 1,365 wine reviews, with intervals. Hybrid matched BM25 on MRR when the query names the label, giving up a little recall, and beat it on paraphrases.',
     description: 'A small retrieval eval over 1,365 wine reviews. It scores BM25, a local embedding model and a reciprocal-rank-fusion hybrid on the same 55 labelled queries, with bootstrap intervals and paired differences.',
     tags: ['RAG', 'Retrieval', 'Evals', 'Embeddings', 'Python'],
     category: 'evals',

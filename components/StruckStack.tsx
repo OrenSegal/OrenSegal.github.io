@@ -54,7 +54,7 @@ export function StruckStack() {
 
       <p className="mt-4 min-h-[2.5rem] text-sm leading-snug text-ink-dim" aria-live="polite">
         {lit === CHOSEN_INDEX
-          ? "Under this grader, Haiku 5.5 was not detectably less accurate than Opus 5.5 at high effort, for about one twenty-fifth of the cost. Gaps under about 19 points would not have been detected."
+          ? "Under this grader, Haiku 5.5 was not detectably less accurate than Opus 5.5 at high effort, for about one twenty-fifth of the cost. Gaps under about 19 points would not have been detected. Most of the 25x is price per token: Haiku was billed about one thirtieth as much per token and used about 25% more tokens."
           : `${row.label}: ${row.pass}% of incidents solved, $${row.cost.toFixed(4)} per solved incident.`}
       </p>
 
