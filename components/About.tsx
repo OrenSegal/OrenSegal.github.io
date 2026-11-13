@@ -96,7 +96,7 @@ export default function About() {
                   How I got a pricing model adopted there
                 </Link>
                 . I moved to New York in 2023 and retrained in AI/ML. Since
-                2024 I have also built and maintained the reporting automation
+                2025 I have also built and maintained the reporting automation
                 for KashCash, a consumer transactions business, and in 2025 I
                 started Shelfie.
               </p>
