@@ -127,12 +127,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
         <div className="mt-14">
           <h3 className="mb-2 text-lg font-medium lowercase text-ink">interested in something like this?</h3>
-          <a
+          <Link
             href="/#contact"
             className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-ink"
           >
             Get in touch
-          </a>
+          </Link>
         </div>
       </div>
     </div>

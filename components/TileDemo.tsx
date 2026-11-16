@@ -1,6 +1,7 @@
 // Small, data-only demonstrations for tiles whose repos publish a figure.
 // Every number below is copied from the named public source; projects without
 // a published figure get no demo rather than an invented one.
+import type { JSX } from 'react'
 
 // rootcause README, "Hand-written loop against LangGraph": 300 runs, Opus 5.5 high,
 // cost per solved incident for a single agent vs an orchestrator with workers.

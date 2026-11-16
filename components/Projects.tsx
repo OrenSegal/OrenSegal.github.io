@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { projects, Project } from '@/lib/projects'
 import projectStats from '@/lib/project-stats.json'
 import { LiveTile } from '@/components/LiveTile'
@@ -122,7 +123,7 @@ export default function Projects() {
               </span>
             )
           })}
-          . <a href="/projects/" className={inline}>All {projects.length} projects</a>. Everything else is at{' '}
+          . <Link href="/projects/" className={inline}>All {projects.length} projects</Link>. Everything else is at{' '}
           <a href="https://github.com/OrenSegal" target="_blank" rel="noopener noreferrer" className={inline}>
             github.com/OrenSegal
           </a>

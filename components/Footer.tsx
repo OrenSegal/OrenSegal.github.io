@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
+import { Github, Linkedin } from './BrandIcons'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()

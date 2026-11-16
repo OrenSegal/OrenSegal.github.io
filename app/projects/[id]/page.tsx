@@ -9,8 +9,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const project = getProjectById(params.id)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const project = getProjectById((await params).id)
 
   if (!project) {
     return {
@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = getProjectById(params.id)
+export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
+  const project = getProjectById((await params).id)
 
   if (!project) {
     notFound()

@@ -1,4 +1,5 @@
-import { Mail, Github, Linkedin, FileText } from 'lucide-react'
+import { Mail, FileText } from 'lucide-react'
+import { Github, Linkedin } from './BrandIcons'
 
 const channels = [
   { label: 'email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
