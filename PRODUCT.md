@@ -51,6 +51,9 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `signal-skills` — agent skills that mine podcasts and reviews into cited build proposals
 - `blast-shield` — Claude Code mod (a fork of Blast Radius) that shows what a risky command will change
 - `deuce` — post-merge cleanup for agent worktrees
+- `ny-noise` — where NYC 311 noise reports concentrate, and next week by ZIP
+- `codebase-audit` — adversarial audit skill with a refuter per serious finding; recall not measured
+- `visibility` — agent skills that plan and walk marketplace listings
 
 The home page leads with the struck stack (the seven rootcause settings, one lit) and a cobalt Shelfie tile, then a wall of six project tiles (rootcause, sous with its marketplace parts scoped/deuce/blast-shield, litmus, cited, llm-gateway-kit, signal-scout), each with a two-sentence blurb, its live GitHub Actions badge on hover, its last-push date, and where the repo publishes a figure, a small demonstration copied from it. A "now" section (the contribution calendar fetched at build with its busiest day struck, last push, last post, New York time) and an "experience" section restating the resume role by role sit between the work and About. A command palette (Cmd/Ctrl+K or "/") reaches every page, project and post, and `/writing/feed.xml` is the RSS feed. Three "checks that proved less than they claimed" (scoped#1, cited#1, signal-scout#3) follow the wall; the other three projects are listed by name. `/writing/` indexes the two posts. Shelfie (closed beta; external TestFlight beta open; shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 

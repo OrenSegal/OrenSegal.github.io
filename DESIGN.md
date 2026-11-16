@@ -233,6 +233,9 @@ Opens on Cmd/Ctrl+K, on "/", and from the mono `⌘k` mark in the nav (`search` 
 ### Activity Tile (`components/Activity.tsx`, in the "now" section)
 The public contribution calendar as a ghost grid: one flat square per day, five white-alpha steps set from that year's own quartiles, 3px gaps. Exactly one cell is orange: the busiest day, named in the mono foot. A phone shows the last 26 weeks. The data is fetched at build; with none, the tile is absent and the now list takes the full row. No tooltips beyond the native title, no legend.
 
+### Repo Activity (`components/RepoActivity.tsx`, in the "now" section)
+The same ghost grid turned sideways: one row per repo, one flat cell per week of commits on its default branch, repo names in 11px mono at the left. One cell is orange, the busiest repo-week, named in the mono foot. Absent when the build fetched no data.
+
 ### Now List and Experience Rows (`components/Now.tsx`, `components/Experience.tsx`)
 The now list is a `dl` on one tile: faint lowercase labels, dim values, machine-sourced parts (push date, post date, New York clock) in mono. Experience is one full-width tile per role in three columns (mono years, light lowercase employer with role and place, the resume line); the current role's years are orange and nothing else on the row is. Phones stack the columns.
 

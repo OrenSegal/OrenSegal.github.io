@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import type { PaletteItem } from '@/components/CommandPalette'
 import { projects } from '@/lib/projects'
 import { posts } from '@/lib/posts'
+import { BOOKING_URL } from '@/lib/site'
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -73,6 +74,7 @@ const paletteItems: PaletteItem[] = [
   { group: 'pages', label: 'resume', hint: 'one page, pdf', href: '/resume.pdf' },
   ...posts.map((p) => ({ group: 'writing', label: p.title, href: p.href })),
   ...projects.map((p) => ({ group: 'projects', label: p.title, hint: p.subtitle, href: `/projects/${p.id}/` })),
+  ...(BOOKING_URL ? [{ group: 'contact', label: 'book a 20-minute call', href: BOOKING_URL }] : []),
   { group: 'contact', label: 'copy email address', hint: EMAIL, copy: EMAIL },
   { group: 'contact', label: 'github', hint: 'github.com/OrenSegal', href: 'https://github.com/OrenSegal' },
   { group: 'contact', label: 'linkedin', hint: 'linkedin.com/in/oren-segal', href: 'https://linkedin.com/in/oren-segal' },

@@ -1,7 +1,9 @@
-import { Mail, FileText } from 'lucide-react'
+import { Mail, FileText, CalendarClock } from 'lucide-react'
+import { BOOKING_URL } from '@/lib/site'
 import { Github, Linkedin } from './BrandIcons'
 
 const channels = [
+  ...(BOOKING_URL ? [{ label: 'book a call', value: '20 minutes, pick a time', href: BOOKING_URL, icon: CalendarClock, external: true }] : []),
   { label: 'email', value: 'orenssegal@gmail.com', href: 'mailto:orenssegal@gmail.com', icon: Mail },
   { label: 'github', value: 'github.com/OrenSegal', href: 'https://github.com/OrenSegal', icon: Github, external: true },
   { label: 'linkedin', value: 'linkedin.com/in/oren-segal', href: 'https://linkedin.com/in/oren-segal', icon: Linkedin, external: true },
@@ -19,7 +21,7 @@ export default function Contact() {
           Email is the fastest way to reach me. Happy to talk shop about evals, gateways, or anything to do with kitchens.
         </p>
 
-        <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4">
+        <div className={`mt-10 grid grid-cols-2 gap-2 ${BOOKING_URL ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
           {channels.map((channel) => {
             const Icon = channel.icon
             return (

@@ -9,8 +9,8 @@ const description =
 export const metadata: Metadata = {
   title: `${title} | Oren Segal`,
   description,
-  openGraph: { title, description, type: 'article', url: './', images: ['/og-image.png'] },
-  twitter: { card: 'summary_large_image', title, description, images: ['/og-image.png'] },
+  openGraph: { title, description, type: 'article', url: './', images: ['/og/reshet-pricing-model.png'] },
+  twitter: { card: 'summary_large_image', title, description, images: ['/og/reshet-pricing-model.png'] },
 }
 
 const sections: { heading: string; paragraphs: string[] }[] = [

@@ -4,6 +4,7 @@ import { projects } from '@/lib/projects'
 import { latestPost } from '@/lib/posts'
 import { formatVerifiedDate } from '@/lib/status'
 import { Activity, hasActivity } from '@/components/Activity'
+import { RepoActivity, hasRepoActivity } from '@/components/RepoActivity'
 import { LocalTime } from '@/components/LocalTime'
 
 const STATS: Record<string, { stars: number; pushedAt: string | null }> = projectStats
@@ -81,6 +82,11 @@ export default function Now() {
               ))}
             </dl>
           </div>
+          {hasRepoActivity && (
+            <div className="md:col-span-5">
+              <RepoActivity />
+            </div>
+          )}
         </div>
       </div>
     </section>

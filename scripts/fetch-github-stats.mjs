@@ -13,6 +13,7 @@ import path from 'node:path'
 
 const LIB_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'lib')
 const PROJECT_STATS_OUT_PATH = path.join(LIB_DIR, 'project-stats.json')
+const REPO_ACTIVITY_OUT_PATH = path.join(LIB_DIR, 'repo-activity.json')
 const CONTRIBUTIONS_OUT_PATH = path.join(LIB_DIR, 'contributions.json')
 const USER = 'OrenSegal'
 const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || ''
@@ -34,6 +35,14 @@ const PROJECT_REPOS = [
   'blast-shield',
   'deuce',
   'ny-noise',
+  'codebase-audit',
+  'visibility',
+]
+
+// Repos that still take commits of their own (the sous plugins now live in sous).
+const ACTIVE_REPOS = [
+  'rootcause', 'sous', 'litmus', 'cited', 'signal-scout', 'signal-skills', 'rag-generation',
+  'llm-gateway-kit', 'ny-noise', 'codebase-audit', 'visibility', 'OrenSegal.github.io',
 ]
 
 async function fetchRepoData() {
@@ -81,6 +90,41 @@ async function fetchContributions() {
   return { fetchedAt: new Date().toISOString(), total: calendar.totalContributions, days }
 }
 
+// Weekly commit counts on the default branch for the last 52 weeks, per repo.
+// GitHub answers 202 while it computes the stats, so each repo is retried.
+async function fetchRepoActivity() {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+  const one = async (repo) => {
+    for (let attempt = 0; attempt < 6; attempt++) {
+      const res = await fetch(`https://api.github.com/repos/${USER}/${repo}/stats/commit_activity`, {
+        headers: { Accept: 'application/vnd.github+json', ...auth },
+      })
+      if (res.status === 200) {
+        const weeks = await res.json()
+        if (Array.isArray(weeks) && weeks.length) return weeks
+      } else if (res.status !== 202) {
+        throw new Error(`${repo}: ${res.status}`)
+      }
+      await sleep(3000)
+    }
+    throw new Error(`${repo}: stats not ready`)
+  }
+  const settled = await Promise.allSettled(ACTIVE_REPOS.map(one))
+  const repos = []
+  let weekStarts = null
+  settled.forEach((r, i) => {
+    if (r.status !== 'fulfilled') {
+      console.warn(`[fetch-github-stats] repo activity skipped, ${r.reason.message}`)
+      return
+    }
+    weekStarts ??= r.value.map((w) => new Date(w.week * 1000).toISOString().slice(0, 10))
+    if (r.value.length !== weekStarts.length) return
+    repos.push({ repo: ACTIVE_REPOS[i], weeks: r.value.map((w) => w.total) })
+  })
+  if (repos.length < ACTIVE_REPOS.length / 2) throw new Error(`only ${repos.length} repos answered`)
+  return { fetchedAt: new Date().toISOString(), weekStarts, repos }
+}
+
 async function main() {
   try {
     const repos = await fetchRepoData()
@@ -104,6 +148,14 @@ async function main() {
     console.log(`[fetch-github-stats] wrote ${contributions.days.length} days, ${contributions.total} contributions`)
   } catch (err) {
     console.warn(`[fetch-github-stats] skipping contributions, keeping committed file: ${err.message}`)
+  }
+
+  try {
+    const activity = await fetchRepoActivity()
+    await writeFile(REPO_ACTIVITY_OUT_PATH, JSON.stringify(activity) + '\n')
+    console.log(`[fetch-github-stats] wrote weekly commits for ${activity.repos.length} repos`)
+  } catch (err) {
+    console.warn(`[fetch-github-stats] skipping repo activity, keeping committed file: ${err.message}`)
   }
 }
 

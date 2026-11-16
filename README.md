@@ -26,6 +26,9 @@ lib/projects.ts          project data, the single source of truth for the projec
 lib/posts.ts             the writing list: drives the index, the RSS feed, the sitemap and the command palette
 lib/project-stats.json   star counts and last-push dates, refreshed by scripts/fetch-github-stats.mjs at prebuild
 lib/contributions.json   the public contribution calendar, refreshed by the same script when GITHUB_TOKEN is set
+lib/repo-activity.json   weekly commits per repo for the last year, refreshed by the same script
+lib/site.ts              BOOKING_URL: set it to a scheduling link and a "book a call" tile appears in Contact
+public/og/               one share card per post, made by scripts/generate-post-cards.mjs (run by hand)
 lib/rootcause-results.ts the seven benchmark settings, copied from the rootcause sweep summary
 ```
 

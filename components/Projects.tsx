@@ -18,7 +18,7 @@ export const CATEGORIES: { id: Project['category']; label: string }[] = [
 // listed below the wall by name.
 const WALL = ['rootcause', 'sous', 'litmus', 'cited', 'llm-gateway-kit', 'signal-scout']
 const SOUS_PARTS = ['scoped', 'deuce', 'blast-shield']
-const MORE = ['ny-noise', 'rag-generation', 'architecture-lint', 'signal-skills']
+const MORE = ['ny-noise', 'rag-generation', 'codebase-audit', 'architecture-lint', 'signal-skills', 'visibility']
 
 // Wording follows the profile README's "Pull requests where a check proved less than it claimed".
 const CHECKS = [
