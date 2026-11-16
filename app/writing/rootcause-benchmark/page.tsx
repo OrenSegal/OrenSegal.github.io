@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { RootcauseResults } from '@/components/RootcauseResults'
 
-const title = 'The benchmark that didn\'t pick a winner'
+const title = "Switching models moved cost 25x. Accuracy didn't move detectably."
 const description =
   '525 graded runs of my incident benchmark across seven model settings: cost per solved incident varied 25x, and accuracy gaps under about 13-19 points were too small to detect.'
 
