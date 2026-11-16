@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/projects/` },
     { url: `${BASE}/writing/` },
     { url: `${BASE}/writing/rootcause-benchmark/` },
+    { url: `${BASE}/writing/checks-that-could-not-fail/` },
     { url: `${BASE}/writing/reshet-pricing-model/` },
     ...projects.map((p) => ({ url: `${BASE}/projects/${p.id}/` })),
   ]

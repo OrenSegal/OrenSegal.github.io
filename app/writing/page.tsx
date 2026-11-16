@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 const title = 'writing'
-const description = 'Write-ups by Oren Segal: an incident-agent benchmark, and getting a pricing model adopted at a TV network.'
+const description = 'Write-ups by Oren Segal: an incident-agent benchmark, checks that could not fail, and getting a pricing model adopted at a TV network.'
 
 export const metadata: Metadata = {
   title: `Writing | Oren Segal`,
@@ -21,6 +21,12 @@ const posts: { href: string; title: string; summary: string; figure?: { value: s
     summary:
       '525 graded runs of rootcause across seven settings. Cost per solved incident varied 25x; pass rates of 77-84% showed no detected difference, though gaps under about 13-19 points would not have been detected.',
     figure: { value: '25x', label: 'spread in cost per solved incident' },
+  },
+  {
+    href: '/writing/checks-that-could-not-fail/',
+    title: "Three checks that passed when they shouldn't have",
+    summary:
+      'A concurrency test on one connection, a citation matcher that forgave the wrong words, and an eval job that graded its own answers. Before trusting a check, make it fail.',
   },
   {
     href: '/writing/reshet-pricing-model/',
