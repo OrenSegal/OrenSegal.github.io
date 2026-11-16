@@ -20,7 +20,7 @@ Every project shown is real, shipped, open-source, with a public repo, tests, an
 
 ## Operating Context
 
-Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (every project) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
+Deployed as a static export (Next.js 15 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (every project) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
 
 ## Capabilities and Constraints
 
@@ -52,7 +52,7 @@ Real shipped projects, sourced from `lib/projects.ts` (each has a real public Gi
 - `blast-shield` — Claude Code mod (a fork of Blast Radius) that shows what a risky command will change
 - `deuce` — post-merge cleanup for agent worktrees
 
-The home page leads with the struck stack (the seven rootcause settings, one lit) and a cobalt Shelfie tile, then a wall of six project tiles (rootcause, sous with its marketplace parts scoped/deuce/blast-shield, litmus, cited, llm-gateway-kit, signal-scout), each with a two-sentence blurb, its live GitHub Actions badge on hover, its last-push date, and where the repo publishes a figure, a small demonstration copied from it. Three "checks that proved less than they claimed" (scoped#1, cited#1, signal-scout#3) follow the wall; the other three projects are listed by name. `/writing/` indexes the two posts. Shelfie (closed beta; external TestFlight beta open; shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
+The home page leads with the struck stack (the seven rootcause settings, one lit) and a cobalt Shelfie tile, then a wall of six project tiles (rootcause, sous with its marketplace parts scoped/deuce/blast-shield, litmus, cited, llm-gateway-kit, signal-scout), each with a two-sentence blurb, its live GitHub Actions badge on hover, its last-push date, and where the repo publishes a figure, a small demonstration copied from it. A "now" section (the contribution calendar fetched at build with its busiest day struck, last push, last post, New York time) and an "experience" section restating the resume role by role sit between the work and About. A command palette (Cmd/Ctrl+K or "/") reaches every page, project and post, and `/writing/feed.xml` is the RSS feed. Three "checks that proved less than they claimed" (scoped#1, cited#1, signal-scout#3) follow the wall; the other three projects are listed by name. `/writing/` indexes the two posts. Shelfie (closed beta; external TestFlight beta open; shelfie.food) is described in About. A resume is served at `/resume.pdf`. No testimonials, press, or case-study metrics exist and none should be invented. Contact: `orenssegal@gmail.com`, `github.com/OrenSegal`, `linkedin.com/in/oren-segal`.
 
 ## Product Principles
 

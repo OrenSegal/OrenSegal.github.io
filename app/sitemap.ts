@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { projects } from '@/lib/projects'
+import { posts } from '@/lib/posts'
 
 export const dynamic = 'force-static'
 
@@ -10,9 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/` },
     { url: `${BASE}/projects/` },
     { url: `${BASE}/writing/` },
-    { url: `${BASE}/writing/rootcause-benchmark/` },
-    { url: `${BASE}/writing/checks-that-could-not-fail/` },
-    { url: `${BASE}/writing/reshet-pricing-model/` },
+    ...posts.map((p) => ({ url: `${BASE}${p.href}`, lastModified: p.date })),
     ...projects.map((p) => ({ url: `${BASE}/projects/${p.id}/` })),
   ]
 }

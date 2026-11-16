@@ -15,6 +15,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
         <p className="font-mono text-xs lowercase text-ink-faint">
           © {currentYear} oren segal · brooklyn, ny · orange marks a struck value, nothing else
+          <span className="max-md:hidden"> · press / to go anywhere</span>
         </p>
         <div className="flex gap-5">
           {socialLinks.map((link) => {

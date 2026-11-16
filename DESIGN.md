@@ -227,6 +227,15 @@ A `field` anchor tile: light lowercase `shelfie` at `2.25rem`-`3rem`, one-line d
 ### Navigation (`components/Navigation.tsx`)
 Fixed `h-16` bar at `panel/95`, no border. Wordmark "oren segal" at `0.875rem` 500 lowercase `ink`. Desktop items `0.875rem` `ink-dim`, `hover:text-accent`, `gap-8`. Below `md` a `Menu`/`X` Lucide toggle opens a `panel` panel listing the items at `1.5rem` light lowercase `ink`, `py-2`.
 
+### Command Palette (`components/CommandPalette.tsx`)
+Opens on Cmd/Ctrl+K, on "/", and from the mono `⌘k` mark in the nav (`search` on a phone). A flat `panel-face` box over an 85% black scrim, no blur, no border, no shadow. The input is the tile-title voice (light lowercase, 30px); rows are 14px, dim at rest, and the lit row is `.struck`, the same ghost/struck rule as the benchmark stack. Group labels and the key hints are 11px mono. Arrow keys move, Enter opens, Escape closes and returns focus to where it was.
+
+### Activity Tile (`components/Activity.tsx`, in the "now" section)
+The public contribution calendar as a ghost grid: one flat square per day, five white-alpha steps set from that year's own quartiles, 3px gaps. Exactly one cell is orange: the busiest day, named in the mono foot. A phone shows the last 26 weeks. The data is fetched at build; with none, the tile is absent and the now list takes the full row. No tooltips beyond the native title, no legend.
+
+### Now List and Experience Rows (`components/Now.tsx`, `components/Experience.tsx`)
+The now list is a `dl` on one tile: faint lowercase labels, dim values, machine-sourced parts (push date, post date, New York clock) in mono. Experience is one full-width tile per role in three columns (mono years, light lowercase employer with role and place, the resume line); the current role's years are orange and nothing else on the row is. Phones stack the columns.
+
 ### Footer (`components/Footer.tsx`)
 One mono line in `ink-faint` (copyright, city, and the colour rule) with three 16px Lucide icons at `ink-faint`, `hover:text-accent`.
 

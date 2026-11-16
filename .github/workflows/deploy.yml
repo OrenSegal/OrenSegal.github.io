@@ -32,6 +32,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # read-only workflow token, for the contribution calendar and repo stats fetched at prebuild
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll

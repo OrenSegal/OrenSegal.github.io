@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { posts } from '@/lib/posts'
+import { formatVerifiedDate } from '@/lib/status'
 
 const title = 'writing'
 const description = 'Write-ups by Oren Segal: an incident-agent benchmark, checks that could not fail, and getting a pricing model adopted at a TV network.'
@@ -11,30 +13,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'Writing', description, url: './', images: ['/og-image.png'] },
   twitter: { card: 'summary_large_image', title: 'Writing', description, images: ['/og-image.png'] },
 }
-
-// Each figure is stated in the post it links to. A post whose only number is not a
-// result it can attribute (Reshet's revenue rise had no holdout) gets no figure.
-const posts: { href: string; title: string; summary: string; figure?: { value: string; label: string } }[] = [
-  {
-    href: '/writing/rootcause-benchmark/',
-    title: "The benchmark that didn't pick a winner",
-    summary:
-      '525 graded runs of rootcause across seven settings. Cost per solved incident varied 25x; pass rates of 77-84% showed no detected difference, though gaps under about 13-19 points would not have been detected.',
-    figure: { value: '25x', label: 'spread in cost per solved incident' },
-  },
-  {
-    href: '/writing/checks-that-could-not-fail/',
-    title: "Three checks that passed when they shouldn't have",
-    summary:
-      'A concurrency test on one connection, a citation matcher that forgave the wrong words, and an eval job that graded its own answers. Before trusting a check, make it fail.',
-  },
-  {
-    href: '/writing/reshet-pricing-model/',
-    title: 'Getting a pricing model adopted at Reshet 13',
-    summary:
-      'A regression that found underpriced primetime ad slots, and the work with the commercial team until they set prices from it.',
-  },
-]
 
 export default function WritingIndex() {
   return (
@@ -56,16 +34,27 @@ export default function WritingIndex() {
               <Link href={post.href} className="tile flex h-full flex-col bg-panel-face p-5 sm:p-6">
                 <h2 className="tile-title text-2xl font-medium leading-tight text-ink sm:text-3xl">{post.title}</h2>
                 <p className="mt-2 max-w-xl leading-relaxed text-ink-dim">{post.summary}</p>
-                {post.figure && (
-                  <p className="mt-auto flex items-baseline gap-3 pt-6">
-                    <span className="text-3xl font-light tabular text-ink">{post.figure.value}</span>
-                    <span className="font-mono text-xs text-ink-faint">{post.figure.label}</span>
+                <div className="mt-auto pt-6">
+                  {post.figure && (
+                    <p className="flex items-baseline gap-3">
+                      <span className="text-3xl font-light tabular text-ink">{post.figure.value}</span>
+                      <span className="font-mono text-xs text-ink-faint">{post.figure.label}</span>
+                    </p>
+                  )}
+                  <p className="mt-3 font-mono text-xs lowercase text-ink-faint">
+                    <time dateTime={post.date}>{formatVerifiedDate(post.date)}</time>
                   </p>
-                )}
+                </div>
               </Link>
             </li>
           ))}
         </ul>
+
+        <p className="mt-6 font-mono text-xs lowercase text-ink-faint">
+          <a href="/writing/feed.xml" className="underline decoration-accent-dim underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+            rss feed
+          </a>
+        </p>
       </div>
     </div>
   )
