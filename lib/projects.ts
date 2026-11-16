@@ -5,7 +5,7 @@ export interface Project {
   blurb: string // two plain sentences for the tile; the long description stays on the detail page
   description: string
   tags: string[]
-  category: 'ai-agents' | 'ai-infra' | 'evals' | 'dev-tools'
+  category: 'ai-agents' | 'ai-infra' | 'evals' | 'dev-tools' | 'data'
   demoUrl?: string
   pageUrl?: string // the project's own GitHub Pages site, when it has one
   ciWorkflow?: string // file name under .github/workflows, drives the live CI badge
@@ -336,6 +336,27 @@ export const projects: Project[] = [
     ],
     techStack: ['Python', 'git', 'gh', 'Claude Code plugin'],
     impact: 'Merged agent branches get cleaned up without a script deleting uncommitted work.',
+  },
+  {
+    id: 'ny-noise',
+    records: { limitations: `${GH}/ny-noise#limitations` },
+    title: 'ny-noise',
+    subtitle: 'Where New York is loud, and next week by ZIP',
+    blurb: 'A block-level model of where 1.6 million NYC 311 noise reports concentrate, a weekly forecast for 177 ZIP codes, and Wake the Block, which estimates how many people one 3 a.m. noise wakes on any street.',
+    description: 'Two models kept apart on purpose. A spatial model explains where noise complaints concentrate on a ~250 m hex grid from 30 measured features of the surroundings; on held-out areas it explains 78% of deviance, against 66% from housing units alone. A forecast gives next week\'s complaints for 177 ZIP codes with 80% ranges that covered 79.8% of the holdout; it beats repeating last week and does not clearly beat exponential smoothing, and the site says so. Wake the Block is a separate decibel model over every NYC building footprint, with residents scaled to the 2020 Census, that counts who a single night-time noise would wake.',
+    tags: ['Forecasting', 'Spatial modelling', 'Python', 'TypeScript', 'Data'],
+    category: 'data',
+    demoUrl: 'https://github.com/OrenSegal/ny-noise',
+    pageUrl: 'https://ny-noise.vercel.app',
+    ciWorkflow: 'ci.yml',
+    featured: false,
+    keyFeatures: [
+      'Spatial cross-validation holds out whole ~36 km² areas, so no block is scored by a model that saw its neighbours',
+      'The forecast is raced against naive baselines in the open, including the quarters it loses',
+      'Wake the Block counts sleepers from footprints, roof heights and homes, with a range from measured window losses',
+    ],
+    techStack: ['Python', 'pandas', 'scikit-learn', 'React', 'TypeScript', 'deck.gl', 'GitHub Actions'],
+    impact: 'Shows where complaints concentrate and what goes with them, and how far each model can be trusted.',
   },
 ]
 

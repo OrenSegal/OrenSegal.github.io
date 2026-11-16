@@ -16,7 +16,8 @@ export default function Hero() {
           <p className="max-w-xl text-lg leading-relaxed text-ink-dim sm:text-xl">
             I build LLM products in Python, TypeScript and Swift, and the evals
             that show whether they work. Founder of Shelfie. Before that, five
-            years of forecasting and pricing models at Reshet 13.
+            years as a senior data analyst at Reshet 13, building its
+            forecasting and pricing models.
           </p>
           <nav aria-label="primary" className="flex flex-wrap gap-x-6 gap-y-2">
             <a href="/writing/rootcause-benchmark/" className={action}>read the benchmark</a>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 const stack = [
   'Python', 'TypeScript', 'Swift', 'SQL', 'Postgres', 'pgvector', 'SQLite', 'Bash',
   'Claude API', 'Claude Code', 'Gemini API', 'MCP', 'OpenTelemetry', 'GitHub Actions',
-  'pandas', 'scikit-learn', 'regression and forecasting', 'bootstrap intervals and power analysis',
+  'pandas', 'scikit-learn', 'BigQuery', 'Looker Studio', 'regression and forecasting', 'bootstrap intervals and power analysis',
 ]
 
 const GH = 'https://github.com/OrenSegal'
@@ -95,10 +95,12 @@ export default function About() {
                 <Link href="/writing/reshet-pricing-model/" className={link}>
                   How I got a pricing model adopted there
                 </Link>
-                . I moved to New York in 2023 and retrained in AI/ML. Since
-                2025 I have also built and maintained the reporting automation
-                for KashCash, a consumer transactions business, and in 2025 I
-                started Shelfie.
+                . I moved to New York in 2023 and retrained in AI/ML, and in
+                2025 I started Shelfie. Since 2025 I have also run the data
+                side of KashCash, a consumer transactions business: a BigQuery
+                warehouse that loads each day with no one in the loop, a sales
+                forecast that flags unusual days, and a watch list of the
+                biggest accounts against their own three-month average.
               </p>
             </div>
           </div>

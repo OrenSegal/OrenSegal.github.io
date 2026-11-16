@@ -28,6 +28,7 @@ const PROJECT_REPOS = [
   'signal-skills',
   'blast-shield',
   'deuce',
+  'ny-noise',
 ]
 
 async function fetchRepoData() {
