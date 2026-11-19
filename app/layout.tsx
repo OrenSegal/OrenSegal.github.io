@@ -64,8 +64,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-panel-face focus:px-4 focus:py-2 focus:text-sm focus:text-ink"
+        >
+          skip to content
+        </a>
         <Navigation />
-        <main className="min-h-screen">
+        <main id="main" className="min-h-screen">
           {children}
         </main>
         <Footer />
