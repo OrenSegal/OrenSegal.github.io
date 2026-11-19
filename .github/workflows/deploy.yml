@@ -30,8 +30,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test
+        run: npm test
+
       - name: Build
         run: npm run build
+        env:
+          # Read-only job token, so the prebuild star and push-date fetch is
+          # not cut off by the unauthenticated API rate limit on shared runners.
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
