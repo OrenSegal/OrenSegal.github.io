@@ -4,6 +4,10 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Not found | Oren Segal',
   robots: { index: false },
+  // The layout's relative canonical and og:url would resolve to /_not-found/,
+  // a route that does not exist on the deployed site. A 404 has neither.
+  alternates: { canonical: null },
+  openGraph: null,
 }
 
 const action = 'text-sm font-medium lowercase text-ink transition-colors hover:text-accent'
