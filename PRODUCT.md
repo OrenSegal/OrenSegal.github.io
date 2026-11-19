@@ -20,13 +20,13 @@ Every project shown is real, shipped, open-source, with a public repo, tests, an
 
 ## Operating Context
 
-Deployed as a static export (Next.js 14 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (every project) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
+Deployed as a static export (Next.js 15 App Router, `output: 'export'`) to GitHub Pages at `OrenSegal.github.io` — no backend, no server runtime. Content (every project) is sourced from `lib/projects.ts` as the single source of truth, driving both the list views and per-project detail pages via `generateStaticParams`. Each project's "GitHub" link points to its real public repo.
 
 ## Capabilities and Constraints
 
 - Static site only — no server, no database, no forms that submit anywhere real (contact is `mailto:`/external profile links only).
 - Must build cleanly under Next.js static export (a prior real bug: any `onClick`/event handler in a Server Component without `'use client'` silently breaks the entire static export).
-- Projects are categorized as `ai-agents`, `ai-infra`, `evals`, `dev-tools`.
+- Projects are categorized as `ai-agents`, `ai-infra`, `evals`, `dev-tools`, `data`.
 - `npm run lint` and `npm run build` both pass with ESLint enforced at build time (no `ignoreDuringBuilds`).
 
 ## Brand Commitments

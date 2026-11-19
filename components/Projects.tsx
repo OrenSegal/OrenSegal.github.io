@@ -20,7 +20,7 @@ const WALL = ['rootcause', 'sous', 'litmus', 'cited', 'llm-gateway-kit', 'signal
 const SOUS_PARTS = ['scoped', 'deuce', 'blast-shield']
 const MORE = ['ny-noise', 'rag-generation', 'architecture-lint', 'signal-skills']
 
-// Wording follows the profile README's "Pull requests where a check proved less than it claimed".
+// Three pull requests where a check proved less than it claimed; each is written up in /writing/checks-that-could-not-fail/.
 const CHECKS = [
   {
     ref: 'scoped#1',
