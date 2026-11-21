@@ -7,7 +7,7 @@ related_targets: []
 
 # Surface: app/page.tsx (full site: Hero, Shelfie, Work tiles, About, Contact, Nav, Footer; project and writing pages inherit)
 
-Mode: Persuade. Audience: recruiters and technical interviewers for Applied AI roles, split between a fast skim and a deep read. Job: leave convinced Oren builds LLM products and the measurement that proves them, and click into at least one real repo. Proof: 12 public repos with CI badges and real last-push dates (lib/projects.ts, lib/project-stats.json), the 525-run benchmark, Shelfie as described in cv.md (closed beta, no user numbers). Constraint: Next.js 14 static export to GitHub Pages, code-led, no image generation. Never say Shelfie was "built with Claude Code agents"; never "production" or "at scale" for Shelfie; no invented metrics.
+Mode: Persuade. Audience: recruiters and technical interviewers for Applied AI roles, split between a fast skim and a deep read. Job: leave convinced Oren builds LLM products and the measurement that proves them, and click into at least one real repo. Proof: 12 public repos with CI badges and real last-push dates (lib/projects.ts, lib/project-stats.json), the 525-run benchmark, Shelfie as described in cv.md (pre-launch, no user numbers). Constraint: Next.js 14 static export to GitHub Pages, code-led, no image generation. Never say Shelfie was "built with Claude Code agents"; never "production" or "at scale" for Shelfie; no invented metrics.
 
 ## Direction contract
 
